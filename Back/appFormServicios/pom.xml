@@ -4,7 +4,7 @@
     <groupId>co.com.jj.appform</groupId>
     <artifactId>appFormServicios</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
    
     
     <parent>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
+            <!--<exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -34,7 +34,7 @@
                     <groupId>org.apache.tomcat.embed</groupId>
                     <artifactId>tomcat-embed-el</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -62,6 +62,7 @@
             <artifactId>app-form</artifactId>
             <version>1.0</version>
         </dependency>
+
     </dependencies>
         
     <build>

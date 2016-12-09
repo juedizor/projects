@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
-import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
 
 /**
  *
@@ -23,31 +22,21 @@ import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
 @RestController
 @RequestMapping("/inicio")
 public class IniciarSesionService {
-
+    
+    
     @Autowired
     GestionUsuariosIface aeUsuarioIface;
-
-    @RequestMapping(value = "/usuario/{nombre}", method = RequestMethod.GET)
-    public List<UsuarioDTO> verificarUsuario(@PathVariable("nombre") String nombre) throws ExceptionGenerics {
+    
+    
+    @RequestMapping (value = "/usuario/{nombre}", method = RequestMethod.GET)
+    public List<UsuarioDTO> verificarUsuario(@PathVariable("nombre") String nombre) throws Exception{
         List<UsuarioDTO> listAeUsuario = new ArrayList<>();
-        if (nombre != null) {
-            if (!nombre.trim().isEmpty()) {
-                try {
-                   listAeUsuario = aeUsuarioIface.getUserActivo(nombre.trim());
-                } catch (Exception e) {
-                    ExceptionGenerics.setCodigo(204);
-                    ExceptionGenerics.setDescripcion(e.getMessage());
-                    throw new ExceptionGenerics();
-                }
-
-                if (listAeUsuario == null || listAeUsuario.isEmpty()) {
-                    ExceptionGenerics.setCodigo(201);
-                    ExceptionGenerics.setDescripcion("No Existe el Usuario");
-                    throw new ExceptionGenerics();
-                }
+        if(nombre != null){
+            if(!nombre.trim().isEmpty()){
+                listAeUsuario = aeUsuarioIface.getUserActivo(nombre.trim());
             }
         }
         return listAeUsuario;
     }
-
+    
 }
