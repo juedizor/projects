@@ -5,6 +5,7 @@
  */
 package co.com.jj.rastreapp.services;
 
+import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
+import org.springframework.http.HttpStatus;
 
 /**
  *
@@ -28,26 +30,26 @@ public class IniciarSesionService {
     GestionUsuariosIface aeUsuarioIface;
 
     @RequestMapping(value = "/usuario/{nombre}", method = RequestMethod.GET)
-    public List<UsuarioDTO> verificarUsuario(@PathVariable("nombre") String nombre) throws ExceptionGenerics {
-        List<UsuarioDTO> listAeUsuario = new ArrayList<>();
+    public UsuarioDTO verificarUsuario(@PathVariable("nombre") String nombre) throws ExceptionGenerics {
+        UsuarioDTO usuarioDTO = null;
         if (nombre != null) {
             if (!nombre.trim().isEmpty()) {
                 try {
-                   listAeUsuario = aeUsuarioIface.getUserActivo(nombre.trim());
+                    usuarioDTO = aeUsuarioIface.getUserActivo(nombre.trim());
                 } catch (Exception e) {
-                    ExceptionGenerics.setCodigo(204);
+                    ExceptionGenerics.setCodigo(Respuestas.ERROR);
                     ExceptionGenerics.setDescripcion(e.getMessage());
                     throw new ExceptionGenerics();
                 }
 
-                if (listAeUsuario == null || listAeUsuario.isEmpty()) {
-                    ExceptionGenerics.setCodigo(201);
+                if (usuarioDTO == null) {
+                    ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
                     ExceptionGenerics.setDescripcion("No Existe el Usuario");
                     throw new ExceptionGenerics();
                 }
             }
         }
-        return listAeUsuario;
+        return usuarioDTO;
     }
 
 }

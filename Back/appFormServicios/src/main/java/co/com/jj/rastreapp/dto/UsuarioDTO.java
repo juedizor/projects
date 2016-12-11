@@ -5,101 +5,82 @@
  */
 package co.com.jj.rastreapp.dto;
 
-
+import java.sql.Timestamp;
 
 /**
  *
  * @author jeio
  */
 public class UsuarioDTO {
-    
-    private String nombre1;
-    private String nombre2;
-    private String apellido1;
-    private String apellido2;
-    private String email;
-    private Integer tipoDocumento;
-    private Long numeroDocumento;
-    private String nombrePerfil;
+
+    private Integer idUsuario;
+    private String nombreUsuario;
+    private String contrasena;
+    private java.sql.Timestamp fechaCreacion;
+    private boolean activo;
+    private PerfilDTO perfil;
+    private PersonaDTO persona;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String nombre1, String nombre2, String apellido1, String apellido2, String email, Integer tipoDocumento, Long numeroDocumento, String nombrePerfil) {
-        this.nombre1 = nombre1;
-        this.nombre2 = nombre2;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.email = email;
-        this.tipoDocumento = tipoDocumento;
-        this.numeroDocumento = numeroDocumento;
-        this.nombrePerfil = nombrePerfil;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public String getNombre1() {
-        return nombre1;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setNombre1(String nombre1) {
-        this.nombre1 = nombre1;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public String getNombre2() {
-        return nombre2;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public void setNombre2(String nombre2) {
-        this.nombre2 = nombre2;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+    public Timestamp getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public String getApellido2() {
-        return apellido2;
+    public void setFechaCreacion(Timestamp fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public String getEmail() {
-        return email;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public PerfilDTO getPerfil() {
+        return perfil;
     }
 
-    public Integer getTipoDocumento() {
-        return tipoDocumento;
+    public void setPerfil(PerfilDTO perfil) {
+        this.perfil = perfil;
     }
 
-    public void setTipoDocumento(Integer tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+    public PersonaDTO getPersona() {
+        return persona;
     }
 
-    public Long getNumeroDocumento() {
-        return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(Long numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
-    }
-
-    public String getNombrePerfil() {
-        return nombrePerfil;
-    }
-
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
     }
     
     
-    
+
+
 }

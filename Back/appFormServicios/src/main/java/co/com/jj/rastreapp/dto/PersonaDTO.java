@@ -23,13 +23,13 @@ public class PersonaDTO {
     private String email;
     private java.sql.Timestamp fechaRegistro;
     private java.sql.Timestamp fechaModificacion;
-    private UsuarioDTO aeUsuarioDTO;
-    private TipoDocumentoDTO aeTipoDocumentoDTO;
+    private UsuarioDTO usuarioDTO;
+    private TipoDocumentoDTO tipoDocumentoDTO;
 
     public PersonaDTO() {
     }
 
-    public PersonaDTO(Integer idPersona, long numeroDocumento, String nombre1, String nombre2, String apellido1, String apellido2, String email, Timestamp fechaRegistro, Timestamp fechaModificacion, UsuarioDTO aeUsuarioDTO, TipoDocumentoDTO aeTipoDocumentoDTO) {
+    public PersonaDTO(Integer idPersona, long numeroDocumento, String nombre1, String nombre2, String apellido1, String apellido2, String email, Timestamp fechaRegistro, Timestamp fechaModificacion, UsuarioDTO usuarioDTO, TipoDocumentoDTO tipoDocumentoDTO) {
         this.idPersona = idPersona;
         this.numeroDocumento = numeroDocumento;
         this.nombre1 = nombre1;
@@ -39,8 +39,8 @@ public class PersonaDTO {
         this.email = email;
         this.fechaRegistro = fechaRegistro;
         this.fechaModificacion = fechaModificacion;
-        this.aeUsuarioDTO = aeUsuarioDTO;
-        this.aeTipoDocumentoDTO = aeTipoDocumentoDTO;
+        this.usuarioDTO = usuarioDTO;
+        this.tipoDocumentoDTO = tipoDocumentoDTO;
     }
 
     public Integer getIdPersona() {
@@ -115,20 +115,20 @@ public class PersonaDTO {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public UsuarioDTO getAeUsuarioDTO() {
-        return aeUsuarioDTO;
+    public UsuarioDTO getUsuarioDTO() {
+        return usuarioDTO;
     }
 
-    public void setAeUsuarioDTO(UsuarioDTO aeUsuarioDTO) {
-        this.aeUsuarioDTO = aeUsuarioDTO;
+    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+        this.usuarioDTO = usuarioDTO;
     }
 
-    public TipoDocumentoDTO getAeTipoDocumentoDTO() {
-        return aeTipoDocumentoDTO;
+    public TipoDocumentoDTO getTipoDocumentoDTO() {
+        return tipoDocumentoDTO;
     }
 
-    public void setAeTipoDocumentoDTO(TipoDocumentoDTO aeTipoDocumentoDTO) {
-        this.aeTipoDocumentoDTO = aeTipoDocumentoDTO;
+    public void setTipoDocumentoDTO(TipoDocumentoDTO tipoDocumentoDTO) {
+        this.tipoDocumentoDTO = tipoDocumentoDTO;
     }
     
     

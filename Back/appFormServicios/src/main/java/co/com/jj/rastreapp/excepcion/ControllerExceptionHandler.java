@@ -18,17 +18,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * @author jeio
  */
 @ControllerAdvice
-public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
+public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({ExceptionGenerics.class})
     @ResponseBody
-    public ErrorMessage notFoundRequest(Exception exception) {
-        ErrorMessage errorMessage = new ErrorMessage(exception);
+    public Message notFoundRequest() {
+        Message errorMessage = new Message("" + ExceptionGenerics.getCodigo(), ExceptionGenerics.getDescripcion());
         LogManager.getLogger(this.getClass()).info("  ERROR: NOT_FOUND, " + errorMessage);
         return errorMessage;
     }
-    
-    
 
 }

@@ -7,13 +7,16 @@ package co.com.jj.appform.persistence.iface;
 
 import co.com.jj.appform.entity.Persona;
 
-
 /**
  *
  * @author jeio
  */
 public interface PersonaIfaceDAO {
-    
+
     public void save(Persona persona) throws Exception;
-    
+
+    public void merge(Persona persona) throws Exception;
+
+    Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception;
+
 }

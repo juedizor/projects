@@ -5,7 +5,7 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.MainApp;
+import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import java.util.List;
@@ -18,21 +18,21 @@ import javax.persistence.Query;
 public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     
-    private final MainApp mainApp = MainApp.getInstance();
+    private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
 
     @Override
     public void save(Usuario usuario) throws Exception {
-        mainApp.getEntityManager().persist(usuario);
+        persistenceApp.getEntityManager().persist(usuario);
     }
 
     @Override
     public void merge(Usuario usuario) throws Exception {
-        mainApp.getEntityManager().merge(usuario);
+        persistenceApp.getEntityManager().merge(usuario);
     }
 
     @Override
     public Usuario findByNombreUsuario(String nombreUsuario) throws Exception {
-        List<Usuario> listAeUsuarios = mainApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuario")
+        List<Usuario> listAeUsuarios = persistenceApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuario")
                 .setParameter("nombreUsuario", nombreUsuario)
                 .getResultList();
         if (listAeUsuarios != null && !listAeUsuarios.isEmpty()) {
@@ -43,7 +43,7 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     @Override
     public List<Usuario> findByNombreUsuarioActivo(String nombreUsuario, boolean activo) throws Exception {
-        Query query = mainApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioActivo");
+        Query query = persistenceApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioActivo");
         query.setParameter("nombreUsuario", nombreUsuario);
         query.setParameter("activo", activo);
         return query.getResultList();
