@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.dto.PersonaDTO;
+import co.com.jj.rastreapp.dto.UsuarioDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
 import co.com.jj.rastreapp.excepcion.Message;
+import java.util.List;
 
 /**
  *
@@ -66,6 +68,27 @@ public class GestionUsuariosService {
         }
 
         return personaDTO;
+    }
+
+    @RequestMapping(value = "/usuarios/all", method = RequestMethod.GET)
+    public List<UsuarioDTO> getUsuarios() throws ExceptionGenerics {
+        List<UsuarioDTO> listUsuarioDTO = null;
+        try {
+            listUsuarioDTO = gestionUsuariosIface.obtenerUsuarios();
+        } catch (Exception e) {
+            ExceptionGenerics.setCodigo(Respuestas.ERROR);
+            ExceptionGenerics.setDescripcion(e.getMessage());
+            throw new ExceptionGenerics();
+        }
+
+        if (listUsuarioDTO != null && !listUsuarioDTO.isEmpty()) {
+            return listUsuarioDTO;
+        } else {
+            ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
+            ExceptionGenerics.setDescripcion("No existen Usuarios");
+            throw new ExceptionGenerics();
+        }
+
     }
 
 }

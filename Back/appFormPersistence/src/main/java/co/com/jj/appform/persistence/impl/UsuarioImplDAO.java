@@ -17,7 +17,6 @@ import javax.persistence.Query;
  */
 public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
-    
     private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
 
     @Override
@@ -47,6 +46,11 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
         query.setParameter("nombreUsuario", nombreUsuario);
         query.setParameter("activo", activo);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Usuario> findAll() throws Exception {
+        return persistenceApp.getEntityManager().createNamedQuery("Usuario.findAll").getResultList();
     }
 
 }

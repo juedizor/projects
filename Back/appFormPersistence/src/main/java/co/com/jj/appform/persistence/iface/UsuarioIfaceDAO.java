@@ -16,6 +16,7 @@ public interface UsuarioIfaceDAO {
     
     public void save(Usuario usuario) throws Exception;
     public void merge(Usuario usuario) throws Exception;
+    List<Usuario> findAll() throws Exception;
     public Usuario findByNombreUsuario(String nombreUsuario) throws Exception;
     public List<Usuario> findByNombreUsuarioActivo(String nombreUsuario, boolean activo) throws Exception;
     

@@ -25,6 +25,7 @@ import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
 import co.com.jj.rastreapp.util.DateUtils;
 import co.com.jj.rastreapp.util.EntityUtils;
+import java.util.ArrayList;
 
 /**
  *
@@ -120,6 +121,34 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
             aeUsuarioDTO = ENTITY_UTILS.getUsuarioDTO(usuario);
         }
         return aeUsuarioDTO;
+    }
+
+    @Override
+    public List<UsuarioDTO> obtenerUsuarios() throws Exception {
+        List<Usuario> listUsuarios = usuarioIfaceDAO.findAll();
+        UsuarioDTO usuarioDTO;
+        PersonaDTO personaDTO;
+        PerfilDTO perfilDTO;
+        TipoDocumentoDTO tipoDocumentoDTO;
+        List<UsuarioDTO> listUsuarioDTO = new ArrayList<>();
+        if (listUsuarios != null && !listUsuarios.isEmpty()) {
+            for (Usuario usuario : listUsuarios) {
+                usuarioDTO = ENTITY_UTILS.getUsuarioDTO(usuario);
+                personaDTO = ENTITY_UTILS.getPersonaDTO(usuario.getIdPersona());
+                tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(usuario.getIdPersona().getIdTipoDocumento());
+                personaDTO.setTipoDocumentoDTO(tipoDocumentoDTO);
+                usuarioDTO.setPersona(personaDTO);
+                perfilDTO = ENTITY_UTILS.getPerfilDTO(usuario.getIdPerfil());
+                usuarioDTO.setPerfil(perfilDTO);
+                listUsuarioDTO.add(usuarioDTO);
+            }
+
+            return listUsuarioDTO;
+
+        }
+
+        return null;
+
     }
 
 }
