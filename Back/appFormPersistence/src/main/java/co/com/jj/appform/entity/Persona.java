@@ -28,7 +28,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author jeio
+ * @author julio.izquierdo
  */
 @Entity
 @Table(name = "persona")
@@ -42,8 +42,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Persona.findByApellido2", query = "SELECT p FROM Persona p WHERE p.apellido2 = :apellido2"),
     @NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email"),
     @NamedQuery(name = "Persona.findByFechaRegistro", query = "SELECT p FROM Persona p WHERE p.fechaRegistro = :fechaRegistro"),
-    @NamedQuery(name = "Persona.findByFechaModificacion", query = "SELECT p FROM Persona p WHERE p.fechaModificacion = :fechaModificacion"), 
-    @NamedQuery(name = "Persona.findByTipoDocumentoNumeroDocumento", query = "SELECT p FROM Persona p WHERE p.idTipoDocumento.idTipoDocumento = :idTipoDocumento AND p.numeroDocumento = :numeroDocumento")})
+    @NamedQuery(name = "Persona.findByFechaModificacion", query = "SELECT p FROM Persona p WHERE p.fechaModificacion = :fechaModificacion")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;

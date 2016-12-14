@@ -7,16 +7,15 @@ package co.com.jj.rastreapp.services;
 
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
+import co.com.jj.rastreapp.dto.InicioSesionDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -29,13 +28,13 @@ public class IniciarSesionService {
     @Autowired
     GestionUsuariosIface aeUsuarioIface;
 
-    @RequestMapping(value = "/usuario/{nombre}", method = RequestMethod.GET)
-    public UsuarioDTO verificarUsuario(@PathVariable("nombre") String nombre) throws ExceptionGenerics {
+    @RequestMapping(value = "/usuario", method = RequestMethod.POST)
+    public UsuarioDTO verificarUsuario(@RequestBody InicioSesionDTO inicioSesionDTO) throws ExceptionGenerics {
         UsuarioDTO usuarioDTO = null;
-        if (nombre != null) {
-            if (!nombre.trim().isEmpty()) {
+        if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena()!= null) {
+            if (!inicioSesionDTO.getUsuario().trim().isEmpty() && !inicioSesionDTO.getContrasena().trim().isEmpty()) {
                 try {
-                    usuarioDTO = aeUsuarioIface.getUserActivo(nombre.trim());
+                    usuarioDTO = aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), inicioSesionDTO.getContrasena().trim());
                 } catch (Exception e) {
                     ExceptionGenerics.setCodigo(Respuestas.ERROR);
                     ExceptionGenerics.setDescripcion(e.getMessage());

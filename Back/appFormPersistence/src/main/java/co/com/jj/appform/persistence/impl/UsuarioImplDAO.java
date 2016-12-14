@@ -41,9 +41,10 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
     }
 
     @Override
-    public List<Usuario> findByNombreUsuarioActivo(String nombreUsuario, boolean activo) throws Exception {
-        Query query = persistenceApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioActivo");
+    public List<Usuario> findByNombreUsuarioContrasenaActivo(String nombreUsuario, String contrasena, boolean activo) throws Exception {
+        Query query = persistenceApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioContrasenaActivo");
         query.setParameter("nombreUsuario", nombreUsuario);
+        query.setParameter("contrasena", contrasena);
         query.setParameter("activo", activo);
         return query.getResultList();
     }

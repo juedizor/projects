@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface GestionUsuariosIface {
 
-    public UsuarioDTO getUserActivo(String nombreUsuario) throws Exception;
+    public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception;
 
     public UsuarioDTO getUser(String nombreUsuario) throws Exception;
 

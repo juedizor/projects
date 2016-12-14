@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author jeio
+ * @author julio.izquierdo
  */
 @Entity
 @Table(name = "tipo_documento")

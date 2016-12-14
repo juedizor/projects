@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author jeio
+ * @author julio.izquierdo
  */
 @Entity
 @Table(name = "usuario")
@@ -37,7 +37,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Usuario.findByContrasena", query = "SELECT u FROM Usuario u WHERE u.contrasena = :contrasena"),
     @NamedQuery(name = "Usuario.findByFechaCreacion", query = "SELECT u FROM Usuario u WHERE u.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Usuario.findByActivo", query = "SELECT u FROM Usuario u WHERE u.activo = :activo"), 
-    @NamedQuery(name = "Usuario.findByNombreUsuarioActivo", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario AND u.activo = :activo")})
+    @NamedQuery(name = "Usuario.findByNombreUsuarioContrasenaActivo", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario AND u.contrasena = :contrasena AND u.activo = :activo")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,12 +65,12 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
-    @ManyToOne(optional = false)
-    private Perfil idPerfil;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(optional = false, cascade = {CascadeType.ALL})
     private Persona idPersona;
+    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
+    @ManyToOne(optional = false)
+    private Perfil idPerfil;
 
     public Usuario() {
     }
@@ -127,20 +127,20 @@ public class Usuario implements Serializable {
         this.activo = activo;
     }
 
-    public Perfil getIdPerfil() {
-        return idPerfil;
-    }
-
-    public void setIdPerfil(Perfil idPerfil) {
-        this.idPerfil = idPerfil;
-    }
-
     public Persona getIdPersona() {
         return idPersona;
     }
 
     public void setIdPersona(Persona idPersona) {
         this.idPersona = idPersona;
+    }
+
+    public Perfil getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(Perfil idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
     @Override

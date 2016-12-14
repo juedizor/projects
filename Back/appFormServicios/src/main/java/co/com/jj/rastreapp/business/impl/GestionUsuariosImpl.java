@@ -48,8 +48,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
     private static final PersistenceApp PERSISTENCE_APP = PersistenceApp.getInstance();
 
     @Override
-    public UsuarioDTO getUserActivo(String nombreUsuario) throws Exception {
-        List<Usuario> listUsuarios = usuarioIfaceDAO.findByNombreUsuarioActivo(nombreUsuario, true);
+    public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception {
+        List<Usuario> listUsuarios = usuarioIfaceDAO.findByNombreUsuarioContrasenaActivo(nombreUsuario, contrasena, true);
         if (listUsuarios != null && !listUsuarios.isEmpty()) {
             UsuarioDTO usuarioDTO = ENTITY_UTILS.getUsuarioDTO(listUsuarios.get(0));
             PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(listUsuarios.get(0).getIdPerfil());
