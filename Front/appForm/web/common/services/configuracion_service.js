@@ -13,10 +13,10 @@ app.factory('Configuracion', ['$http', '$q', function($http, $q){
 		 // aplicacion, hace uso de promesas
 		cargar: function(){
 			var d = $q.defer();
-
 			$http.get('configuracion.json')
 				.success(function(data){
 					self.config = data;
+					
 					d.resolve();
 				})
 				.error(function(error){
