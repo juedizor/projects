@@ -18,6 +18,7 @@ import co.com.jj.rastreapp.dto.UsuarioDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
 import co.com.jj.rastreapp.excepcion.Message;
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -25,16 +26,17 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/gestionUsuarios")
+@CrossOrigin("*")
 public class GestionUsuariosService {
 
     @Autowired
     GestionUsuariosIface gestionUsuariosIface;
 
     @RequestMapping(value = "/usuarios", method = RequestMethod.POST)
-    public Message registrarUsuario(@RequestBody PersonaDTO personaDTO) throws ExceptionGenerics {
+    public Message registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws ExceptionGenerics {
         int resultado;
         try {
-            resultado = gestionUsuariosIface.registrarUsuario(personaDTO);
+            resultado = gestionUsuariosIface.registrarUsuario(usuarioDTO);
         } catch (Exception e) {
             ExceptionGenerics.setCodigo(Respuestas.ERROR);
             ExceptionGenerics.setDescripcion(e.getMessage());

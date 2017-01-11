@@ -97,5 +97,5 @@ public class EntityUtils {
         perfilDTO.setNombrePerfil(perfil.getNombre());
         return perfilDTO;
     }
-
+    
 }

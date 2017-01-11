@@ -19,7 +19,7 @@ public interface GestionUsuariosIface {
 
     public UsuarioDTO getUser(String nombreUsuario) throws Exception;
 
-    public int registrarUsuario(PersonaDTO personaDTO) throws Exception;
+    public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception;
 
     public PersonaDTO getPersona(int tipoDoc, long numeroDoc) throws Exception;
 

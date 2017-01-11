@@ -1,0 +1,68 @@
+<div class="row">
+<div class="col-xs-12">
+<div class="box"> 
+<div class="box-header">
+  <h3 class="box-title">Listado de Usuarios</h3>
+  <div class="row" align="right">
+    <div class="col-sm-12">
+      <button class="btn btn-primary" ng-click = "listarUsuariosCtrl.abrirModal(null)"> <i class="fa fa-user"></i> Registrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- /.box-header -->
+<div class="box-body">
+<table datatable="ng" dt-options="listarUsuariosCtrl.dtOptions" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+          <th>Tipo de Documento
+          </th>
+
+          <th >Número de Documento
+          </th>
+
+          <th>Primer Nombre
+          </th>
+
+          <th>Primer Apellido
+          </th>
+
+          <th>Correo Electronico
+          </th>
+
+          <th>usuario
+          </th>
+
+          <th>Perfil
+          </th>
+
+           <th>Acción
+           </th>
+      </tr>    
+    </thead>
+    <tbody>
+    <tr ng-repeat = "user in listarUsuariosCtrl.users.dataUser">
+        <td >{{user.persona.tipoDocumentoDTO.nombre}}</td>
+        <td>{{user.persona.numeroDocumento}}</td>
+        <td>{{user.persona.nombre1}}</td>
+        <td>{{user.persona.apellido1}}</td>
+        <td>{{user.persona.email}}</td>
+        <td>{{user.nombreUsuario}}</td>
+        <td>{{user.perfil.nombrePerfil}}</td>
+        <td>
+          <a ng-click = "listarUsuariosCtrl.abrirModal(user)" class="btn btn-warning" title="Editar">
+            <i class="fa fa-edit"></i>
+          </a>   
+        </td>
+      </tr>
+    </tbody>
+</table>  
+  </div>
+  </div>
+  </div>
+</div>
+<!-- /.box-body -->
+
+
+
+<div ng-include = "'template/gestionUsuarios/modalUsuarios.html'"></div>

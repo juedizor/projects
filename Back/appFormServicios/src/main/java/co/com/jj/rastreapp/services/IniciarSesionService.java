@@ -8,13 +8,13 @@ package co.com.jj.rastreapp.services;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.dto.InicioSesionDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @RestController
 @RequestMapping("/inicio")
+@CrossOrigin("*")
 public class IniciarSesionService {
 
     @Autowired
@@ -43,7 +44,7 @@ public class IniciarSesionService {
 
                 if (usuarioDTO == null) {
                     ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
-                    ExceptionGenerics.setDescripcion("No Existe el Usuario");
+                    ExceptionGenerics.setDescripcion("usuario/contraseña incorrectos");
                     throw new ExceptionGenerics();
                 }
             }

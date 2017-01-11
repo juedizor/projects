@@ -1,0 +1,128 @@
+<div ng-controller = "gestionUsuariosCtrl as gestionUser" class="modal fade" id="modal_usuario" data-keyboard=”false” data-backdrop>
+  <form name="formUser" ng-submit = "controller.guardar()" novalidate="novalidate">
+      <div class="modal-dialog" style="width: 70%;">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>-->
+            <h4 class="modal-title">Datos Usuarios - {{accion.textAccion}}</h4>
+          </div>
+
+
+          <div class="modal-body" >
+          
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Tipo de Documento</label>
+                      <dir-tipo-documentos docs = "gestionUser.tiposDoc" tipos = "gestionUser.tipoDocumentos" name = "tipoDoc" 
+                      ng-model = "gestionUser.tipoDocumentos" required = "required">
+                      </dir-tipo-documentos>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Número de Documento</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.persona.numeroDocumento" placeholder="Número de Documento" type="text"
+                      name = "numeroDocumento" required = "required" ng-blur = "gestionUser.change()">
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Primer Nombre</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.persona.nombre1" placeholder="Primer Nombre" type="text" 
+                      name = "nombre1" required = "required">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Segundo Nombre</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.persona.nombre2" placeholder="Segundo Nombre" type="text" 
+                      name = "nombre2" required = "required">
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Primer Apellido</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.persona.apellido1" placeholder="Primer Apellido" type="text" 
+                      name = "apellido1" required = "required">
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Segundo Apellido</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.persona.apellido2" placeholder="Segundo Apellido" type="text" 
+                      name = "apellido2" required = "required">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-8">
+                    <div class="form-group">
+                      <label>Correo Electronico</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.persona.email" placeholder="Correo Electronico" type="text" 
+                      name = "email" required = "required">
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Usuario</label>
+                      <input class="form-control" ng-model="gestionUser.usuario.nombreUsuario" placeholder="Nombre de Usuario" type="text" 
+                      name = "nombreUsuario" required = "required">
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                        <label>Perfil</label>
+                        <dir-perfiles profile = "gestionUser.profile" perfiles = "gestionUser.perfiles" name = "perfiles"  required = "required"></dir-perfiles>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input class="form-control" ng-model="gestionUser.usuario.contrasena" placeholder="Digite una Contraseña" type="password" 
+                        name = "contrasena1" required = "required">
+                    </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                        <label>Repetir Contraseña</label>
+                        <input class="form-control" ng-model="gestionUser.usuario.contrasena" placeholder="Repita una Contraseña" type="password" 
+                        name = "contrasena2" required = "required">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.box-body -->
+            </div>
+            
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" ng-disabled = "gestionUser.disabledBtnGuardar" ng-click = "gestionUser.guardar()" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+  <!-- /.modal-dialog -->
+  <pre>  {{formUser | json}}</pre>
+  </form>
+</div>

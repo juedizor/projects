@@ -64,32 +64,27 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
     }
 
     @Override
-    public int registrarUsuario(PersonaDTO personaDTO) throws Exception {
+    public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
         int resultado = Respuestas.SIN_DATOS;
-        if (personaDTO != null) {
-            // tiene que validar si el usuario ya existe 
-            UsuarioDTO aeUsuarioDTO = getUser(personaDTO.getUsuarioDTO().getNombreUsuario());
-            if (aeUsuarioDTO != null) {
-                resultado = Respuestas.EXISTE_REGISTRO;
-            } else {
-                try {
-                    PERSISTENCE_APP.getEntityTransaction().begin();
-                    personaDTO.setFechaRegistro(DATE_UTILS.getFechaActual());
-                    Persona persona = ENTITY_UTILS.getPersona(personaDTO);
-                    TipoDocumento tipoDocumento = tipoDocumentoIfaceDAO.findById(personaDTO.getTipoDocumentoDTO().getIdTipoDocumento());
-                    persona.setIdTipoDocumento(tipoDocumento);
-                    Usuario usuario = ENTITY_UTILS.getUsuario(personaDTO.getUsuarioDTO());
-                    Perfil perfil = perfilIfaceDAO.findByNombre(personaDTO.getUsuarioDTO().getPerfil().getNombrePerfil());
-                    usuario.setIdPerfil(perfil);
-                    usuario.setIdPersona(persona);
-                    usuarioIfaceDAO.save(usuario);
-                    PERSISTENCE_APP.getEntityTransaction().commit();
-                    resultado = Respuestas.CREADO;
-                } catch (Exception e) {
-                    PERSISTENCE_APP.getEntityTransaction().rollback();
-                    throw new Exception("Error realizando transacción usuario:\n" + e.getMessage());
-                }
+        if (usuarioDTO != null) {
+            try {
+                PERSISTENCE_APP.getEntityTransaction().begin();
+                usuarioDTO.getPersona().setFechaRegistro(DATE_UTILS.getFechaActual());
+                Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
+                TipoDocumento tipoDocumento = tipoDocumentoIfaceDAO.findById(usuarioDTO.getPersona().getTipoDocumentoDTO().getIdTipoDocumento());
+                persona.setIdTipoDocumento(tipoDocumento);
+                Usuario usuario = ENTITY_UTILS.getUsuario(usuarioDTO.getPersona().getUsuarioDTO());
+                Perfil perfil = perfilIfaceDAO.findByNombre(usuarioDTO.getPersona().getUsuarioDTO().getPerfil().getNombrePerfil());
+                usuario.setIdPerfil(perfil);
+                usuario.setIdPersona(persona);
+                usuarioIfaceDAO.save(usuario);
+                PERSISTENCE_APP.getEntityTransaction().commit();
+                resultado = Respuestas.CREADO;
+            } catch (Exception e) {
+                PERSISTENCE_APP.getEntityTransaction().rollback();
+                throw new Exception("Error realizando transacción usuario:\n" + e.getMessage());
             }
+
         }
 
         return resultado;

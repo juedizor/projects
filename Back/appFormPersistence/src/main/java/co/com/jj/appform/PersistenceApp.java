@@ -32,11 +32,15 @@ public class PersistenceApp {
         return persistenceApp;
     }
 
-    public EntityManager getEntityManager() throws Exception {
+    public EntityManagerFactory getEntityManagerFactory() throws Exception {
         if (emf == null) {
             emf = Persistence.createEntityManagerFactory("appFormDS");
-            manager = emf.createEntityManager();
         }
+        return emf;
+    }
+
+    public EntityManager getEntityManager() throws Exception {
+        manager = getEntityManagerFactory().createEntityManager();
         return manager;
     }
 
@@ -45,8 +49,4 @@ public class PersistenceApp {
         return tx;
     }
 
-//    @Bean(name = "tx")
-//    public EntityTransaction getEntityTransaction() {
-//        return manager.getTransaction();
-//    }
 }
