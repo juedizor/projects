@@ -1,5 +1,5 @@
 <div ng-controller = "gestionUsuariosCtrl as gestionUser" class="modal fade" id="modal_usuario" data-keyboard=”false” data-backdrop>
-  <form name="formUser" ng-submit = "controller.guardar()" novalidate="novalidate">
+  <form name="gestionUser.formUser" ng-submit = "controller.guardar()" novalidate="novalidate">
       <div class="modal-dialog" style="width: 70%;">
 
         <div class="modal-content">
@@ -116,13 +116,13 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "gestionUser.closeModal()">Close</button>
             <button type="button" ng-disabled = "gestionUser.disabledBtnGuardar" ng-click = "gestionUser.guardar()" class="btn btn-primary">Guardar</button>
           </div>
         </div>
         <!-- /.modal-content -->
       </div>
   <!-- /.modal-dialog -->
-  <pre>  {{formUser | json}}</pre>
+  <pre>  {{gestionUser.formUser.numeroDocumento | json}}</pre>
   </form>
 </div>

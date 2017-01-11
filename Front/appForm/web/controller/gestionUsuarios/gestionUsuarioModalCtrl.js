@@ -32,15 +32,20 @@ app.controller('gestionUsuariosCtrl',
 			self.usuario.$create();
 		}
 
+		this.oldUser = {};
+
 		
 		// funcion que puede ser llamada para poder cargar los datos de usuario
 		$rootScope.$on("callGetDataUser", function(event, user){
-	       self.getDataUser(user);
+			self.oldUser = user;
+	        self.getDataUser(user);
         });
 
 		// variable para almacenar el numero de documento inicial al momento de la edicio de 
 		// datos
         this.numDocumento = "";
+
+        this.formUser = null;
 
 		// funcion para el cargue de informacion de usuario cuando se realiza un proceso de edicio
 		this.getDataUser = function(user) {
@@ -49,21 +54,26 @@ app.controller('gestionUsuariosCtrl',
 			self.profile = {};
 			if(user.user !== null){
 				self.usuario = new RegistrarUsuariosResource(user);
-				self.usuario = self.usuario.user;
+				angular.copy(self.usuario.user, self.usuario);
 				self.numDocumento = self.usuario.persona.numeroDocumento;
 				self.tipoDocumentos = self.usuario.persona.tipoDocumentoDTO;
 	            self.profile = self.usuario.perfil;
 			}
+			self.formUser.$setPristine();
+			self.formUser.$setUntouched();
         }
 
         this.change = function(){
         	if(self.numDocumento == self.usuario.persona.numeroDocumento){
         		return;
         	}
+        }
 
-
-
-        	
+        this.closeModal = function(){
+        	console.log("entre")
+        	console.log(self.usuario)
+        	console.log(self.oldUser)
+        	self.usuario =  self.oldUser;
         }
 
 }]);

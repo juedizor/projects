@@ -32,7 +32,7 @@ app.controller('listarUsuariosCtrl',
     		para poder enviar los datos de una edicion de usuarios
     	*/
  		$rootScope.$emit("callGetDataUser", {user}); 
-
+ 		
 
     	
     }
