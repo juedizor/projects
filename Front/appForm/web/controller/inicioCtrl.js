@@ -41,19 +41,22 @@ app.controller('inicioCtrl',
 		// se utliza el servicio inyectado
 		// se usa la promesa creada en el mismo para poder realizar el consumo del inicio de login
 		LoginService.login(datos).then(
-			function(){ // funcion cuando la promesa es exitosa
+			function(success){ // funcion cuando la promesa es exitosa
 				self.cargando = false;
 			    $cookieStore.put('estaConectado', true);
-			    $cookieStore.put('usuario', LoginService.dataUser);
+			    $cookieStore.put('usuario', success.data);
 				$rootScope.user.valido = true;
 				$rootScope.wrapper = "wrapper";
 				$rootScope.init = "hold-transition skin-purple sidebar-mini";
 				$location.url(self.redirecTo);
 			}, 
-			function(){ // funcion cuando la promesa genero error
+			function(error){ // funcion cuando la promesa genero error
 				self.cargando = false;
 				self.invalido = true;
-				self.dataErr = LoginService.dataErr;
+				if(error.data == null){
+					self.mensaje = "No hay conexión con el servidor, verifique";
+					return;
+				}
 				self.mensaje = self.dataErr.description;
 			});
 

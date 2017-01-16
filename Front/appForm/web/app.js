@@ -6,11 +6,10 @@ var app = angular.module('appForm', [
 	'appForm.configuracion', 
 	'appForm.cerrarSesion', 
 	'appForm.usuarios', 
-	'datatables', 
 	'appForm.tipoDocumentos', 
 	'appForm.perfil', 
-	'appForm.bridgeUser', 
-	'jcs-autoValidate'
+	'jcs-autoValidate', 
+	'ui.bootstrap'
 	]);
 
 
@@ -59,6 +58,8 @@ app.controller('mainCtrl',
 	$scope.gUsuarios     = "";
 	$scope.gFormularios  = "";
 
+
+
 	// cargue inicial de los tiepos de documentos de persoinas
 	var tiposDocumentos = $cookieStore.get('tiposDocumentos');
 	if(tiposDocumentos !== undefined && tiposDocumentos.length > 0){
@@ -84,8 +85,8 @@ app.controller('mainCtrl',
 	// aqui se hace uso del servicio Configuracion, 
 	//usando la promesa creada en el mismo. 
 	Configuracion.cargar().then(
-		function(){
-			$rootScope.config = Configuracion.config;
+		function(value){
+			$rootScope.config = value.data;
 	})
 
 	

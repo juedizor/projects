@@ -4,7 +4,8 @@ app.directive('dirTipoDocumentos',	function(){
 		templateUrl: 'template/gestionParams/tipoDocumentos.html', 
 		scope: {
 			tiposDoc: "=docs", 
-			tipoDocumentos: "=tipos"
+			tipoDocumentos: "=tipos", 
+			obligatorio: "="
 		}
 	};
 });

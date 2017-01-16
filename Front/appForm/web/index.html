@@ -13,18 +13,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
   <!-- Cargue de estilos -->
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="../lib/ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <link rel="stylesheet" href="dist/css/skins/skin-purple.min.css">
   <link rel="stylesheet" href="../lib/plugins/select2/select2.min.css">
+  <link rel="stylesheet" href="../lib/plugins/datatables/dataTables.bootstrap.css">
 
 
-   <!-- JQUERY -->
-   <script src="angular-datatables-master/vendor/jquery/dist/jquery.js"></script>     
-   <script src="angular-datatables-master/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-   <link rel="stylesheet" href="angular-datatables-master/vendor/datatables/media/css/jquery.dataTables.min.css">
-   <script src="../lib/plugins/select2/select2.full.min.js"></script>
+   <!-- JQUERY -->   
+   <!-- jQuery 2.1.4 -->
+  <script src="../lib/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+  <script src="../lib/plugins/select2/select2.full.min.js"></script>
+
+  <!-- Bootstrap 3.3.5 -->
+  <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+
+   <!-- DataTables -->
+  <script src="../lib/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="../lib/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+  
+  <!-- AdminLTE App -->
+  <script src="dist/js/app.min.js"></script>
 
   <!-- ANGULAR -->
   <!-- Importaciones de angular -->
@@ -34,16 +46,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../lib/angular/angular-resource.min.js"></script>
   <script src="../lib/angular/jcs-auto-validate.js"></script>
 
-  <!-- Angular DataTables -->
- <script src="angular-datatables-master/src/angular-datatables.directive.js"></script>
- <script src="angular-datatables-master/src/angular-datatables.instances.js"></script>
- <script src="angular-datatables-master/src/angular-datatables.util.js"></script>
- <script src="angular-datatables-master/src/angular-datatables.renderer.js"></script>
- <script src="angular-datatables-master/src/angular-datatables.factory.js"></script>
- <script src="angular-datatables-master/src/angular-datatables.options.js"></script>
- <script src="angular-datatables-master/src/angular-datatables.js"></script>
+  <link rel="styleSheet" href="../lib/ui-grid/ui-grid.min.css"/>
+  <script src="../lib/ui-grid/ui-grid.min.js"></script>
 
-  
+  <script src="../lib/bootstrap/ui-bootstrap.min.js"></script>
+
+
   <!--  Cargue de controllers-->
   <script src="app.js"></script>
   <script src="controller/inicioCtrl.js"></script>
@@ -62,28 +70,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script type="text/javascript" src = "common/services/gestionUsuarios/usuariosService.js"></script>
   <script type="text/javascript" src = "common/services/gestionParams/tipoDocumentosService.js"></script>
   <script type="text/javascript" src = "common/services/gestionParams/perfilesService.js"></script>
-  <script type="text/javascript" src = "common/services/bridge/dataUsuarioBridge.js"></script>
   
   
 
   <!-- Cargue de Directivas-->
   <script type="text/javascript" src = "common/directives/params/tipoDocumentosDirective.js"></script>
   <script type="text/javascript" src = "common/directives/params/perfilesDirective.js"></script>
-
-  <!-- Cargue de Filtros-->
-  <script type="text/javascript" src = "common/filters/filtros.js"></script>
-
- 
-
-
-  <!-- Bootstrap 3.3.5 -->
-  <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/app.min.js"></script>
+  <script type="text/javascript" src = "common/directives/validator/validateDirective.js"></script>
 
 
   
 
+
+  <!-- Cargue de Filtros-->
+  <script type="text/javascript" src = "common/filters/filtros.js"></script>
 
 
 </head>

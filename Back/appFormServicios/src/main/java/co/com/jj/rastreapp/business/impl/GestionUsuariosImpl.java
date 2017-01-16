@@ -57,7 +57,7 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
             PersonaDTO personaDTO = ENTITY_UTILS.getPersonaDTO(listUsuarios.get(0).getIdPersona());
             usuarioDTO.setPersona(personaDTO);
             TipoDocumentoDTO tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(listUsuarios.get(0).getIdPersona().getIdTipoDocumento());
-            personaDTO.setTipoDocumentoDTO(tipoDocumentoDTO);
+            personaDTO.setTipoDocumento(tipoDocumentoDTO);
             return usuarioDTO;
         }
         return null;
@@ -71,7 +71,7 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
                 PERSISTENCE_APP.getEntityTransaction().begin();
                 usuarioDTO.getPersona().setFechaRegistro(DATE_UTILS.getFechaActual());
                 Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
-                TipoDocumento tipoDocumento = tipoDocumentoIfaceDAO.findById(usuarioDTO.getPersona().getTipoDocumentoDTO().getIdTipoDocumento());
+                TipoDocumento tipoDocumento = tipoDocumentoIfaceDAO.findById(usuarioDTO.getPersona().getTipoDocumento().getIdTipoDocumento());
                 persona.setIdTipoDocumento(tipoDocumento);
                 Usuario usuario = ENTITY_UTILS.getUsuario(usuarioDTO.getPersona().getUsuarioDTO());
                 Perfil perfil = perfilIfaceDAO.findByNombre(usuarioDTO.getPersona().getUsuarioDTO().getPerfil().getNombrePerfil());
@@ -102,7 +102,7 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
             usuarioDTO = ENTITY_UTILS.getUsuarioDTO(persona.getUsuarioList().get(0));
             PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(persona.getUsuarioList().get(0).getIdPerfil());
             usuarioDTO.setPerfil(perfilDTO);
-            personaDTO.setTipoDocumentoDTO(tipoDocumentoDTO);
+            personaDTO.setTipoDocumento(tipoDocumentoDTO);
             personaDTO.setUsuarioDTO(usuarioDTO);
         }
         return personaDTO;
@@ -111,11 +111,11 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
     @Override
     public UsuarioDTO getUser(String nombreUsuario) throws Exception {
         Usuario usuario = usuarioIfaceDAO.findByNombreUsuario(nombreUsuario);
-        UsuarioDTO aeUsuarioDTO = null;
+        UsuarioDTO usuarioDTO = null;
         if (usuario != null) {
-            aeUsuarioDTO = ENTITY_UTILS.getUsuarioDTO(usuario);
+            usuarioDTO = ENTITY_UTILS.getUsuarioDTO(usuario);
         }
-        return aeUsuarioDTO;
+        return usuarioDTO;
     }
 
     @Override
@@ -129,9 +129,10 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
         if (listUsuarios != null && !listUsuarios.isEmpty()) {
             for (Usuario usuario : listUsuarios) {
                 usuarioDTO = ENTITY_UTILS.getUsuarioDTO(usuario);
+                usuarioDTO.setContrasena("");
                 personaDTO = ENTITY_UTILS.getPersonaDTO(usuario.getIdPersona());
                 tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(usuario.getIdPersona().getIdTipoDocumento());
-                personaDTO.setTipoDocumentoDTO(tipoDocumentoDTO);
+                personaDTO.setTipoDocumento(tipoDocumentoDTO);
                 usuarioDTO.setPersona(personaDTO);
                 perfilDTO = ENTITY_UTILS.getPerfilDTO(usuario.getIdPerfil());
                 usuarioDTO.setPerfil(perfilDTO);

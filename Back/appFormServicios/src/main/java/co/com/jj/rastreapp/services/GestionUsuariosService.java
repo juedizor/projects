@@ -72,7 +72,7 @@ public class GestionUsuariosService {
         return personaDTO;
     }
 
-    @RequestMapping(value = "/usuarios/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
     public List<UsuarioDTO> getUsuarios() throws ExceptionGenerics {
         List<UsuarioDTO> listUsuarioDTO = null;
         try {
@@ -90,7 +90,26 @@ public class GestionUsuariosService {
             ExceptionGenerics.setDescripcion("No existen Usuarios");
             throw new ExceptionGenerics();
         }
+    }
 
+    @RequestMapping(value = "/usuarios/{nombreUsuario}", method = RequestMethod.GET)
+    public UsuarioDTO getUsuarioDTO(@PathVariable(value = "nombreUsuario") String nombreUsuario) throws ExceptionGenerics {
+        UsuarioDTO usuarioDTO = null;
+        try {
+            usuarioDTO = gestionUsuariosIface.getUser(nombreUsuario);
+        } catch (Exception e) {
+            ExceptionGenerics.setCodigo(Respuestas.ERROR);
+            ExceptionGenerics.setDescripcion(e.getMessage());
+            throw new ExceptionGenerics();
+        }
+        
+        if(usuarioDTO == null){
+            ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
+            ExceptionGenerics.setDescripcion("No existe el usuario");
+            throw new ExceptionGenerics();
+        }
+        
+        return usuarioDTO;
     }
 
 }

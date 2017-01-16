@@ -4,7 +4,8 @@ app.directive('dirPerfiles', function(){
 		templateUrl: 'template/gestionParams/perfiles.html', 
 		scope: {
 			profile: "=", 
-			perfiles: "="
+			perfiles: "=", 
+			obligatorio: "="
 		}
 	};
 });

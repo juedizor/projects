@@ -1,28 +1,18 @@
 var app = angular.module('appForm.usuarios', []);
 
-app.factory('UsuariosResource', ['$resource', 'urlRest',  function($resource, urlRest){
-	return $resource(urlRest+"gestionUsuarios/usuarios/all", {}, 
-	     {
-          query: { method: "GET", isArray: true }
-       });
-}]);
-
-
-app.factory('RegistrarUsuariosResource', ['$resource', 'urlRest', function($resource, urlRest){
+app.factory('UsuariosResource', ['$resource', 'urlRest', function($resource, urlRest){
 	return $resource(urlRest + "gestionUsuarios/usuarios", {}, 
     		{
-		        query: { method: "GET", isArray: true },
-            create: { method: "POST"},
-            get: { method: "GET"},
-            remove: { method: "DELETE"},
-            update: { method: "PUT"}
+	            getPersona:{
+	              	method:'GET',
+	              	url:urlRest + "gestionUsuarios/usuarios/:tipoDoc/:numeroDoc",
+                	params:{tipoDoc:"@tipoDoc",numeroDoc:"@numeroDoc"}
+	            }, 
+	            getUser:{
+	            	method:'GET',
+	              	url:urlRest + "gestionUsuarios/usuarios/:nombreUsuario",
+	              	params:{nombreUsuario:"@nombreUsuario"}
+	            }
     		});
 
-}]);
-
-app.factory('ValidarPersonaResource', ['$resource', 'urlRest', function($resource, urlRest){
-    return $resource(urlRest + "gestionUsuarios/usuarios", {}, 
-      {
-        query: { method: "GET", isArray: true }
-      });
 }]);

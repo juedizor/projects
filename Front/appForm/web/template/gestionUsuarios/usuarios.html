@@ -12,7 +12,7 @@
 
 <!-- /.box-header -->
 <div class="box-body">
-<table datatable="ng" dt-options="listarUsuariosCtrl.dtOptions" class="table table-bordered table-hover">
+<table  id= "example2" class="table table-bordered table-hover">
     <thead>
       <tr>
           <th>Tipo de Documento
@@ -42,7 +42,7 @@
     </thead>
     <tbody>
     <tr ng-repeat = "user in listarUsuariosCtrl.users.dataUser">
-        <td >{{user.persona.tipoDocumentoDTO.nombre}}</td>
+        <td class="tooltipster">{{user.persona.tipoDocumento.nombre}}</td>
         <td>{{user.persona.numeroDocumento}}</td>
         <td>{{user.persona.nombre1}}</td>
         <td>{{user.persona.apellido1}}</td>
@@ -62,7 +62,11 @@
   </div>
 </div>
 <!-- /.box-body -->
+<script type="text/javascript">
+   
+</script>
 
 
 
 <div ng-include = "'template/gestionUsuarios/modalUsuarios.html'"></div>
+
