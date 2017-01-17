@@ -9,7 +9,11 @@ var app = angular.module('appForm', [
 	'appForm.tipoDocumentos', 
 	'appForm.perfil', 
 	'jcs-autoValidate', 
-	'ui.bootstrap'
+	'ui.bootstrap', 
+	'ui.grid', 
+	'ui.grid.resizeColumns', 
+	'ui.grid.autoResize', 
+	'ui.grid.pagination'
 	]);
 
 

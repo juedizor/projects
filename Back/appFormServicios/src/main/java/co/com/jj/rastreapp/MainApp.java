@@ -42,28 +42,35 @@ public class MainApp  extends SpringBootServletInitializer {
     }
     
     // generacion de bean 
-    
     @Bean
     public UsuarioIfaceDAO getUsuarioIfaceDAO(){
-        usuarioIfaceDAO = new UsuarioImplDAO();
+        if(usuarioIfaceDAO == null){
+            usuarioIfaceDAO = new UsuarioImplDAO();
+        }
         return usuarioIfaceDAO;
     }
     
     @Bean
     public PersonaIfaceDAO getPersonaIfaceDAO(){
-        personaIfaceDAO = new PersonaImplDAO();
+        if(personaIfaceDAO == null){
+            personaIfaceDAO = new PersonaImplDAO();
+        }
         return personaIfaceDAO;
     }
     
     @Bean
     public TipoDocumentoIfaceDAO getTipoDocumentoIfaceDAO(){
-        tipoDocumentoIfaceDAO = new TipoDocumentoImplDAO();
+        if(tipoDocumentoIfaceDAO == null){
+            tipoDocumentoIfaceDAO = new TipoDocumentoImplDAO();
+        }
         return tipoDocumentoIfaceDAO;
     }
     
     @Bean
     public PerfilIfaceDAO getPerfilIfaceDAO(){
-        perfilIfaceDAO = new PerfilImplDAO();
+        if(perfilIfaceDAO == null){
+            perfilIfaceDAO = new PerfilImplDAO();
+        }
         return perfilIfaceDAO;
     }
 }

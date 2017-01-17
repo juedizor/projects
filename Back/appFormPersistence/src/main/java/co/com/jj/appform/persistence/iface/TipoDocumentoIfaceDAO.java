@@ -7,6 +7,7 @@ package co.com.jj.appform.persistence.iface;
 
 import co.com.jj.appform.entity.TipoDocumento;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface TipoDocumentoIfaceDAO {
     
     public List<TipoDocumento> findAll() throws Exception;
     public TipoDocumento findById(int idTipoDocumento) throws Exception;
+    public void setEntityManager(EntityManager manager);
     
 }

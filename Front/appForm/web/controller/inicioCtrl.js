@@ -27,11 +27,13 @@ app.controller('inicioCtrl',
 		if(datos.usuario.length < 3){
 			self.invalido = true;
 			self.mensaje = "Ingrese su usuario"; 
-			return 
+			console.log(self.mensaje)
+			return;
 		}else{
 			if(datos.contrasena.length < 3){
 				self.invalido = true;
 				self.mensaje = "Ingrese su contraseña"; 
+				console.log(self.mensaje)
 				return;	
 			}
 		}
@@ -57,7 +59,7 @@ app.controller('inicioCtrl',
 					self.mensaje = "No hay conexión con el servidor, verifique";
 					return;
 				}
-				self.mensaje = self.dataErr.description;
+				self.mensaje = error.data.description;
 			});
 
 	}

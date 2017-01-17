@@ -2,11 +2,9 @@ app.controller('gestionUsuariosCtrl',
 	['$scope',  
 	'$rootScope',
 	'UsuariosResource', 
-	'defaultErrorMessageResolver', 
 	function($scope, 
 		$rootScope, 
-		UsuariosResource, 
-		defaultErrorMessageResolver){
+		UsuariosResource){
 
 		var self = this; // se almacena el contexto del controlador dentro de la variable self
 
@@ -32,7 +30,18 @@ app.controller('gestionUsuariosCtrl',
 		
 		// funcion para realizar el proceso de registro de usuarios
 		this.guardar = function(){
-			self.usuario.$create();
+			var response = self.usuario.$save();		
+			response.then(function(success){
+				var responseUser = [];
+				responseUser = UsuariosResource.query().$promise.then(function(success){
+					$rootScope.$emit("updateUserTable", {success}); 
+				});
+				
+			});
+	        
+	        self.formUser.$setPristine();
+			self.formUser.$setUntouched();
+			
 		}
 
 		
@@ -51,12 +60,15 @@ app.controller('gestionUsuariosCtrl',
 
 
         this.usuarioResource = UsuariosResource;
+        this.styleFormGroup = "form-group has-success";
 
 		// funcion para el cargue de informacion de usuario cuando se realiza un proceso de edicio
 		this.getDataUser = function(user) {
 			self.usuario = new UsuariosResource();
 			self.tipoDocumentos = {};
 			self.profile = {};
+			self.formUser.$setPristine();
+			self.formUser.$setUntouched();
 			if(user.user !== null){
 				self.usuario = new UsuariosResource(user);
 				angular.copy(self.usuario.user, self.usuario);
@@ -64,10 +76,25 @@ app.controller('gestionUsuariosCtrl',
 				self.nombreUsuario = self.usuario.nombreUsuario;
 				self.usuario.persona.tipoDocumento;
 	            self.usuario.perfil;
+				angular.element("#numDocError").addClass(self.styleFormGroup);
+				angular.element("#fieldEmail").addClass(self.styleFormGroup);
+				angular.element("#fieldPerfil").addClass(self.styleFormGroup);
+				angular.element("#requiredPass1").addClass(self.styleFormGroup);
+				angular.element("#requiredPass2").addClass(self.styleFormGroup);
+				angular.element("#userError").addClass(self.styleFormGroup);
+				angular.element("#fieldApellido1").addClass(self.styleFormGroup);
+				angular.element("#fieldApellido2").addClass(self.styleFormGroup);
+				angular.element("#fieldNombre1").addClass(self.styleFormGroup);
+				angular.element("#fieldNombre2").addClass(self.styleFormGroup);
+				angular.element("#fieldTipoDoc").addClass(self.styleFormGroup);
+			}else{
+				self.numDocumento = "";
+				self.nombreUsuario = "";
 			}
-			self.formUser.$setPristine();
-			self.formUser.$setUntouched();
+			angular.element("#errorNumDoc").html("");
+			angular.element("#errorUser").html("");
+			angular.element("#errorPass1").html("");
+			angular.element("#errorPass2").html("");
+			
         }
-
-
 }]);

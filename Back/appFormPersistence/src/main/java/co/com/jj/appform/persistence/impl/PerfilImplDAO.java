@@ -9,6 +9,7 @@ import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -16,17 +17,16 @@ import java.util.List;
  */
 public class PerfilImplDAO implements PerfilIfaceDAO{
 
-    private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
+    private EntityManager manager;
     
     @Override
     public List<Perfil> findAll() throws Exception {
-        return persistenceApp.getEntityManager().createNamedQuery("Perfil.findAll").getResultList();
+        return manager.createNamedQuery("Perfil.findAll").getResultList();
     }
 
     @Override
     public Perfil findByNombre(String nombre) throws Exception {
-        List<Perfil> listPerfil = persistenceApp.
-                getEntityManager().
+        List<Perfil> listPerfil = manager.
                 createNamedQuery("Perfil.findByNombre").
                 setParameter("nombre", nombre).getResultList();
         if(listPerfil != null && !listPerfil.isEmpty()){
@@ -34,5 +34,14 @@ public class PerfilImplDAO implements PerfilIfaceDAO{
         }
         return null;
     }
+
+    @Override
+    public void setEntityManager(EntityManager manager) {
+        this.manager = manager;
+    }
+    
+    
+    
+    
     
 }

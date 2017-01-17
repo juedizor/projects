@@ -9,6 +9,7 @@ import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
@@ -18,20 +19,21 @@ import javax.persistence.Query;
 public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
+    private EntityManager manager;
 
     @Override
     public void save(Usuario usuario) throws Exception {
-        persistenceApp.getEntityManager().persist(usuario);
+        manager.persist(usuario);
     }
 
     @Override
     public void merge(Usuario usuario) throws Exception {
-        persistenceApp.getEntityManager().merge(usuario);
+        manager.merge(usuario);
     }
 
     @Override
     public Usuario findByNombreUsuario(String nombreUsuario) throws Exception {
-        List<Usuario> listAeUsuarios = persistenceApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuario")
+        List<Usuario> listAeUsuarios = manager.createNamedQuery("Usuario.findByNombreUsuario")
                 .setParameter("nombreUsuario", nombreUsuario)
                 .getResultList();
         if (listAeUsuarios != null && !listAeUsuarios.isEmpty()) {
@@ -42,7 +44,7 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     @Override
     public List<Usuario> findByNombreUsuarioContrasenaActivo(String nombreUsuario, String contrasena, boolean activo) throws Exception {
-        Query query = persistenceApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioContrasenaActivo");
+        Query query = manager.createNamedQuery("Usuario.findByNombreUsuarioContrasenaActivo");
         query.setParameter("nombreUsuario", nombreUsuario);
         query.setParameter("contrasena", contrasena);
         query.setParameter("activo", activo);
@@ -51,7 +53,12 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     @Override
     public List<Usuario> findAll() throws Exception {
-        return persistenceApp.getEntityManager().createNamedQuery("Usuario.findAll").getResultList();
+        return manager.createNamedQuery("Usuario.findAll").getResultList();
+    }
+
+    @Override
+    public void setEntityManager(EntityManager manager) {
+        this.manager = manager;
     }
 
 }

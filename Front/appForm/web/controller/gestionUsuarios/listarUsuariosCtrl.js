@@ -2,61 +2,62 @@ app.controller('listarUsuariosCtrl',
 	['$scope', 
 	'UsuariosResource', 
 	'$location',
-	'$rootScope', 
+	'$rootScope',
+	'i18nService', 
 	function($scope, 
 		UsuariosResource, 
 		$location, 
-		$rootScope){
+		$rootScope, 
+		i18nService){
 	
 	var self = this; // se almacena el contexto del controlador
 
 	// se activa el menu de gestion de usuarios
 	$scope.setActive('gUsuarios');
-	
 	// variable para almacenar todos los usuarios del sistema
 	this.users = {
-		dataUser: {}
+		dataUser: []
 	};
 
 	// ejecucion de la consulta para listar todos los usuarios del sistema
  	UsuariosResource.query().$promise.then(
 		function(data){
-			self.users.dataUser = data;
+			self.cargarDatosTabla(data);
  	});
 
-  
- 	// se usa para la inicializacion el datatable de jquery 
- 	this.bTooltipsterExists = false;
-	$scope.$watch(
-		function(){
-		    if(angular.element('.tooltipster').length){
-		        self.bTooltipsterExists = true;
-		        return true;
-		    }
-		    
-		    return false;
-		},
-		function(){
-		    if(self.bTooltipsterExists){
-		        $('#example2').DataTable({
-					"paging": true,
-					"lengthChange": true,
-					"searching": true,
-					"ordering": true,
-					"info": true,
-					"autoWidth": false, 
-					"language": {
-			            "lengthMenu": "Mostrar _MENU_ registros por pagina",
-			            "zeroRecords": "No hay Resultados",
-			            "info": "Mostrando _START_ de _END_ de _TOTAL_ registros",
-			            "infoEmpty": "No hay Resultados",
-			            "infoFiltered": "(Filtrando de _MAX_ registros)", 
-			            "search":"Buscar:",
-			        }
-				});
-		    }
+ 	this.cargarDatosTabla = function(data){
+ 		var dataUser = [];
+		angular.forEach(data, function(value, key) {
+			var user = {};
+			user["TipoDeDocumento"] = value.persona.tipoDocumento.nombre;
+			user["NumeroDocumento"] = value.persona.numeroDocumento;
+			user["PrimerNombre"] = value.persona.nombre1;
+			user["PrimerApellido"] = value.persona.apellido1;
+			user["CorreoElectronico"] = value.persona.email;
+			user["Usuario"] = value.nombreUsuario;
+			user["Perfil"] = value.perfil.nombrePerfil;
+			self.users.dataUser.push(user);
 		});
-
+ 	}
+	
+	i18nService.setCurrentLang('es');
+ 	this.gridOptions = {
+ 		enableFiltering: true, 
+ 		enableSorting: true,
+ 		data: self.users.dataUser, 
+ 		enableColumnResizing: true,
+	    paginationPageSizes: [5, 10, 15],
+		paginationPageSize: 5,
+ 		columnDefs: [
+	      { name: 'TipoDeDocumento', enableHiding: false  },
+	      { name: 'NumeroDocumento', enableHiding: false },
+	      { name: 'PrimerNombre', enableHiding: false  }, 
+	      { name: 'PrimerApellido', enableHiding: false  },
+	      { name: 'CorreoElectronico', enableHiding: false },
+	      { name: 'Usuario', enableHiding: false  }, 
+	      { name: 'Perfil', enableHiding: false  }
+	    ]
+ 	}
 
     this.abrirModal = function(user){
     	$("#modal_usuario").modal(); // se instancia la ventana modal de bootstrap
@@ -70,9 +71,11 @@ app.controller('listarUsuariosCtrl',
     		registro = true;
     	}
  		$rootScope.$emit("callGetDataUser", {user, valAccion, registro}); 
- 		
-
-    	
     }
+
+    $rootScope.$on("updateUserTable", function(event, user){
+    	self.users.dataUser = user.success;
+    	//self.cargarDatosTabla(self.users.dataUser);
+    });
 
 }]);

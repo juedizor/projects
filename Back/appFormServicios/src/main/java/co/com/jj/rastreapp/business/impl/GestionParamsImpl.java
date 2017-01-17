@@ -5,6 +5,7 @@
  */
 package co.com.jj.rastreapp.business.impl;
 
+import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.TipoDocumento;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
@@ -31,9 +32,11 @@ public class GestionParamsImpl implements GestionParamsIface {
     PerfilIfaceDAO perfilIfaceDAO;
 
     private static final EntityUtils ENTITY_UTILS = EntityUtils.getInstance();
+    private static final PersistenceApp PERSISTENCE_APP = PersistenceApp.getInstance();
 
     @Override
     public List<TipoDocumentoDTO> obtenerTiposDocumentos() throws Exception {
+        tipoDocumentoIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
         List<TipoDocumento> listTipoDocumento = tipoDocumentoIfaceDAO.findAll();
         TipoDocumentoDTO tipoDocumentoDTO;
         List<TipoDocumentoDTO> listTipoDocumentoDTO = new ArrayList<>();
@@ -49,6 +52,7 @@ public class GestionParamsImpl implements GestionParamsIface {
 
     @Override
     public List<PerfilDTO> obtenerPerfiles() throws Exception {
+        perfilIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
         List<Perfil> listPerfil = perfilIfaceDAO.findAll();
         PerfilDTO perfilDTO;
         List<PerfilDTO> listPerfilDTO = new ArrayList<>();

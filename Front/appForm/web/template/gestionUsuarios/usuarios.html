@@ -12,55 +12,14 @@
 
 <!-- /.box-header -->
 <div class="box-body">
-<table  id= "example2" class="table table-bordered table-hover">
-    <thead>
-      <tr>
-          <th>Tipo de Documento
-          </th>
-
-          <th >Número de Documento
-          </th>
-
-          <th>Primer Nombre
-          </th>
-
-          <th>Primer Apellido
-          </th>
-
-          <th>Correo Electronico
-          </th>
-
-          <th>usuario
-          </th>
-
-          <th>Perfil
-          </th>
-
-           <th>Acción
-           </th>
-      </tr>    
-    </thead>
-    <tbody>
-    <tr ng-repeat = "user in listarUsuariosCtrl.users.dataUser">
-        <td class="tooltipster">{{user.persona.tipoDocumento.nombre}}</td>
-        <td>{{user.persona.numeroDocumento}}</td>
-        <td>{{user.persona.nombre1}}</td>
-        <td>{{user.persona.apellido1}}</td>
-        <td>{{user.persona.email}}</td>
-        <td>{{user.nombreUsuario}}</td>
-        <td>{{user.perfil.nombrePerfil}}</td>
-        <td>
-          <a ng-click = "listarUsuariosCtrl.abrirModal(user)" class="btn btn-warning" title="Editar">
-            <i class="fa fa-edit"></i>
-          </a>   
-        </td>
-      </tr>
-    </tbody>
-</table>  
-  </div>
-  </div>
-  </div>
+<div ui-i18n="{{lang}}">
+  <div id="grid1" ui-grid="listarUsuariosCtrl.gridOptions" ui-grid-pagination ui-grid-auto-resize class="grid"></div>
+ </div>
 </div>
+</div>
+</div>
+</div>
+<!--<pre>{{listarUsuariosCtrl.users.dataUser| json}}</pre>-->
 <!-- /.box-body -->
 <script type="text/javascript">
    

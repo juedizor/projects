@@ -16,9 +16,9 @@ import javax.persistence.Persistence;
  */
 public class PersistenceApp {
 
-    private static EntityManager manager = null;
-    private static EntityManagerFactory emf = null;
-    private static EntityTransaction tx = null;
+    private EntityManager manager = null;
+    private EntityManagerFactory emf = null;
+    private EntityTransaction tx = null;
     private static PersistenceApp persistenceApp = null;
 
     private PersistenceApp() {
@@ -33,20 +33,55 @@ public class PersistenceApp {
     }
 
     public EntityManagerFactory getEntityManagerFactory() throws Exception {
-        if (emf == null) {
+        if(emf == null){
             emf = Persistence.createEntityManagerFactory("appFormDS");
         }
         return emf;
     }
 
     public EntityManager getEntityManager() throws Exception {
-        manager = getEntityManagerFactory().createEntityManager();
+        if (emf == null) {
+            getEntityManagerFactory();
+        }
+        manager = emf.createEntityManager();
         return manager;
     }
 
     public EntityTransaction getEntityTransaction() throws Exception {
-        tx = getEntityManager().getTransaction();
+        if (emf == null) {
+            getEntityManagerFactory();
+        }
+        if (manager == null) {
+            getEntityManager();
+        }
+
+        tx = manager.getTransaction();
         return tx;
     }
+
+    public EntityManager getManager() {
+        return manager;
+    }
+
+    public void setManager(EntityManager manager) {
+        this.manager = manager;
+    }
+
+    public EntityManagerFactory getEmf() {
+        return emf;
+    }
+
+    public void setEmf(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
+    public EntityTransaction getTx() {
+        return tx;
+    }
+
+    public void setTx(EntityTransaction tx) {
+        this.tx = tx;
+    }
+    
 
 }

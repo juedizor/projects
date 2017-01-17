@@ -1,5 +1,5 @@
 <div ng-controller = "gestionUsuariosCtrl as gestionUser" class="modal fade" id="modal_usuario" data-keyboard=”false” data-backdrop>
-  <form name="gestionUser.formUser" ng-submit = "controller.guardar()" novalidate="novalidate">
+  <form name="gestionUser.formUser" ng-submit = "gestionUser.guardar()" novalidate="novalidate">
       <div class="modal-dialog" style="width: 70%;">
 
         <div class="modal-content">
@@ -19,7 +19,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col-xs-4">
-                    <div class="form-group" >
+                    <div id = "fieldTipoDoc" class="form-group" >
                       <label>Tipo de Documento</label>
                       <dir-tipo-documentos obligatorio = "required" docs = "gestionUser.tiposDoc" 
                       tipos = "gestionUser.usuario.persona.tipoDocumento">
@@ -36,20 +36,22 @@
                       type="text"
                       name = "numeroDocumento" 
                       required = ""
-                      is-existe-usuario
+                      validar-campo-resource
                       valueinput = "gestionUser.usuario.persona.numeroDocumento"
                       valueid = "'numDocError'"
                       method = "gestionUser.usuarioResource.getPersona"
                       params = "{tipoDoc: gestionUser.usuario.persona.tipoDocumento.idTipoDocumento, 
                       numeroDoc: gestionUser.usuario.persona.numeroDocumento}"
                       idmsgerr = "'errorNumDoc'"
-                      form = "gestionUser.formUser"/>
+                      form = "gestionUser.formUser"
+                      valueant = "gestionUser.numDocumento" 
+                      msgerror = "'Persona Existe en el Sistema'"/>
                       <div id = "errorNumDoc" style="display: none" 
-                     class="help-block has-error error-msg">Persona Existe en el Sistema</div> 
+                     class="help-block has-error error-msg"></div> 
                     </div>
                   </div>
                   <div class="col-xs-4">
-                    <div class="form-group">
+                    <div id = "fieldNombre1" class="form-group">
                       <label>Primer Nombre</label>
                       <input class="form-control" ng-model="gestionUser.usuario.persona.nombre1" placeholder="Primer Nombre" type="text" 
                       name = "nombre1" required = "required">
@@ -59,21 +61,21 @@
 
                 <div class="row">
                   <div class="col-xs-4">
-                    <div class="form-group">
+                    <div id = "fieldNombre2" class="form-group">
                       <label>Segundo Nombre</label>
                       <input class="form-control" ng-model="gestionUser.usuario.persona.nombre2" placeholder="Segundo Nombre" type="text" 
                       name = "nombre2">
                     </div>
                   </div>
                   <div class="col-xs-4">
-                    <div class="form-group">
+                    <div id= "fieldApellido1" class="form-group">
                       <label>Primer Apellido</label>
                       <input class="form-control" ng-model="gestionUser.usuario.persona.apellido1" placeholder="Primer Apellido" type="text" 
                       name = "apellido1" required = "required">
                     </div>
                   </div>
                   <div class="col-xs-4">
-                    <div class="form-group">
+                    <div  id = "fieldApellido2" class="form-group">
                       <label>Segundo Apellido</label>
                       <input class="form-control" ng-model="gestionUser.usuario.persona.apellido2" placeholder="Segundo Apellido" type="text" 
                       name = "apellido2">
@@ -83,7 +85,7 @@
 
                 <div class="row">
                   <div class="col-xs-8">
-                    <div class="form-group">
+                    <div id = "fieldEmail" class="form-group">
                       <label>Correo Electronico</label>
                       <input class="form-control" ng-model="gestionUser.usuario.persona.email" placeholder="Correo Electronico" type="email" 
                       name = "email" required = "required">
@@ -98,67 +100,80 @@
                       type="text" 
                       name = "nombreUsuario" 
                       required = "required" 
-                      is-existe-usuario
+                      validar-campo-resource
                       valueinput = "gestionUser.usuario.nombreUsuario"
                       valueid = "'userError'"
                       method = "gestionUser.usuarioResource.getUser"
                       params = "{nombreUsuario: gestionUser.usuario.nombreUsuario}"
                       idmsgerr = "'errorUser'"
-                      form = "gestionUser.formUser"/>
+                      form = "gestionUser.formUser" 
+                      valueant = "gestionUser.nombreUsuario" 
+                      msgerror = "'Usuario Existe'"/>
                       <div id = "errorUser" style="display: none" 
-                     class="help-block has-error error-msg">Usuario Existe</div>
+                     class="help-block has-error error-msg"></div>
                     </div>
-                    
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-xs-4">
-                    <div class="form-group">
+                    <div id = "fieldPerfil"  class="form-group">
                         <label>Perfil</label>
                         <dir-perfiles obligatorio = "required" profile = "gestionUser.usuario.perfil" perfiles = "gestionUser.perfiles" name = "perfiles"  required = "required"></dir-perfiles>
                     </div>
                   </div>
 
                   <div class="col-xs-4" ng-show = "gestionUser.registro">
-                    <div class="form-group">
+                    <div id = "requiredPass1" class="form-group">
                         <label>Contraseña</label>
-                        <input class="form-control" ng-model="gestionUser.usuario.contrasena" placeholder="Digite una Contraseña" type="password" 
-                        name = "contrasena1" required = "required">
+                        <input id = "pass1" 
+                        class="form-control" 
+                        ng-model="gestionUser.usuario.contrasena" 
+                        placeholder="Digite una Contraseña" type="password" 
+                        name = "contrasena1"
+                        field-required
+                        msgerror = "'El campo es Obligatorio'" 
+                        form = "gestionUser.formUser"
+                        idmsgerr = "'errorPass1'"
+                        valueid = "'requiredPass1'" />
+                        <div id = "errorPass1" style="display: none" 
+                         class="help-block has-error error-msg"></div>
                     </div>
                   </div>
 
                   <div class="col-xs-4" ng-show = "gestionUser.registro">
-                    <div class="form-group">
+                    <div id = "requiredPass2" class="form-group">
                         <label>Repetir Contraseña</label>
-                        <input class="form-control" ng-model="gestionUser.usuario.contrasena" placeholder="Repita una Contraseña" type="password" 
-                        name = "contrasena2" required = "required">
+                        <input id = "pass2" 
+                        class="form-control" 
+                        ng-model="gestionUser.usuario.contrasena" 
+                        placeholder="Repita una Contraseña" 
+                        type="password" 
+                        name = "contrasena2" 
+                        field-required
+                        msgerror = "'El campo es Obligatorio'" 
+                        form = "gestionUser.formUser"
+                        idmsgerr = "'errorPass2'"
+                        valueid = "'requiredPass2'" />
+                        <div id = "errorPass2" style="display: none" 
+                         class="help-block has-error error-msg"></div>
                     </div>
                   </div>
                 </div>
-
               </div>
               <!-- /.box-body -->
             </div>
-            
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="alert alert-warning" role="alert" ng-show = "gestionUser.isShowError">{{gestionUser.msgError}}</div>    
-              </div>
-            </div>
-
           </div>
-          
           
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "gestionUser.closeModal()">Close</button>
-            <button type="button" ng-disabled = "!gestionUser.formUser.$valid"  ng-click = "gestionUser.guardar()" class="btn btn-primary">Guardar</button>
+            <button type="submit" ng-disabled = "!gestionUser.formUser.$valid"  class="btn btn-primary">Guardar</button>
           </div>
         </div>
         <!-- /.modal-content -->
       </div>
   <!-- /.modal-dialog -->
-  <pre>{{gestionUser.formUser.nombreUsuario | json}}</pre>
+  <!--<pre>{{gestionUser.formUser | json}}</pre>-->
   </form>
 </div>
 

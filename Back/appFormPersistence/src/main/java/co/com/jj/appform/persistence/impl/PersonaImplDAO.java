@@ -9,6 +9,7 @@ import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 /**
@@ -18,15 +19,16 @@ import javax.persistence.Query;
 public class PersonaImplDAO implements PersonaIfaceDAO {
 
     private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
+    private EntityManager manager;
 
     @Override
     public void save(Persona persona) throws Exception {
-        persistenceApp.getEntityManager().persist(persona);
+        manager.persist(persona);
     }
 
     @Override
     public Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception {
-        Query query = persistenceApp.getEntityManager().createNamedQuery("Persona.findByTipoDocumentoNumeroDocumento");
+        Query query = manager.createNamedQuery("Persona.findByTipoDocumentoNumeroDocumento");
         query.setParameter("idTipoDocumento", tipoDocumento);
         query.setParameter("numeroDocumento", numeroDocumento);
         List<Persona> listPersona = query.getResultList();
@@ -40,7 +42,12 @@ public class PersonaImplDAO implements PersonaIfaceDAO {
 
     @Override
     public void merge(Persona persona) throws Exception {
-        persistenceApp.getEntityManager().merge(persona);
+        manager.merge(persona);
+    }
+
+    @Override
+    public void setEntityManager(EntityManager manager) {
+        this.manager = manager;
     }
 
 }
