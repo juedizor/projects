@@ -76,6 +76,16 @@ app.controller('listarUsuariosCtrl',
     $rootScope.$on("updateUserTable", function(event, user){
     	self.users.dataUser = user.success;
     	//self.cargarDatosTabla(self.users.dataUser);
+    	self.gridOptions.data = [];
+    	/*var users = {};
+    	users["TipoDeDocumento"] = "value.persona.tipoDocumento.nombre";
+		users["NumeroDocumento"] = "value.persona.numeroDocumento";
+		users["PrimerNombre"] = "alue.persona.nombre1";
+		users["PrimerApellido"] = "alue.persona.apellido1";
+		users["CorreoElectronico"] = "value.persona.email";
+		users["Usuario"] = "alue.nombreUsuario";
+		users["Perfil"] = "value.perfil.nombrePerfil";
+		self.gridOptions.data.push(users);*/
     });
 
 }]);
