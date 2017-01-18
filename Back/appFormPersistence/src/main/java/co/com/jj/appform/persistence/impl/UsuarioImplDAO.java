@@ -18,7 +18,6 @@ import javax.persistence.Query;
  */
 public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
-    private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
     private EntityManager manager;
 
     @Override

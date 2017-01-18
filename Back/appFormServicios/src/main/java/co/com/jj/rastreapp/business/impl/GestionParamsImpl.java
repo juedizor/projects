@@ -16,6 +16,7 @@ import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
 import co.com.jj.rastreapp.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +31,14 @@ public class GestionParamsImpl implements GestionParamsIface {
     TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
     @Autowired
     PerfilIfaceDAO perfilIfaceDAO;
-
+    
     private static final EntityUtils ENTITY_UTILS = EntityUtils.getInstance();
-    private static final PersistenceApp PERSISTENCE_APP = PersistenceApp.getInstance();
+    private PersistenceApp persistenceApp;
 
     @Override
     public List<TipoDocumentoDTO> obtenerTiposDocumentos() throws Exception {
-        tipoDocumentoIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
+        persistenceApp = new PersistenceApp();
+        tipoDocumentoIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
         List<TipoDocumento> listTipoDocumento = tipoDocumentoIfaceDAO.findAll();
         TipoDocumentoDTO tipoDocumentoDTO;
         List<TipoDocumentoDTO> listTipoDocumentoDTO = new ArrayList<>();
@@ -52,7 +54,8 @@ public class GestionParamsImpl implements GestionParamsIface {
 
     @Override
     public List<PerfilDTO> obtenerPerfiles() throws Exception {
-        perfilIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
+        persistenceApp = new PersistenceApp();
+        perfilIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
         List<Perfil> listPerfil = perfilIfaceDAO.findAll();
         PerfilDTO perfilDTO;
         List<PerfilDTO> listPerfilDTO = new ArrayList<>();
@@ -65,5 +68,4 @@ public class GestionParamsImpl implements GestionParamsIface {
 
         return listPerfilDTO;
     }
-
 }

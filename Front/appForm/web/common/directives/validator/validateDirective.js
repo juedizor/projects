@@ -9,7 +9,8 @@ app.directive('validarCampoResource',function() {
         params: '=', 
         idmsgerr: '=', 
         valueant: '=', 
-        msgerror: '='
+        msgerror: '=', 
+        namefield: '='
       },
       link: function(scope, element, attributes) {
       	var valueAnt = "";
@@ -33,15 +34,14 @@ app.directive('validarCampoResource',function() {
   	      				angular.element("#"+scope.valueid).addClass("form-group has-error");
   	      				angular.element("#"+scope.idmsgerr).removeAttr('style');
                   angular.element("#"+scope.idmsgerr).html(scope.msgerror);
-                  scope.form.$invalid = true;
-                  scope.form.$valid = false;
+                  scope.namefield.$invalid = true;
   	      			}, 
   	      			function(error){
   	      				angular.element("#"+scope.valueid).removeClass();
   	      				angular.element("#"+scope.valueid).addClass("form-group has-success");
   	      				angular.element("#"+scope.idmsgerr).attr('style', 'display:none');
                   angular.element("#"+scope.idmsgerr).html("");
-                  scope.form.$valid = false;
+                  scope.namefield.$invalid = false;
   	      			});
       		}else{
       			angular.element("#"+scope.idmsgerr).attr('style', 'display:none');
@@ -50,36 +50,4 @@ app.directive('validarCampoResource',function() {
     	}) 
       }
     };
-});
-
-
-app.directive('fieldRequired', function(){
-    return {
-      restrict: 'A', 
-      scope: {
-        valueid: '=',
-        msgerror: '=', 
-        form: '=', 
-        idmsgerr: '='
-      }, 
-      link: function(scope, element, attributes) {
-        element.bind("blur", function(){
-          if(element.val().length <= 0){
-              angular.element("#"+scope.valueid).removeClass();
-              angular.element("#"+scope.valueid).addClass("form-group has-error");
-              angular.element("#"+scope.idmsgerr).removeAttr('style');
-              angular.element("#"+scope.idmsgerr).html(scope.msgerror);
-              scope.form.$invalid = true;
-              scope.form.$valid = false;
-          }else{
-              angular.element("#"+scope.valueid).removeClass();
-              angular.element("#"+scope.valueid).addClass("form-group has-success");
-              angular.element("#"+scope.idmsgerr).attr('style', 'display:none');
-              angular.element("#"+scope.idmsgerr).html("");
-              scope.form.$invalid = false;
-              scope.form.$valid = true;
-          }
-        });
-      }
-    }
 });

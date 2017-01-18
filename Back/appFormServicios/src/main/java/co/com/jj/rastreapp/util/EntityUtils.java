@@ -84,6 +84,9 @@ public class EntityUtils {
 
     public Usuario getUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
+        if(usuarioDTO.getIdUsuario() != null){
+            usuario.setIdUsuario(usuarioDTO.getIdUsuario());
+        }
         usuario.setActivo(true);
         usuario.setContrasena(usuarioDTO.getContrasena());
         usuario.setFechaCreacion(usuarioDTO.getFechaCreacion());

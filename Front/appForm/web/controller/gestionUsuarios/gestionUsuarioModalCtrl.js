@@ -38,7 +38,6 @@ app.controller('gestionUsuariosCtrl',
 				});
 				
 			});
-	        
 	        self.formUser.$setPristine();
 			self.formUser.$setUntouched();
 			
@@ -61,21 +60,24 @@ app.controller('gestionUsuariosCtrl',
 
         this.usuarioResource = UsuariosResource;
         this.styleFormGroup = "form-group has-success";
+        this.required = true;
 
 		// funcion para el cargue de informacion de usuario cuando se realiza un proceso de edicio
 		this.getDataUser = function(user) {
 			self.usuario = new UsuariosResource();
 			self.tipoDocumentos = {};
 			self.profile = {};
-			self.formUser.$setPristine();
-			self.formUser.$setUntouched();
-			if(user.user !== null){
+			if(!angular.isUndefined(self.formUser)){
+				self.formUser.$setPristine();	
+				self.formUser.$setUntouched();
+			}
+			if(!self.registro){
+				self.required = false;
 				self.usuario = new UsuariosResource(user);
 				angular.copy(self.usuario.user, self.usuario);
 				self.numDocumento = self.usuario.persona.numeroDocumento;
 				self.nombreUsuario = self.usuario.nombreUsuario;
-				self.usuario.persona.tipoDocumento;
-	            self.usuario.perfil;
+
 				angular.element("#numDocError").addClass(self.styleFormGroup);
 				angular.element("#fieldEmail").addClass(self.styleFormGroup);
 				angular.element("#fieldPerfil").addClass(self.styleFormGroup);
@@ -88,6 +90,7 @@ app.controller('gestionUsuariosCtrl',
 				angular.element("#fieldNombre2").addClass(self.styleFormGroup);
 				angular.element("#fieldTipoDoc").addClass(self.styleFormGroup);
 			}else{
+				self.required = true;
 				self.numDocumento = "";
 				self.nombreUsuario = "";
 			}

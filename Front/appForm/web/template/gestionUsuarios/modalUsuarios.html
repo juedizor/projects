@@ -45,7 +45,8 @@
                       idmsgerr = "'errorNumDoc'"
                       form = "gestionUser.formUser"
                       valueant = "gestionUser.numDocumento" 
-                      msgerror = "'Persona Existe en el Sistema'"/>
+                      msgerror = "'Persona Existe en el Sistema'" 
+                      namefield = "gestionUser.formUser.numeroDocumento"/>
                       <div id = "errorNumDoc" style="display: none" 
                      class="help-block has-error error-msg"></div> 
                     </div>
@@ -108,7 +109,8 @@
                       idmsgerr = "'errorUser'"
                       form = "gestionUser.formUser" 
                       valueant = "gestionUser.nombreUsuario" 
-                      msgerror = "'Usuario Existe'"/>
+                      msgerror = "'Usuario Existe'" 
+                      namefield = "gestionUser.formUser.nombreUsuario"/>
                       <div id = "errorUser" style="display: none" 
                      class="help-block has-error error-msg"></div>
                     </div>
@@ -131,13 +133,9 @@
                         ng-model="gestionUser.usuario.contrasena" 
                         placeholder="Digite una Contraseña" type="password" 
                         name = "contrasena1"
-                        field-required
-                        msgerror = "'El campo es Obligatorio'" 
-                        form = "gestionUser.formUser"
-                        idmsgerr = "'errorPass1'"
-                        valueid = "'requiredPass1'" />
-                        <div id = "errorPass1" style="display: none" 
-                         class="help-block has-error error-msg"></div>
+                        ng-required = "gestionUser.required"/>
+                       <!--<div id = "errorPass1" style="display: none" 
+                         class="help-block has-error error-msg"></div>-->
                     </div>
                   </div>
 
@@ -150,13 +148,9 @@
                         placeholder="Repita una Contraseña" 
                         type="password" 
                         name = "contrasena2" 
-                        field-required
-                        msgerror = "'El campo es Obligatorio'" 
-                        form = "gestionUser.formUser"
-                        idmsgerr = "'errorPass2'"
-                        valueid = "'requiredPass2'" />
-                        <div id = "errorPass2" style="display: none" 
-                         class="help-block has-error error-msg"></div>
+                        ng-required="gestionUser.required" />
+                       <!-- <div id = "errorPass2" style="display: none" 
+                         class="help-block has-error error-msg"></div>-->
                     </div>
                   </div>
                 </div>
@@ -167,7 +161,7 @@
           
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "gestionUser.closeModal()">Close</button>
-            <button type="submit" ng-disabled = "!gestionUser.formUser.$valid"  class="btn btn-primary">Guardar</button>
+            <button type="submit" ng-disabled = "gestionUser.formUser.$invalid || gestionUser.formUser.numeroDocumento.$invalid || gestionUser.formUser.nombreUsuario.$invalid"  class="btn btn-primary">Guardar</button>
           </div>
         </div>
         <!-- /.modal-content -->

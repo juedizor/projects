@@ -8,6 +8,7 @@ package co.com.jj.rastreapp.business.iface;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *

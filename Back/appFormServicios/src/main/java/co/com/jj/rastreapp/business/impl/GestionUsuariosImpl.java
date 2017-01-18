@@ -45,11 +45,12 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 
     private static final DateUtils DATE_UTILS = DateUtils.getInstance();
     private static final EntityUtils ENTITY_UTILS = EntityUtils.getInstance();
-    private static final PersistenceApp PERSISTENCE_APP = PersistenceApp.getInstance();
+    private PersistenceApp persistenceApp;
 
     @Override
     public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception {
-        usuarioIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
+        persistenceApp = new PersistenceApp();
+        usuarioIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
         List<Usuario> listUsuarios = usuarioIfaceDAO.findByNombreUsuarioContrasenaActivo(nombreUsuario, contrasena, true);
         if (listUsuarios != null && !listUsuarios.isEmpty()) {
             UsuarioDTO usuarioDTO = ENTITY_UTILS.getUsuarioDTO(listUsuarios.get(0));
@@ -69,25 +70,37 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
         int resultado = Respuestas.SIN_DATOS;
         if (usuarioDTO != null) {
             try {
-                PERSISTENCE_APP.getEntityTransaction().begin();
-                tipoDocumentoIfaceDAO.setEntityManager(PERSISTENCE_APP.getManager());
-                perfilIfaceDAO.setEntityManager(PERSISTENCE_APP.getManager());
-                usuarioIfaceDAO.setEntityManager(PERSISTENCE_APP.getManager());
+                persistenceApp = new PersistenceApp();
+                persistenceApp.getEntityTransaction().begin();
+                tipoDocumentoIfaceDAO.setEntityManager(persistenceApp.getManager());
+                perfilIfaceDAO.setEntityManager(persistenceApp.getManager());
+                usuarioIfaceDAO.setEntityManager(persistenceApp.getManager());
+                
+                Usuario usuario = usuarioIfaceDAO.findByNombreUsuario(usuarioDTO.getNombreUsuario());
+                if(usuario == null){
+                    usuario = ENTITY_UTILS.getUsuario(usuarioDTO);
+                }
                 java.sql.Timestamp fechaReg = DATE_UTILS.getFechaActual();
                 usuarioDTO.getPersona().setFechaRegistro(fechaReg);
                 Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
                 TipoDocumento tipoDocumento = tipoDocumentoIfaceDAO.findById(usuarioDTO.getPersona().getTipoDocumento().getIdTipoDocumento());
                 persona.setIdTipoDocumento(tipoDocumento);
-                Usuario usuario = ENTITY_UTILS.getUsuario(usuarioDTO);
                 Perfil perfil = perfilIfaceDAO.findByNombre(usuarioDTO.getPerfil().getNombrePerfil());
                 usuario.setIdPerfil(perfil);
                 usuario.setIdPersona(persona);
                 usuario.setFechaCreacion(fechaReg);
-                usuarioIfaceDAO.save(usuario);
-                PERSISTENCE_APP.getEntityTransaction().commit();
-                resultado = Respuestas.CREADO;
+                if(usuarioDTO.getIdUsuario() != null){
+                    usuarioIfaceDAO.merge(usuario);
+                    persistenceApp.getEntityTransaction().commit();
+                    resultado = Respuestas.ACTUALIZADO;
+                }else{
+                    usuarioIfaceDAO.save(usuario);
+                    persistenceApp.getEntityTransaction().commit();
+                    resultado = Respuestas.CREADO;
+                }
+                
             } catch (Exception e) {
-                PERSISTENCE_APP.getEntityTransaction().rollback();
+                persistenceApp.getEntityTransaction().rollback();
                 throw new Exception("Error realizando transacción usuario:\n" + e.getMessage());
             }
 
@@ -98,7 +111,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 
     @Override
     public PersonaDTO getPersona(int tipoDoc, long numeroDoc) throws Exception {
-        personaIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
+        persistenceApp = new PersistenceApp();
+        personaIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
         Persona persona = personaIfaceDAO.findByTipoDocumentoNumeroDocumento(tipoDoc, numeroDoc);
         PersonaDTO personaDTO = null;
         TipoDocumentoDTO tipoDocumentoDTO;
@@ -117,7 +131,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 
     @Override
     public UsuarioDTO getUser(String nombreUsuario) throws Exception {
-        usuarioIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
+        persistenceApp = new PersistenceApp();
+        usuarioIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
         Usuario usuario = usuarioIfaceDAO.findByNombreUsuario(nombreUsuario);
         UsuarioDTO usuarioDTO = null;
         if (usuario != null) {
@@ -128,7 +143,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 
     @Override
     public List<UsuarioDTO> obtenerUsuarios() throws Exception {
-        usuarioIfaceDAO.setEntityManager(PERSISTENCE_APP.getEntityManager());
+        persistenceApp = new PersistenceApp();
+        usuarioIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
         List<Usuario> listUsuarios = usuarioIfaceDAO.findAll();
         UsuarioDTO usuarioDTO;
         PersonaDTO personaDTO;

@@ -21,15 +21,8 @@ public class PersistenceApp {
     private EntityTransaction tx = null;
     private static PersistenceApp persistenceApp = null;
 
-    private PersistenceApp() {
+    public PersistenceApp() {
 
-    }
-
-    public static PersistenceApp getInstance() {
-        if (persistenceApp == null) {
-            persistenceApp = new PersistenceApp();
-        }
-        return persistenceApp;
     }
 
     public EntityManagerFactory getEntityManagerFactory() throws Exception {
@@ -43,7 +36,10 @@ public class PersistenceApp {
         if (emf == null) {
             getEntityManagerFactory();
         }
-        manager = emf.createEntityManager();
+        
+        if(manager == null){
+            manager = emf.createEntityManager();
+        }
         return manager;
     }
 
@@ -54,8 +50,9 @@ public class PersistenceApp {
         if (manager == null) {
             getEntityManager();
         }
-
-        tx = manager.getTransaction();
+        if(tx == null){
+            tx = manager.getTransaction();
+        }
         return tx;
     }
 

@@ -5,8 +5,6 @@
  */
 package co.com.jj.appform;
 
-import javax.persistence.Query;
-
 /**
  *
  * @author jeio
@@ -14,11 +12,11 @@ import javax.persistence.Query;
 public class Test {
     
     public static void main(String[] args) throws Exception {
-        PersistenceApp mainApp = PersistenceApp.getInstance();
-        Query query = mainApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioActivo");
-        query.setParameter("nombreUsuario", "juedizor");
-        query.setParameter("activo", true);
-        query.getResultList();
+//        PersistenceApp mainApp = PersistenceApp.getInstance();
+//        Query query = mainApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioActivo");
+//        query.setParameter("nombreUsuario", "juedizor");
+//        query.setParameter("activo", true);
+//        query.getResultList();
     }
     
 }

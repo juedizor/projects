@@ -94,6 +94,7 @@ public class Persona implements Serializable {
     private Date fechaModificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Usuario> usuarioList;
+    
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
     @ManyToOne(optional = false)
     private TipoDocumento idTipoDocumento;

@@ -12,6 +12,7 @@ app.controller('listarUsuariosCtrl',
 	
 	var self = this; // se almacena el contexto del controlador
 
+
 	// se activa el menu de gestion de usuarios
 	$scope.setActive('gUsuarios');
 	// variable para almacenar todos los usuarios del sistema
@@ -29,6 +30,7 @@ app.controller('listarUsuariosCtrl',
  		var dataUser = [];
 		angular.forEach(data, function(value, key) {
 			var user = {};
+			user["user"] = value;
 			user["TipoDeDocumento"] = value.persona.tipoDocumento.nombre;
 			user["NumeroDocumento"] = value.persona.numeroDocumento;
 			user["PrimerNombre"] = value.persona.nombre1;
@@ -36,6 +38,7 @@ app.controller('listarUsuariosCtrl',
 			user["CorreoElectronico"] = value.persona.email;
 			user["Usuario"] = value.nombreUsuario;
 			user["Perfil"] = value.perfil.nombrePerfil;
+			user["Accion"] = '<a ng-click = "listarUsuariosCtrl.abrirModal(user)" class="btn btn-warning" title="Editar"> <i class="fa fa-edit"></i></a>';
 			self.users.dataUser.push(user);
 		});
  	}
@@ -47,7 +50,7 @@ app.controller('listarUsuariosCtrl',
  		data: self.users.dataUser, 
  		enableColumnResizing: true,
 	    paginationPageSizes: [5, 10, 15],
-		paginationPageSize: 5,
+		paginationPageSize: 10,
  		columnDefs: [
 	      { name: 'TipoDeDocumento', enableHiding: false  },
 	      { name: 'NumeroDocumento', enableHiding: false },
@@ -55,18 +58,33 @@ app.controller('listarUsuariosCtrl',
 	      { name: 'PrimerApellido', enableHiding: false  },
 	      { name: 'CorreoElectronico', enableHiding: false },
 	      { name: 'Usuario', enableHiding: false  }, 
-	      { name: 'Perfil', enableHiding: false  }
+	      { name: 'Perfil', enableHiding: false  }, 
+	      { name: 'data', visible: false},
+	      { name: 'Accion', 
+	      	displayName:'',  
+	      	enableHiding: false, 
+	      	cellTemplate: 'template/link/editarUsuario.html',
+	      	enableFiltering: false, 
+  			enableSorting: false, 
+  			enableColumnMenu: false, width: '4%'}
 	    ]
  	}
 
-    this.abrirModal = function(user){
+ 	this.gridOptions.appScopeProvider  = this;	
+
+    this.abrirModal = function(data){
+    	var user = {};
+    	if(data !== null){
+    		user = data.user;
+ 		}
+
     	$("#modal_usuario").modal(); // se instancia la ventana modal de bootstrap
     	/*	se llama metodo de controller gestionUsuariosCtrl, 
     		para poder enviar los datos de una edicion de usuarios
     	*/
     	var valAccion = "Edición de Datos";
     	var registro = false;
-    	if(user == null){
+    	if(data == null){
     		valAccion = "Registro de Datos";
     		registro = true;
     	}
@@ -74,18 +92,10 @@ app.controller('listarUsuariosCtrl',
     }
 
     $rootScope.$on("updateUserTable", function(event, user){
-    	self.users.dataUser = user.success;
-    	//self.cargarDatosTabla(self.users.dataUser);
+    	self.users.dataUser = [];
+    	self.cargarDatosTabla(user.success);
     	self.gridOptions.data = [];
-    	/*var users = {};
-    	users["TipoDeDocumento"] = "value.persona.tipoDocumento.nombre";
-		users["NumeroDocumento"] = "value.persona.numeroDocumento";
-		users["PrimerNombre"] = "alue.persona.nombre1";
-		users["PrimerApellido"] = "alue.persona.apellido1";
-		users["CorreoElectronico"] = "value.persona.email";
-		users["Usuario"] = "alue.nombreUsuario";
-		users["Perfil"] = "value.perfil.nombrePerfil";
-		self.gridOptions.data.push(users);*/
+		self.gridOptions.data = self.users.dataUser;
     });
 
 }]);

@@ -5,7 +5,6 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import java.util.List;
@@ -18,7 +17,6 @@ import javax.persistence.Query;
  */
 public class PersonaImplDAO implements PersonaIfaceDAO {
 
-    private final PersistenceApp persistenceApp = PersistenceApp.getInstance();
     private EntityManager manager;
 
     @Override
