@@ -5,7 +5,6 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import java.util.List;

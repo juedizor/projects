@@ -36,8 +36,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario"),
     @NamedQuery(name = "Usuario.findByContrasena", query = "SELECT u FROM Usuario u WHERE u.contrasena = :contrasena"),
     @NamedQuery(name = "Usuario.findByFechaCreacion", query = "SELECT u FROM Usuario u WHERE u.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Usuario.findByActivo", query = "SELECT u FROM Usuario u WHERE u.activo = :activo"), 
-    @NamedQuery(name = "Usuario.findByNombreUsuarioContrasenaActivo", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario AND u.contrasena = :contrasena AND u.activo = :activo")})
+    @NamedQuery(name = "Usuario.findByActivo", query = "SELECT u FROM Usuario u WHERE u.activo = :activo")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,7 +68,7 @@ public class Usuario implements Serializable {
     @ManyToOne(optional = false, cascade = {CascadeType.ALL})
     private Persona idPersona;
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Perfil idPerfil;
 
     public Usuario() {

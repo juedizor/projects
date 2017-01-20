@@ -42,9 +42,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Persona.findByApellido2", query = "SELECT p FROM Persona p WHERE p.apellido2 = :apellido2"),
     @NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email"),
     @NamedQuery(name = "Persona.findByFechaRegistro", query = "SELECT p FROM Persona p WHERE p.fechaRegistro = :fechaRegistro"),
-    @NamedQuery(name = "Persona.findByFechaModificacion", query = "SELECT p FROM Persona p WHERE p.fechaModificacion = :fechaModificacion"), 
-    @NamedQuery(name = "Persona.findByTipoDocumentoNumeroDocumento", query = "SELECT p FROM Persona p WHERE p.idTipoDocumento.idTipoDocumento = :idTipoDocumento AND p.numeroDocumento = :numeroDocumento")
-})
+    @NamedQuery(name = "Persona.findByFechaModificacion", query = "SELECT p FROM Persona p WHERE p.fechaModificacion = :fechaModificacion")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,24 +55,16 @@ public class Persona implements Serializable {
     @NotNull
     @Column(name = "numero_documento")
     private long numeroDocumento;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "nombre1")
     private String nombre1;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "nombre2")
     private String nombre2;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "apellido1")
     private String apellido1;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "apellido2")
     private String apellido2;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -88,13 +78,15 @@ public class Persona implements Serializable {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
-    @Basic(optional = false)
     @Column(name = "fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<Direccion> direccionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Usuario> usuarioList;
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<Empresa> empresaList;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
     @ManyToOne(optional = false)
     private TipoDocumento idTipoDocumento;
@@ -106,16 +98,11 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, long numeroDocumento, String nombre1, String nombre2, String apellido1, String apellido2, String email, Date fechaRegistro, Date fechaModificacion) {
+    public Persona(Integer idPersona, long numeroDocumento, String email, Date fechaRegistro) {
         this.idPersona = idPersona;
         this.numeroDocumento = numeroDocumento;
-        this.nombre1 = nombre1;
-        this.nombre2 = nombre2;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
         this.email = email;
         this.fechaRegistro = fechaRegistro;
-        this.fechaModificacion = fechaModificacion;
     }
 
     public Integer getIdPersona() {
@@ -190,12 +177,28 @@ public class Persona implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
+    public List<Direccion> getDireccionList() {
+        return direccionList;
+    }
+
+    public void setDireccionList(List<Direccion> direccionList) {
+        this.direccionList = direccionList;
+    }
+
     public List<Usuario> getUsuarioList() {
         return usuarioList;
     }
 
     public void setUsuarioList(List<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
+    }
+
+    public List<Empresa> getEmpresaList() {
+        return empresaList;
+    }
+
+    public void setEmpresaList(List<Empresa> empresaList) {
+        this.empresaList = empresaList;
     }
 
     public TipoDocumento getIdTipoDocumento() {

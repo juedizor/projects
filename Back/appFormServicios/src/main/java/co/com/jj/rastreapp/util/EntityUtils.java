@@ -5,10 +5,12 @@
  */
 package co.com.jj.rastreapp.util;
 
+import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.entity.TipoDocumento;
 import co.com.jj.appform.entity.Usuario;
+import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
@@ -99,6 +101,23 @@ public class EntityUtils {
         perfilDTO.setIdPerfil(perfil.getIdPerfil());
         perfilDTO.setNombrePerfil(perfil.getNombre());
         return perfilDTO;
+    }
+    
+    public Direccion getDireccion(DireccionDTO direccionDTO){
+        Direccion direccion = new Direccion();
+        direccion.setNombreDireccion(direccionDTO.getNombreDireccion());
+        if(direccionDTO.getIdDireccion() != null){
+            direccion.setIdDireccion(direccionDTO.getIdDireccion());
+        }
+        if(direccionDTO.getFechaInicial() != null){
+            direccion.setFechaInicial(direccionDTO.getFechaInicial());
+        }
+        
+        if(direccionDTO.getFechaFinal() != null){
+            direccion.setFechaFinal(direccionDTO.getFechaFinal());
+        }
+        
+        return direccion;
     }
     
 }

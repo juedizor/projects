@@ -42,7 +42,7 @@ public class TipoDocumento implements Serializable {
     private Integer idTipoDocumento;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
+    @Size(min = 1, max = 3)
     @Column(name = "codigo")
     private String codigo;
     @Basic(optional = false)

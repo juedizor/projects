@@ -32,46 +32,6 @@ public class GestionUsuariosService {
     @Autowired
     GestionUsuariosIface gestionUsuariosIface;
 
-    @RequestMapping(value = "/usuarios", method = RequestMethod.POST)
-    public Message registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws ExceptionGenerics {
-        int resultado;
-        try {
-            resultado = gestionUsuariosIface.registrarUsuario(usuarioDTO);
-        } catch (Exception e) {
-            ExceptionGenerics.setCodigo(Respuestas.ERROR);
-            ExceptionGenerics.setDescripcion(e.getMessage());
-            throw new ExceptionGenerics();
-        }
-        Message message;
-        if (resultado == Respuestas.EXISTE_REGISTRO) {
-            message = new Message("" + Respuestas.EXISTE_REGISTRO, "Usuario Existe");
-            return message;
-        } else {
-            message = new Message("" + Respuestas.CREADO, "Usuario Creado");
-            return message;
-        }
-    }
-
-    @RequestMapping(value = "/usuarios/{tipoDoc}/{numeroDoc}", method = RequestMethod.GET)
-    public PersonaDTO getPersona(@PathVariable(value = "tipoDoc") int tipoDoc,
-            @PathVariable(value = "numeroDoc") long numeroDoc) throws ExceptionGenerics {
-        PersonaDTO personaDTO = null;
-        try {
-            personaDTO = gestionUsuariosIface.getPersona(tipoDoc, numeroDoc);
-        } catch (Exception e) {
-            ExceptionGenerics.setCodigo(Respuestas.ERROR);
-            ExceptionGenerics.setDescripcion(e.getMessage());
-            throw new ExceptionGenerics();
-        }
-        if (personaDTO == null) {
-            ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
-            ExceptionGenerics.setDescripcion("No existe Persona");
-            throw new ExceptionGenerics();
-        }
-
-        return personaDTO;
-    }
-
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
     public List<UsuarioDTO> getUsuarios() throws ExceptionGenerics {
         List<UsuarioDTO> listUsuarioDTO = null;
@@ -93,7 +53,7 @@ public class GestionUsuariosService {
     }
 
     @RequestMapping(value = "/usuarios/{nombreUsuario}", method = RequestMethod.GET)
-    public UsuarioDTO getUsuarioDTO(@PathVariable(value = "nombreUsuario") String nombreUsuario) throws ExceptionGenerics {
+    public UsuarioDTO getUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) throws ExceptionGenerics {
         UsuarioDTO usuarioDTO = null;
         try {
             usuarioDTO = gestionUsuariosIface.getUser(nombreUsuario);
@@ -102,14 +62,16 @@ public class GestionUsuariosService {
             ExceptionGenerics.setDescripcion(e.getMessage());
             throw new ExceptionGenerics();
         }
-        
-        if(usuarioDTO == null){
+
+        if (usuarioDTO == null) {
             ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
             ExceptionGenerics.setDescripcion("No existe el usuario");
             throw new ExceptionGenerics();
         }
-        
+
         return usuarioDTO;
     }
+
+    
 
 }

@@ -25,6 +25,7 @@ public class PersonaDTO {
     private java.sql.Timestamp fechaModificacion;
     private UsuarioDTO usuarioDTO;
     private TipoDocumentoDTO tipoDocumento;
+    private DireccionDTO direccion;
 
     public PersonaDTO() {
     }
@@ -130,11 +131,14 @@ public class PersonaDTO {
     public void setTipoDocumento(TipoDocumentoDTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
-    
-    
-    
-    
-    
+
+    public DireccionDTO getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(DireccionDTO direccion) {
+        this.direccion = direccion;
+    }
     
     
 }

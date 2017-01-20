@@ -6,6 +6,8 @@
     <class>co.com.jj.appform.entity.Persona</class>
     <class>co.com.jj.appform.entity.TipoDocumento</class>
     <class>co.com.jj.appform.entity.Usuario</class>
+    <class>co.com.jj.appform.entity.Direccion</class>
+    <class>co.com.jj.appform.entity.Empresa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_sgf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="julio16"/>

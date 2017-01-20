@@ -8,7 +8,6 @@ package co.com.jj.appform.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +43,7 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPerfil")
+    @OneToMany(mappedBy = "idPerfil")
     private List<Usuario> usuarioList;
 
     public Perfil() {

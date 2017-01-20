@@ -19,6 +19,8 @@ public interface PersonaIfaceDAO {
     public void merge(Persona persona) throws Exception;
 
     Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception;
+    
+    Persona findByEmail(String email) throws Exception;
 
     public void setEntityManager(EntityManager manager);
 

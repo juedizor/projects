@@ -26,7 +26,10 @@ public class PersonaImplDAO implements PersonaIfaceDAO {
 
     @Override
     public Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception {
-        Query query = manager.createNamedQuery("Persona.findByTipoDocumentoNumeroDocumento");
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT p FROM Persona p WHERE p.idTipoDocumento.idTipoDocumento = :idTipoDocumento ");
+        sql.append("AND p.numeroDocumento = :numeroDocumento");
+        Query query = manager.createQuery(sql.toString());
         query.setParameter("idTipoDocumento", tipoDocumento);
         query.setParameter("numeroDocumento", numeroDocumento);
         List<Persona> listPersona = query.getResultList();
@@ -46,6 +49,17 @@ public class PersonaImplDAO implements PersonaIfaceDAO {
     @Override
     public void setEntityManager(EntityManager manager) {
         this.manager = manager;
+    }
+
+    @Override
+    public Persona findByEmail(String email) throws Exception {
+        Query query = manager.createNamedQuery("Persona.findByEmail");
+        query.setParameter("email", email);
+        List<Persona> listPersona = query.getResultList();
+        if(listPersona != null && !listPersona.isEmpty()){
+            return listPersona.get(0);
+        }
+        return null;
     }
 
 }

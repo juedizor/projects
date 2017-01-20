@@ -20,6 +20,8 @@ public interface UsuarioIfaceDAO {
     public void merge(Usuario usuario) throws Exception;
 
     List<Usuario> findAll() throws Exception;
+    
+    public Usuario findById(int id) throws Exception;
 
     public Usuario findByNombreUsuario(String nombreUsuario) throws Exception;
 

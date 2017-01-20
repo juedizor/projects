@@ -5,7 +5,7 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.PersistenceApp;
+
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import java.util.List;
@@ -43,7 +43,11 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     @Override
     public List<Usuario> findByNombreUsuarioContrasenaActivo(String nombreUsuario, String contrasena, boolean activo) throws Exception {
-        Query query = manager.createNamedQuery("Usuario.findByNombreUsuarioContrasenaActivo");
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario ");
+        sql.append("AND u.contrasena = :contrasena ");
+        sql.append("AND u.activo = :activo");
+        Query query = manager.createQuery(sql.toString());
         query.setParameter("nombreUsuario", nombreUsuario);
         query.setParameter("contrasena", contrasena);
         query.setParameter("activo", activo);
@@ -58,6 +62,17 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
     @Override
     public void setEntityManager(EntityManager manager) {
         this.manager = manager;
+    }
+
+    @Override
+    public Usuario findById(int id) throws Exception {
+        Query query = manager.createNamedQuery("Usuario.findByIdUsuario");
+        query.setParameter("idUsuario", id);
+        List<Usuario> listUsuarios = query.getResultList();
+        if(listUsuarios != null && !listUsuarios.isEmpty()){
+            return listUsuarios.get(0);
+        }
+        return null;
     }
 
 }
