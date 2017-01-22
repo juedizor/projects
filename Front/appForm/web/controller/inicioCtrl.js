@@ -27,13 +27,11 @@ app.controller('inicioCtrl',
 		if(datos.usuario.length < 3){
 			self.invalido = true;
 			self.mensaje = "Ingrese su usuario"; 
-			console.log(self.mensaje)
 			return;
 		}else{
 			if(datos.contrasena.length < 3){
 				self.invalido = true;
 				self.mensaje = "Ingrese su contraseña"; 
-				console.log(self.mensaje)
 				return;	
 			}
 		}
@@ -47,6 +45,7 @@ app.controller('inicioCtrl',
 				self.cargando = false;
 			    $cookieStore.put('estaConectado', true);
 			    $cookieStore.put('usuario', success.data);
+			    $rootScope.usuario = success.data;
 				$rootScope.user.valido = true;
 				$rootScope.wrapper = "wrapper";
 				$rootScope.init = "hold-transition skin-purple sidebar-mini";
@@ -63,5 +62,11 @@ app.controller('inicioCtrl',
 			});
 
 	}
+
+	this.registrar = function(){
+		$("#modal_empresa").modal();
+	}
+
+
 
 }]);

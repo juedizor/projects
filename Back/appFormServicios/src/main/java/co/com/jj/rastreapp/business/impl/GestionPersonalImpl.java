@@ -6,22 +6,26 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.entity.TipoDocumento;
 import co.com.jj.appform.entity.Usuario;
+import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.business.iface.GestionPersonalIface;
+import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import co.com.jj.rastreapp.util.DateUtils;
 import co.com.jj.rastreapp.util.EntityUtils;
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +44,8 @@ public class GestionPersonalImpl implements GestionPersonalIface {
     TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
     @Autowired
     PerfilIfaceDAO perfilIfaceDAO;
+    @Autowired
+    DireccionIfaceDAO direccionIfaceDAO;
 
     private static final DateUtils DATE_UTILS = DateUtils.getInstance();
     private static final EntityUtils ENTITY_UTILS = EntityUtils.getInstance();
@@ -49,8 +55,10 @@ public class GestionPersonalImpl implements GestionPersonalIface {
     public int registrarPersona(PersonaDTO personaDTO) throws Exception {
         int resultado = Respuestas.SIN_DATOS;
         if (personaDTO != null) {
+            persistenceApp = new PersistenceApp();
             try {
-                persistenceApp = new PersistenceApp();
+
+                java.sql.Timestamp fechaReg = DATE_UTILS.getFechaActual(); // fecha Actual
                 persistenceApp.getEntityTransaction().begin(); // se inicia la transaccion
 
                 /**
@@ -60,33 +68,57 @@ public class GestionPersonalImpl implements GestionPersonalIface {
                 perfilIfaceDAO.setEntityManager(persistenceApp.getManager());
                 usuarioIfaceDAO.setEntityManager(persistenceApp.getManager());
                 personaIfaceDAO.setEntityManager(persistenceApp.getManager());
+                direccionIfaceDAO.setEntityManager(persistenceApp.getManager());
 
-                Usuario usuario = usuarioIfaceDAO.findByNombreUsuario(personaDTO.getUsuarioDTO().getNombreUsuario());
-                if (usuario == null) {
-                    if (personaDTO.getUsuarioDTO().getIdUsuario() != null) {
-                        usuario = usuarioIfaceDAO.findById(personaDTO.getUsuarioDTO().getIdUsuario());
-                        usuario.setNombreUsuario(personaDTO.getUsuarioDTO().getNombreUsuario());
-                    } else {
-                        usuario = ENTITY_UTILS.getUsuario(personaDTO.getUsuarioDTO());
-                    }
-                }
-                java.sql.Timestamp fechaReg = DATE_UTILS.getFechaActual();
-                personaDTO.setFechaRegistro(fechaReg);
                 Persona persona = ENTITY_UTILS.getPersona(personaDTO);
-                TipoDocumento tipoDocumento = tipoDocumentoIfaceDAO.findById(personaDTO.getTipoDocumento().getIdTipoDocumento());
+                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(personaDTO.getTipoDocumento());
                 persona.setIdTipoDocumento(tipoDocumento);
-                Perfil perfil = perfilIfaceDAO.findByNombre(personaDTO.getUsuarioDTO().getPerfil().getNombrePerfil());
+                Usuario usuario = ENTITY_UTILS.getUsuario(personaDTO.getUsuario());
+
+                Perfil perfil = ENTITY_UTILS.getPerfil(personaDTO.getUsuario().getPerfil());
                 usuario.setIdPerfil(perfil);
-                usuario.setIdPersona(persona);
-                usuario.setFechaCreacion(fechaReg);
-                if (personaDTO.getUsuarioDTO().getIdUsuario() != null) {
-                    personaIfaceDAO.merge(persona);
-                    persistenceApp.getEntityTransaction().commit();
-                    resultado = Respuestas.ACTUALIZADO;
+                Direccion direccion = ENTITY_UTILS.getDireccion(personaDTO.getDireccion());
+                direccion.setFechaInicial(fechaReg);
+                if (personaDTO.getIdPersona() != null) {
+                    // en este punto entra en proceso de edicion de datos
+                    persona.setFechaModificacion(fechaReg);
+                    personaIfaceDAO.merge(persona); // actualiza los datos de persona si aplica
+                    Usuario user = usuarioIfaceDAO.findById(usuario.getIdUsuario());
+                    usuario.setContrasena(user.getContrasena());
+                    usuario.setIdPersona(persona);
+                    usuarioIfaceDAO.merge(usuario); // actualiza los datos de usuario si aplica
+                    Direccion dirPersona = direccionIfaceDAO.findByIdPersona(persona.getIdPersona());
+                    if (!dirPersona.getNombreDireccion().trim().equals(direccion.getNombreDireccion())) {
+                        dirPersona.setFechaFinal(fechaReg);
+                        direccionIfaceDAO.merge(dirPersona);
+                        persistenceApp.getEntityTransaction().commit();
+                        PersistenceApp persistenceAppDir = new PersistenceApp();
+                        try {
+                            persistenceAppDir.getEntityTransaction().begin();
+                            direccionIfaceDAO.setEntityManager(persistenceAppDir.getEntityManager());
+                            direccion.setIdDireccion(null);
+                            direccion.setIdPersona(persona);
+                            direccionIfaceDAO.save(direccion);
+                            persistenceAppDir.getEntityTransaction().commit();
+                        } catch (Exception e) {
+                            persistenceAppDir.getEntityTransaction().rollback();
+                            throw new Exception("Error realizando transacción persona - usuario:\n" + e.getMessage());
+                        }
+                    } else {
+                        persistenceApp.getEntityTransaction().commit();
+                    }
+                    return Respuestas.ACTUALIZADO;
                 } else {
+                    // en este punto entra en proceso de registro de datos
+                    persona.setFechaRegistro(fechaReg);
                     personaIfaceDAO.save(persona);
+                    usuario.setFechaCreacion(fechaReg);
+                    usuario.setIdPersona(persona);
+                    persona.setUsuarioList(Arrays.asList(usuario));
+                    direccion.setIdPersona(persona);
+                    persona.setDireccionList(Arrays.asList(direccion));
                     persistenceApp.getEntityTransaction().commit();
-                    resultado = Respuestas.CREADO;
+                    return Respuestas.CREADO;
                 }
             } catch (Exception e) {
                 persistenceApp.getEntityTransaction().rollback();
@@ -113,7 +145,7 @@ public class GestionPersonalImpl implements GestionPersonalIface {
             PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(persona.getUsuarioList().get(0).getIdPerfil());
             usuarioDTO.setPerfil(perfilDTO);
             personaDTO.setTipoDocumento(tipoDocumentoDTO);
-            personaDTO.setUsuarioDTO(usuarioDTO);
+            personaDTO.setUsuario(usuarioDTO);
         }
         return personaDTO;
     }

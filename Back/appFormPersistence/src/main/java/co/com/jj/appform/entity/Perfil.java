@@ -29,7 +29,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p"),
     @NamedQuery(name = "Perfil.findByIdPerfil", query = "SELECT p FROM Perfil p WHERE p.idPerfil = :idPerfil"),
-    @NamedQuery(name = "Perfil.findByNombre", query = "SELECT p FROM Perfil p WHERE p.nombre = :nombre")})
+    @NamedQuery(name = "Perfil.findByNombre", query = "SELECT p FROM Perfil p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "Perfil.findByAccesoWeb", query = "SELECT p FROM Perfil p WHERE p.accesoWeb = :accesoWeb")})
 public class Perfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,10 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "nombre")
     private String nombre;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "acceso_web")
+    private boolean accesoWeb;
     @OneToMany(mappedBy = "idPerfil")
     private List<Usuario> usuarioList;
 
@@ -53,9 +58,10 @@ public class Perfil implements Serializable {
         this.idPerfil = idPerfil;
     }
 
-    public Perfil(Integer idPerfil, String nombre) {
+    public Perfil(Integer idPerfil, String nombre, boolean accesoWeb) {
         this.idPerfil = idPerfil;
         this.nombre = nombre;
+        this.accesoWeb = accesoWeb;
     }
 
     public Integer getIdPerfil() {
@@ -72,6 +78,14 @@ public class Perfil implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean getAccesoWeb() {
+        return accesoWeb;
+    }
+
+    public void setAccesoWeb(boolean accesoWeb) {
+        this.accesoWeb = accesoWeb;
     }
 
     public List<Usuario> getUsuarioList() {

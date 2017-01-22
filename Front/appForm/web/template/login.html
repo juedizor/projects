@@ -41,7 +41,7 @@
       <div class = "row" ng-show = "inicio.invalido">
   			<div class="col-md-12">
   				<br>
-  				<div class="alert alert-danger">
+  				<div class="alert alert-danger-custom">
   					<strong>Verificar!</strong>
   					{{ inicio.mensaje }}
   				</div>
@@ -50,6 +50,22 @@
 
 
     </form>
+    <div class="row">
+        <div class="col-md-6">
+          <a href="" ng-click = "inicio.registrar()" >Registrarme</a>  
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <a href="" >Olvide contraseña ?</a>      
+        </div>
+
+    </div>
+
+
+
+    <div ng-include = "'template/gestionEmpresas/empresaModal.html'"></div>
+    
+
+
     
 
   </div><!-- /.login-box-body -->

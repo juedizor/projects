@@ -3,31 +3,34 @@ app.controller('listarUsuariosCtrl',
 	'UsuariosResource', 
 	'$location',
 	'$rootScope',
-	'i18nService', 
+	'i18nService',
+	'$cookieStore',
 	function($scope, 
 		UsuariosResource, 
 		$location, 
 		$rootScope, 
-		i18nService){
+		i18nService, 
+		$cookieStore){
 	
 	var self = this; // se almacena el contexto del controlador
-
 
 	// se activa el menu de gestion de usuarios
 	$scope.setActive('gUsuarios');
 	// variable para almacenar todos los usuarios del sistema
-	this.users = {
+	this.user = {
 		dataUser: []
 	};
 
+	var usr = $cookieStore.get('usuario');
+
 	// ejecucion de la consulta para listar todos los usuarios del sistema
- 	UsuariosResource.query().$promise.then(
+ 	UsuariosResource.getUsers({nombreUsuario: usr.nombreUsuario}).$promise.then(
 		function(data){
 			self.cargarDatosTabla(data);
  	});
 
+
  	this.cargarDatosTabla = function(data){
- 		var dataUser = [];
 		angular.forEach(data, function(value, key) {
 			var user = {};
 			user["user"] = value;
@@ -35,11 +38,12 @@ app.controller('listarUsuariosCtrl',
 			user["NumeroDocumento"] = value.persona.numeroDocumento;
 			user["PrimerNombre"] = value.persona.nombre1;
 			user["PrimerApellido"] = value.persona.apellido1;
+			user["Dirección"] = value.persona.direccion.nombreDireccion;
 			user["CorreoElectronico"] = value.persona.email;
 			user["Usuario"] = value.nombreUsuario;
 			user["Perfil"] = value.perfil.nombrePerfil;
-			user["Accion"] = '<a ng-click = "listarUsuariosCtrl.abrirModal(user)" class="btn btn-warning" title="Editar"> <i class="fa fa-edit"></i></a>';
-			self.users.dataUser.push(user);
+			user["Accion"] = '';
+			self.user.dataUser.push(user);
 		});
  	}
 	
@@ -47,7 +51,7 @@ app.controller('listarUsuariosCtrl',
  	this.gridOptions = {
  		enableFiltering: true, 
  		enableSorting: true,
- 		data: self.users.dataUser, 
+ 		data: self.user.dataUser, 
  		enableColumnResizing: true,
 	    paginationPageSizes: [5, 10, 15],
 		paginationPageSize: 10,
@@ -56,10 +60,11 @@ app.controller('listarUsuariosCtrl',
 	      { name: 'NumeroDocumento', enableHiding: false },
 	      { name: 'PrimerNombre', enableHiding: false  }, 
 	      { name: 'PrimerApellido', enableHiding: false  },
+	      { name: 'Dirección', enableHiding: false  },
 	      { name: 'CorreoElectronico', enableHiding: false },
 	      { name: 'Usuario', enableHiding: false  }, 
 	      { name: 'Perfil', enableHiding: false  }, 
-	      { name: 'data', visible: false},
+	      { name: 'data', visible: false },
 	      { name: 'Accion', 
 	      	displayName:'',  
 	      	enableHiding: false, 
@@ -92,10 +97,10 @@ app.controller('listarUsuariosCtrl',
     }
 
     $rootScope.$on("updateUserTable", function(event, user){
-    	self.users.dataUser = [];
+    	self.user.dataUser = [];
     	self.cargarDatosTabla(user.success);
     	self.gridOptions.data = [];
-		self.gridOptions.data = self.users.dataUser;
+		self.gridOptions.data = self.user.dataUser;
     });
 
 }]);

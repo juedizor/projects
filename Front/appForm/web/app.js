@@ -13,12 +13,17 @@ var app = angular.module('appForm', [
 	'ui.grid', 
 	'ui.grid.resizeColumns', 
 	'ui.grid.autoResize', 
-	'ui.grid.pagination'
+	'ui.grid.pagination', 
+	'appForm.empresas', 
+	'appForm.personas'
 	]);
 
 
 // variables de rootScope
-app.run(['$rootScope', function($rootScope){
+app.run(['$rootScope', 
+	'defaultErrorMessageResolver',  
+	function($rootScope, 
+		defaultErrorMessageResolver){
 	$rootScope.config = {};
 	$rootScope.user = {
 		valido: false
@@ -26,7 +31,9 @@ app.run(['$rootScope', function($rootScope){
 	$rootScope.usuario = {};
 	$rootScope.wrapper = "";
 	$rootScope.init = "sidebar-collapse login-page";
-	
+
+	defaultErrorMessageResolver.setI18nFileRootPath('../lib/angular');
+	defaultErrorMessageResolver.setCulture('es-CO');		
 }]);
 
 // generacion de una constante para la direccion http de los servicios
@@ -61,8 +68,6 @@ app.controller('mainCtrl',
 
 	$scope.gUsuarios     = "";
 	$scope.gFormularios  = "";
-
-
 
 	// cargue inicial de los tiepos de documentos de persoinas
 	var tiposDocumentos = $cookieStore.get('tiposDocumentos');
@@ -112,7 +117,6 @@ app.controller('mainCtrl',
 	// cierra la sesion de la cookie creada y redireccion a la pagina de inicio
 	$scope.salir = function(){
 		var cerrar = CerrarSesion.cerrar();
-		console.log(cerrar);
 		if(cerrar){
 			$rootScope.wrapper = "";
 			$rootScope.init = "sidebar-collapse login-page";
@@ -126,7 +130,9 @@ app.controller('mainCtrl',
 	// funcion para activar menus y submenus
 	$scope.setActive = function(menu, submenu){
 		$scope.gUsuarios     = "";
-		$scope.gFormularios  = "";
+		$scope.gFormularios  = "";7
+		$scope.gInicio  = "";
+		$scope.gClientes = "";
 
 		$scope[menu] = "active";
 	}

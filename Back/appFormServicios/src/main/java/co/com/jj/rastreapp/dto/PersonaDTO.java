@@ -23,14 +23,14 @@ public class PersonaDTO {
     private String email;
     private java.sql.Timestamp fechaRegistro;
     private java.sql.Timestamp fechaModificacion;
-    private UsuarioDTO usuarioDTO;
+    private UsuarioDTO usuario;
     private TipoDocumentoDTO tipoDocumento;
     private DireccionDTO direccion;
 
     public PersonaDTO() {
     }
 
-    public PersonaDTO(Integer idPersona, long numeroDocumento, String nombre1, String nombre2, String apellido1, String apellido2, String email, Timestamp fechaRegistro, Timestamp fechaModificacion, UsuarioDTO usuarioDTO, TipoDocumentoDTO tipoDocumento) {
+    public PersonaDTO(Integer idPersona, long numeroDocumento, String nombre1, String nombre2, String apellido1, String apellido2, String email, Timestamp fechaRegistro, Timestamp fechaModificacion, UsuarioDTO usuario, TipoDocumentoDTO tipoDocumento) {
         this.idPersona = idPersona;
         this.numeroDocumento = numeroDocumento;
         this.nombre1 = nombre1;
@@ -40,7 +40,7 @@ public class PersonaDTO {
         this.email = email;
         this.fechaRegistro = fechaRegistro;
         this.fechaModificacion = fechaModificacion;
-        this.usuarioDTO = usuarioDTO;
+        this.usuario = usuario;
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -116,13 +116,14 @@ public class PersonaDTO {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public UsuarioDTO getUsuarioDTO() {
-        return usuarioDTO;
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
-        this.usuarioDTO = usuarioDTO;
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
     }
+
 
     public TipoDocumentoDTO getTipoDocumento() {
         return tipoDocumento;

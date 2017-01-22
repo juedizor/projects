@@ -7,12 +7,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistema de de {{config.aplicativo}} </title>
+  <title>Sistema de {{config.aplicativo}} </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
   <!-- Cargue de estilos -->
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/alerts.css">
 
   <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="../lib/ionicons/css/ionicons.min.css">
@@ -59,8 +60,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="controller/inicioCtrl.js"></script>
   <script src="controller/gestionUsuarios/listarUsuariosCtrl.js"></script>
   <script src="controller/gestionUsuarios/gestionUsuarioModalCtrl.js"></script>
-  
-
+  <script src="controller/gestionFormularios/formulariosCtrl.js"></script>
+  <script src="controller/gestionEmpresas/gestionEmpresaModalCtrl.js"></script>
+  <script src="controller/principal/principalCtrl.js"></script>
+  <script src="controller/gestionClientes/listarClientesCtrl.js"></script>
 
   <!-- Cargue condig.js enrutamiento-->
   <script type="text/javascript" src = "config.js"></script>
@@ -72,6 +75,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script type="text/javascript" src = "common/services/gestionUsuarios/usuariosService.js"></script>
   <script type="text/javascript" src = "common/services/gestionParams/tipoDocumentosService.js"></script>
   <script type="text/javascript" src = "common/services/gestionParams/perfilesService.js"></script>
+  <script type="text/javascript" src = "common/services/gestionEmpresas/empresasService.js"></script>
+  <script type="text/javascript" src = "common/services/gestionPersonal/personasService.js"></script>
   
   
 

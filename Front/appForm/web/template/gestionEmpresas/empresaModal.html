@@ -1,0 +1,278 @@
+<div ng-controller = "gestionEmpresaModalCtrl as modalEmpCtrl" class="modal fade" id="modal_empresa" data-keyboard=”false” data-backdrop>
+  <form name="modalEmpCtrl.formEmpresa" ng-submit = "modalEmpCtrl.guardar()" novalidate="novalidate">
+      <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>-->
+            <h4 class="modal-title">Empresa - Registro</h4>
+          </div>
+
+
+          <div class="modal-body" >
+          
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div id = "fieldTipoDoc" class="form-group" >
+                      <label>Tipo de Documento</label>
+                      <dir-tipo-documentos 
+                      obligatorio = "required" 
+                      docs = "modalEmpCtrl.tiposDoc" 
+                      tipos = "modalEmpCtrl.persona.tipoDocumento">
+                      </dir-tipo-documentos>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group" id = "numDocError">
+                      <label>Número de Documento</label>
+                      <input class="form-control" 
+                      type="number" 
+                      ng-model="modalEmpCtrl.persona.numeroDocumento"
+                      placeholder="Número de Documento"
+                      type="text"
+                      name = "numeroDocumento" 
+                      required = ""
+                      validar-campo-resource
+                      valueinput = "modalEmpCtrl.persona.numeroDocumento"
+                      valueid = "'numDocError'"
+                      method = "modalEmpCtrl.personaResource.getPersona"
+                      params = "{tipoDoc: modalEmpCtrl.persona.tipoDocumento.idTipoDocumento, 
+                      numeroDoc: modalEmpCtrl.persona.numeroDocumento}"
+                      idmsgerr = "'errorNumDoc'"
+                      form = "modalEmpCtrl.formEmpresa"
+                      valueant = "modalEmpCtrl.numDocumento" 
+                      msgerror = "'Persona Existe en el Sistema'" 
+                      namefield = "modalEmpCtrl.formEmpresa.numeroDocumento"/>
+                      <div id = "errorNumDoc" style="display: none" 
+                     class="help-block has-error error-msg"></div> 
+                    </div>
+                  </div>
+                  <div ng-hide = "modalEmpCtrl.camposNit" class="col-xs-4">
+                    <div id = "fieldNombre1" class="form-group">
+                      <label>Primer Nombre</label>
+                      <input class="form-control" 
+                      ng-model="modalEmpCtrl.persona.nombre1" 
+                      placeholder="Primer Nombre" 
+                      type="text" 
+                      name = "nombre1" 
+                      ng-required = "modalEmpCtrl.required" 
+                      maxlength="100" />
+                    </div>
+                  </div>
+                </div>
+
+                <div  ng-show = "modalEmpCtrl.camposNit" class="row">
+                    <div class="col-xs-12">
+                        <div id = "fieldNombreEmpresa" class="form-group">
+                          <label>Nombre Empresa</label>
+                          <input class="form-control" 
+                          ng-model="modalEmpCtrl.persona.empresa.nombreEmpresa" 
+                          placeholder="Nombre de su Empresa" 
+                          type="text" 
+                          name = "nombreEmpresa" 
+                          maxlength="100"
+                          ng-required = "!modalEmpCtrl.required" />
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-hide = "modalEmpCtrl.camposNit" class="row">
+                  <div class="col-xs-4">
+                    <div id = "fieldNombre2" class="form-group">
+                      <label>Segundo Nombre</label>
+                      <input class="form-control" 
+                      ng-model="modalEmpCtrl.persona.nombre2" 
+                      placeholder="Segundo Nombre" 
+                      type="text" 
+                      name = "nombre2" 
+                      maxlength="100"/>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id= "fieldApellido1" class="form-group">
+                      <label>Primer Apellido</label>
+                      <input class="form-control" 
+                      ng-model="modalEmpCtrl.persona.apellido1" 
+                      placeholder="Primer Apellido" 
+                      type="text" 
+                      name = "apellido1" 
+                      required = "required" 
+                      maxlength="100" 
+                      ng-required = "modalEmpCtrl.required" />
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div  id = "fieldApellido2" class="form-group">
+                      <label>Segundo Apellido</label>
+                      <input class="form-control" 
+                      ng-model="modalEmpCtrl.persona.apellido2" 
+                      placeholder="Segundo Apellido" 
+                      type="text" 
+                      name = "apellido2" 
+                      maxlength="100" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-8">
+                    <div id = "fieldEmail" class="form-group">
+                      <label>Correo Electronico</label>
+                      <input class="form-control" 
+                      ng-model="modalEmpCtrl.persona.email" 
+                      placeholder="Correo Electronico" 
+                      type="email" 
+                      name = "email" 
+                      required = "required" 
+                      maxlength="100" 
+                      validar-campo-resource
+                      valueinput = "modalEmpCtrl.persona.email"
+                      valueid = "'fieldEmail'"
+                      method = "modalEmpCtrl.personaResource.getPersonaEmail"
+                      params = "{email: modalEmpCtrl.persona.email}"
+                      idmsgerr = "'errorEmail'"
+                      form = "modalEmpCtrl.formEmpresa"
+                      valueant = "modalEmpCtrl.email" 
+                      msgerror = "'El email ingresado ya existe'" 
+                      namefield = "modalEmpCtrl.formEmpresa.email"/>
+                      <div id = "errorEmail" style="display: none" 
+                     class="help-block has-error error-msg"></div> 
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id = "userError" class = "form-group">
+                      <label>Usuario</label>
+                      <input class="form-control" 
+                      ng-model="modalEmpCtrl.persona.usuario.nombreUsuario"
+                      placeholder="Nombre de Usuario" 
+                      type="text" 
+                      name = "nombreUsuario" 
+                      required = "required" 
+                      validar-campo-resource
+                      valueinput = "modalEmpCtrl.persona.usuario.nombreUsuario"
+                      valueid = "'userError'"
+                      method = "modalEmpCtrl.usuarioResource.getUser"
+                      params = "{nombreUsuario: modalEmpCtrl.persona.usuario.nombreUsuario}"
+                      idmsgerr = "'errorUser'"
+                      form = "modalEmpCtrl.formEmpresa" 
+                      valueant = "modalEmpCtrl.nombreUsuario" 
+                      msgerror = "'Usuario Existe'" 
+                      namefield = "modalEmpCtrl.formEmpresa.nombreUsuario" 
+                      maxlength="10"/>
+                      <div id = "errorUser" style="display: none" 
+                     class="help-block has-error error-msg"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div id = "direccion" class="form-group">
+                          <label>Dirección</label>
+                          <input id = "dir" 
+                          class="form-control" 
+                          ng-model="gestionUser.persona.direccion.nombreDireccion" 
+                          placeholder="Ingrese la dirección" 
+                          type="text" 
+                          name = "direccion" 
+                          ng-required="required" />
+                      </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id = "requiredPass1" class="form-group">
+                        <label>Contraseña</label>
+                        <input id = "pass1" 
+                        class="form-control" 
+                        ng-model="modalEmpCtrl.persona.usuario.contrasena" 
+                        placeholder="Digite una Contraseña" type="password" 
+                        name = "contrasena1"
+                        ng-required = "modalEmpCtrl.required" 
+                        maxlength="100"
+                        validar-campos-iguales 
+                        form = "modalEmpCtrl.formEmpresa" 
+                        campo = "modalEmpCtrl.contrasena2"
+                        namefield = "modalEmpCtrl.formEmpresa.contrasena1" 
+                        valueid = "'requiredPass1'", 
+                        msgerror = "'Contraseñas no conciden'" 
+                        idmsgerr = "'errorPass1'"/>
+                       <div id = "errorPass1" style="display: none" 
+                         class="help-block has-error error-msg"></div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                    <div id = "requiredPass2" class="form-group">
+                        <label>Repetir Contraseña</label>
+                        <input id = "pass2" 
+                        class="form-control" 
+                        ng-model="modalEmpCtrl.contrasena2" 
+                        placeholder="Repita una Contraseña" 
+                        type="password" 
+                        name = "contrasena2" 
+                        ng-required="modalEmpCtrl.required" 
+                        validar-campos-iguales 
+                        form = "modalEmpCtrl.formEmpresa" 
+                        campo = "modalEmpCtrl.persona.usuario.contrasena"
+                        namefield = "modalEmpCtrl.formEmpresa.contrasena2" 
+                        valueid = "'requiredPass2'", 
+                        msgerror = "'Contraseñas no conciden'" 
+                        idmsgerr = "'errorPass2'"/>
+                       <div id = "errorPass2" style="display: none" 
+                         class="help-block has-error error-msg"></div>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                      <div id = "descripcionEmpresa" class="form-group">
+                        <label>Descripción de su Empresa</label>  
+                        <textarea class="form-control" 
+                        id="textDescripcionEmpresa" 
+                        name="descripcionEmpresa" 
+                        ng-model = "modalEmpCtrl.persona.empresa.descripcionEmpresa"
+                        required="required">
+                        </textarea>
+                      </div>
+                  </div>
+
+                  
+                </div>
+
+
+              </div>
+              <!-- /.box-body -->
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <div ng-show = "modalEmpCtrl.mostrarMsgTransaccion" class="row">
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <div class="alert alert-success-custom" ng-class= "modalEmpCtrl.classMsgTransaccion" role="alert">
+                      {{modalEmpCtrl.msgTransaccion}}
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "modalEmpCtrl.closeModal()">Close</button>
+            
+            <button type="submit" ng-disabled = "modalEmpCtrl.formEmpresa.$invalid || modalEmpCtrl.formEmpresa.numeroDocumento.$invalid || modalEmpCtrl.formEmpresa.nombreUsuario.$invalid || modalEmpCtrl.formEmpresa.contrasena2.$invalid"  class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+  <!-- /.modal-dialog -->
+  <!--<pre>{{modalEmpCtrl.formEmpresa | json}}</pre>-->
+  </form>
+</div>
+

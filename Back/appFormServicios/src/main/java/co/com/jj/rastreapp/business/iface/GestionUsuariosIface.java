@@ -18,6 +18,6 @@ public interface GestionUsuariosIface {
 
     public UsuarioDTO getUser(String nombreUsuario) throws Exception;
 
-    public List<UsuarioDTO> obtenerUsuarios() throws Exception;
+    public List<UsuarioDTO> obtenerUsuarios(String nombreUsuario) throws Exception;
 
 }

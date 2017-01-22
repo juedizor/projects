@@ -42,6 +42,15 @@ public class EntityUtils {
         tipoDocumentoDTO.setNombre(tipoDocumento.getNombre());
         return tipoDocumentoDTO;
     }
+    
+    public TipoDocumento getTipoDocumento(TipoDocumentoDTO tipoDocumentoDTO){
+        TipoDocumento tipoDocumento = new TipoDocumento();
+        tipoDocumento.setIdTipoDocumento(tipoDocumentoDTO.getIdTipoDocumento());
+        tipoDocumento.setCodigo(tipoDocumentoDTO.getCodigo());
+        tipoDocumento.setNombre(tipoDocumentoDTO.getNombre());
+        return tipoDocumento;
+                 
+    }
 
     public PersonaDTO getPersonaDTO(Persona persona) {
         PersonaDTO personaDTO = new PersonaDTO();
@@ -62,6 +71,9 @@ public class EntityUtils {
 
     public Persona getPersona(PersonaDTO personaDTO) {
         Persona persona = new Persona();
+        if(personaDTO.getIdPersona() != null){
+            persona.setIdPersona(personaDTO.getIdPersona());
+        }
         persona.setApellido1(personaDTO.getApellido1());
         persona.setApellido2(personaDTO.getApellido2());
         persona.setEmail(personaDTO.getEmail());
@@ -103,6 +115,15 @@ public class EntityUtils {
         return perfilDTO;
     }
     
+    public Perfil getPerfil(PerfilDTO perfilDTO){
+        Perfil perfil = new Perfil();
+        if(perfilDTO.getIdPerfil() != null){
+            perfil.setIdPerfil(perfilDTO.getIdPerfil());
+        }
+        perfil.setNombre(perfilDTO.getNombrePerfil());
+        return perfil;
+    }
+    
     public Direccion getDireccion(DireccionDTO direccionDTO){
         Direccion direccion = new Direccion();
         direccion.setNombreDireccion(direccionDTO.getNombreDireccion());
@@ -118,6 +139,19 @@ public class EntityUtils {
         }
         
         return direccion;
+    }
+    
+    public DireccionDTO getDireccionDTO(Direccion direccion){
+        DireccionDTO direccionDTO = new DireccionDTO();
+        direccionDTO.setIdDireccion(direccion.getIdDireccion());
+        direccionDTO.setNombreDireccion(direccion.getNombreDireccion());
+        direccionDTO.setFechaInicial(new java.sql.Timestamp(direccion.getFechaInicial().getTime()));
+        if(direccion.getFechaFinal() != null){
+            direccionDTO.setFechaFinal(new java.sql.Timestamp(direccion.getFechaFinal().getTime()));
+        }
+        
+        return direccionDTO;
+        
     }
     
 }

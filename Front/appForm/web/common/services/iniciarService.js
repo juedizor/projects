@@ -1,11 +1,11 @@
 var app = angular.module('appForm.loginService', []);
 
-app.factory('LoginService', ['$http', '$q', function($http, $q){
+app.factory('LoginService', ['$http', '$q', 'urlRest',  function($http, $q, urlRest){
 	// uso de promesas
 	var self = {
 		login: function(datos){
 			//var d = $q.defer();
-			return $http.post('http://localhost:8081/inicio/usuario', datos);
+			return $http.post(urlRest+'inicio/usuario', datos);
 			/*.success(function(data){
 				self.dataUser = data;
 				d.resolve();

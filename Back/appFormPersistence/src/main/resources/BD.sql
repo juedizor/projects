@@ -1,4 +1,4 @@
-
+DROP TABLE IF EXISTS cliente;
 DROP TABLE IF EXISTS empresa;
 DROP TABLE IF EXISTS direccion;
 DROP TABLE IF EXISTS usuario;
@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS tipo_documento;
 
 CREATE TABLE perfil(
     id_perfil integer auto_increment not null, 
-    nombre varchar (100) not null, 
+    nombre varchar (100) not null,
+    acceso_web boolean not null,
     primary key(id_perfil)
 );
 
@@ -73,10 +74,24 @@ CREATE TABLE empresa(
     id_empresa integer auto_increment not null, 
     nombre_empresa varchar(100) not null,
     descripcion_empresa varchar(500) not null,
-    id_persona integer not null,
+    id_persona integer null,
     primary key(id_empresa), 
     foreign key(id_persona) references persona(id_persona)
     on update cascade
     on delete cascade, 
     unique(nombre_empresa)
 );
+
+
+CREATE TABLE cliente(
+    id_cliente integer auto_increment not null,
+    id_persona integer not null, 
+    id_pesona_cliente integer not null, 
+    primary key(id_cliente), 
+    foreign key (id_persona) references persona(id_persona)
+    on delete cascade
+    on update cascade, 
+    foreign key (id_pesona_cliente) references persona(id_persona)
+    on delete cascade
+    on update cascade
+); 

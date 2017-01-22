@@ -32,19 +32,14 @@ public class IniciarSesionService {
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     public UsuarioDTO verificarUsuario(@RequestBody InicioSesionDTO inicioSesionDTO) throws ExceptionGenerics {
         UsuarioDTO usuarioDTO = null;
-        if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena()!= null) {
+        if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena() != null) {
             if (!inicioSesionDTO.getUsuario().trim().isEmpty() && !inicioSesionDTO.getContrasena().trim().isEmpty()) {
                 try {
-                    usuarioDTO = aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), inicioSesionDTO.getContrasena().trim());
+                    usuarioDTO = aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
+                            inicioSesionDTO.getContrasena().trim());
                 } catch (Exception e) {
                     ExceptionGenerics.setCodigo(Respuestas.ERROR);
                     ExceptionGenerics.setDescripcion(e.getMessage());
-                    throw new ExceptionGenerics();
-                }
-
-                if (usuarioDTO == null) {
-                    ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
-                    ExceptionGenerics.setDescripcion("usuario/contraseña incorrectos");
                     throw new ExceptionGenerics();
                 }
             }

@@ -51,3 +51,41 @@ app.directive('validarCampoResource',function() {
       }
     };
 });
+
+app.directive('validarCamposIguales', function(){
+  return {
+    restrict: 'A', 
+    scope: {
+      form: '=',
+      campo: '=', 
+      namefield: '=', 
+      idmsgerr: '=',
+      valueid: '=',
+      msgerror: '='
+    }, 
+    link: function(scope, element, attr){
+        element.bind('blur', function(){
+            if(!angular.isUndefined(scope.campo) && scope.campo.length > 0){
+              if(scope.campo != element.val()){
+                  console.log(scope.campo+ "- "+element.val());
+                    angular.element("#"+scope.valueid).removeClass();
+                    angular.element("#"+scope.valueid).addClass("form-group has-error");
+                    angular.element("#"+scope.idmsgerr).removeAttr('style');
+                    angular.element("#"+scope.idmsgerr).html(scope.msgerror);
+                    scope.namefield.$invalid = true;
+                    scope.$apply();
+              }else{
+                console.log(scope.campo+ "- "+element.val());
+                    angular.element("#"+scope.valueid).removeClass();
+                    angular.element("#"+scope.valueid).addClass("form-group has-success");
+                    angular.element("#"+scope.idmsgerr).attr('style', 'display:none');
+                    angular.element("#"+scope.idmsgerr).html("");
+                    scope.namefield.$invalid = false;
+                    scope.$apply();
+              }
+            }
+        })
+    }
+
+  }
+})

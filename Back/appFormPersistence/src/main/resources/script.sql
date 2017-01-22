@@ -4,9 +4,9 @@ VALUES ('1', 'CC', 'CEDULA DE CIUDADANIA'),
 ('3', 'NIT', 'NIT'), 
 ('4', 'CE', 'CEDULA DE EXTRANJERIA');
 
-INSERT INTO `perfil` (`id_perfil`, `nombre`) 
-VALUES ('1', 'ADMINISTRADOR'), 
-('2', 'GUARDA DE SEGURIDAD');
+INSERT INTO `perfil` (`id_perfil`, `nombre`, `acceso_web`) 
+VALUES ('1', 'ADMINISTRADOR', true), 
+('2', 'GUARDA DE SEGURIDAD', false);
 
 INSERT INTO `persona` (`id_persona`, `id_tipo_documento`, `numero_documento`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `email`, `fecha_registro`, `fecha_modificacion`) 
 VALUES ('1', '1', '1064991582', 'JULIO', 'EDUARDO', 'IZQUIERDO', 'OROZCO', 'jeio_1990@hotmail.com', CURRENT_TIMESTAMP, NULL);

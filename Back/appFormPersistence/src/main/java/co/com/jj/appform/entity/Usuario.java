@@ -8,7 +8,6 @@ package co.com.jj.appform.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,7 +64,7 @@ public class Usuario implements Serializable {
     @Column(name = "activo")
     private boolean activo;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false, cascade = {CascadeType.ALL})
+    @ManyToOne(optional = false)
     private Persona idPersona;
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
     @ManyToOne

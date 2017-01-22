@@ -42,15 +42,13 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
     }
 
     @Override
-    public List<Usuario> findByNombreUsuarioContrasenaActivo(String nombreUsuario, String contrasena, boolean activo) throws Exception {
+    public List<Usuario> findByNombreUsuarioContrasena(String nombreUsuario, String contrasena) throws Exception {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario ");
         sql.append("AND u.contrasena = :contrasena ");
-        sql.append("AND u.activo = :activo");
         Query query = manager.createQuery(sql.toString());
         query.setParameter("nombreUsuario", nombreUsuario);
         query.setParameter("contrasena", contrasena);
-        query.setParameter("activo", activo);
         return query.getResultList();
     }
 

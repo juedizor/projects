@@ -50,7 +50,7 @@ public class Empresa implements Serializable {
     @Column(name = "descripcion_empresa")
     private String descripcionEmpresa;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Persona idPersona;
 
     public Empresa() {

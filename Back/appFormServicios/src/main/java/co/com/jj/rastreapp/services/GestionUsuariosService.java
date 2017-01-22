@@ -32,11 +32,11 @@ public class GestionUsuariosService {
     @Autowired
     GestionUsuariosIface gestionUsuariosIface;
 
-    @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
-    public List<UsuarioDTO> getUsuarios() throws ExceptionGenerics {
+    @RequestMapping(value = "/usuarios/{nombreUsuario}", method = RequestMethod.GET)
+    public List<UsuarioDTO> getUsuarios(@PathVariable(value = "nombreUsuario") String nombreUsuario) throws ExceptionGenerics {
         List<UsuarioDTO> listUsuarioDTO = null;
         try {
-            listUsuarioDTO = gestionUsuariosIface.obtenerUsuarios();
+            listUsuarioDTO = gestionUsuariosIface.obtenerUsuarios(nombreUsuario);
         } catch (Exception e) {
             ExceptionGenerics.setCodigo(Respuestas.ERROR);
             ExceptionGenerics.setDescripcion(e.getMessage());
@@ -52,7 +52,7 @@ public class GestionUsuariosService {
         }
     }
 
-    @RequestMapping(value = "/usuarios/{nombreUsuario}", method = RequestMethod.GET)
+    @RequestMapping(value = "/usuarios/usuario/{nombreUsuario}", method = RequestMethod.GET)
     public UsuarioDTO getUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) throws ExceptionGenerics {
         UsuarioDTO usuarioDTO = null;
         try {
@@ -71,7 +71,5 @@ public class GestionUsuariosService {
 
         return usuarioDTO;
     }
-
-    
 
 }

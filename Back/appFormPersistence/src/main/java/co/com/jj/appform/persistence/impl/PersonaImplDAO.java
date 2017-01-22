@@ -56,10 +56,22 @@ public class PersonaImplDAO implements PersonaIfaceDAO {
         Query query = manager.createNamedQuery("Persona.findByEmail");
         query.setParameter("email", email);
         List<Persona> listPersona = query.getResultList();
-        if(listPersona != null && !listPersona.isEmpty()){
+        if (listPersona != null && !listPersona.isEmpty()) {
             return listPersona.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Persona findById(int idPersona) throws Exception {
+        Query query = manager.createNamedQuery("Persona.findByIdPersona");
+        query.setParameter("idPersona", idPersona);
+        List<Persona> listPersona = query.getResultList();
+        if (listPersona != null && !listPersona.isEmpty()) {
+            return listPersona.get(0);
+        }
+        return null;
+
     }
 
 }

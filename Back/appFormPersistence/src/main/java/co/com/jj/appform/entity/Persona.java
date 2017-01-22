@@ -85,7 +85,7 @@ public class Persona implements Serializable {
     private List<Direccion> direccionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Usuario> usuarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    @OneToMany(mappedBy = "idPersona")
     private List<Empresa> empresaList;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
     @ManyToOne(optional = false)

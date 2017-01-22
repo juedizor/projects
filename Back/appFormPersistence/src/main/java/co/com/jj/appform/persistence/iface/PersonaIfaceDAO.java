@@ -17,6 +17,8 @@ public interface PersonaIfaceDAO {
     public void save(Persona persona) throws Exception;
 
     public void merge(Persona persona) throws Exception;
+    
+    Persona findById(int idPersona) throws Exception;
 
     Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception;
     
