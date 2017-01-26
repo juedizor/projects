@@ -5,7 +5,6 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import java.util.List;
@@ -67,9 +66,25 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
         Query query = manager.createNamedQuery("Usuario.findByIdUsuario");
         query.setParameter("idUsuario", id);
         List<Usuario> listUsuarios = query.getResultList();
-        if(listUsuarios != null && !listUsuarios.isEmpty()){
+        if (listUsuarios != null && !listUsuarios.isEmpty()) {
             return listUsuarios.get(0);
         }
+        return null;
+    }
+
+    @Override
+    public List<Usuario> findByEmpresaAndNotNombreUsuario(int idEmpresa, String nombreUsuario) throws Exception {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT u FROM Usuario u WHERE u.nombreUsuario NOT IN (:nombreUsuario)");
+        sql.append(" AND (u.idEmpresa.idEmpresa = :idEmpresa OR :idEmpresa MEMBER OF u.idPersona.empresaList)");
+        Query query = manager.createQuery(sql.toString());
+        query.setParameter("nombreUsuario", nombreUsuario);
+        query.setParameter("idEmpresa", idEmpresa);
+        List<Usuario> listUsuarios = query.getResultList();
+        if (listUsuarios != null && !listUsuarios.isEmpty()) {
+            return listUsuarios;
+        }
+
         return null;
     }
 

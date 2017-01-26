@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS empresa;
 DROP TABLE IF EXISTS direccion;
-DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS persona;
 DROP TABLE IF EXISTS perfil;
 DROP TABLE IF EXISTS tipo_documento;
@@ -51,6 +51,18 @@ CREATE TABLE direccion(
 );
 
 
+CREATE TABLE empresa(
+    id_empresa integer auto_increment not null, 
+    nombre_empresa varchar(100) null,
+    descripcion_empresa varchar(500) not null,
+    id_persona integer not null,
+    primary key(id_empresa), 
+    foreign key(id_persona) references persona(id_persona)
+    on update cascade
+    on delete cascade, 
+    unique(nombre_empresa)
+);
+
 CREATE TABLE usuario (
     id_usuario integer auto_increment not null, 
     nombre_usuario varchar(10) not null, 
@@ -59,6 +71,7 @@ CREATE TABLE usuario (
     activo boolean not null, 
     id_perfil integer null, 
     id_persona integer not null, 
+    id_empresa integer null,
     primary key(id_usuario), 
     foreign key(id_perfil) references perfil(id_perfil)
     on update cascade
@@ -66,32 +79,22 @@ CREATE TABLE usuario (
     foreign key(id_persona) references persona(id_persona)
     on update cascade
     on delete cascade, 
-    unique (nombre_usuario)
-);
-
-
-CREATE TABLE empresa(
-    id_empresa integer auto_increment not null, 
-    nombre_empresa varchar(100) not null,
-    descripcion_empresa varchar(500) not null,
-    id_persona integer null,
-    primary key(id_empresa), 
-    foreign key(id_persona) references persona(id_persona)
+    foreign key(id_empresa) references empresa(id_empresa)
     on update cascade
-    on delete cascade, 
-    unique(nombre_empresa)
+    on delete cascade,
+    unique (nombre_usuario)
 );
 
 
 CREATE TABLE cliente(
     id_cliente integer auto_increment not null,
-    id_persona integer not null, 
-    id_pesona_cliente integer not null, 
+    id_empresa integer not null, 
+    id_pesona integer not null, 
     primary key(id_cliente), 
-    foreign key (id_persona) references persona(id_persona)
+    foreign key (id_empresa) references empresa(id_empresa)
     on delete cascade
     on update cascade, 
-    foreign key (id_pesona_cliente) references persona(id_persona)
+    foreign key (id_pesona) references persona(id_persona)
     on delete cascade
     on update cascade
 ); 

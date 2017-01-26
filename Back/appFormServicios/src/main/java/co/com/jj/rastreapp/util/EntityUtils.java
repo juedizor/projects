@@ -6,11 +6,13 @@
 package co.com.jj.rastreapp.util;
 
 import co.com.jj.appform.entity.Direccion;
+import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.entity.TipoDocumento;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.rastreapp.dto.DireccionDTO;
+import co.com.jj.rastreapp.dto.EmpresaDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
@@ -42,14 +44,14 @@ public class EntityUtils {
         tipoDocumentoDTO.setNombre(tipoDocumento.getNombre());
         return tipoDocumentoDTO;
     }
-    
-    public TipoDocumento getTipoDocumento(TipoDocumentoDTO tipoDocumentoDTO){
+
+    public TipoDocumento getTipoDocumento(TipoDocumentoDTO tipoDocumentoDTO) {
         TipoDocumento tipoDocumento = new TipoDocumento();
         tipoDocumento.setIdTipoDocumento(tipoDocumentoDTO.getIdTipoDocumento());
         tipoDocumento.setCodigo(tipoDocumentoDTO.getCodigo());
         tipoDocumento.setNombre(tipoDocumentoDTO.getNombre());
         return tipoDocumento;
-                 
+
     }
 
     public PersonaDTO getPersonaDTO(Persona persona) {
@@ -71,7 +73,7 @@ public class EntityUtils {
 
     public Persona getPersona(PersonaDTO personaDTO) {
         Persona persona = new Persona();
-        if(personaDTO.getIdPersona() != null){
+        if (personaDTO.getIdPersona() != null) {
             persona.setIdPersona(personaDTO.getIdPersona());
         }
         persona.setApellido1(personaDTO.getApellido1());
@@ -98,7 +100,7 @@ public class EntityUtils {
 
     public Usuario getUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
-        if(usuarioDTO.getIdUsuario() != null){
+        if (usuarioDTO.getIdUsuario() != null) {
             usuario.setIdUsuario(usuarioDTO.getIdUsuario());
         }
         usuario.setActivo(true);
@@ -107,51 +109,69 @@ public class EntityUtils {
         usuario.setNombreUsuario(usuarioDTO.getNombreUsuario());
         return usuario;
     }
-    
-    public PerfilDTO getPerfilDTO(Perfil perfil){
+
+    public PerfilDTO getPerfilDTO(Perfil perfil) {
         PerfilDTO perfilDTO = new PerfilDTO();
         perfilDTO.setIdPerfil(perfil.getIdPerfil());
         perfilDTO.setNombrePerfil(perfil.getNombre());
         return perfilDTO;
     }
-    
-    public Perfil getPerfil(PerfilDTO perfilDTO){
+
+    public Perfil getPerfil(PerfilDTO perfilDTO) {
         Perfil perfil = new Perfil();
-        if(perfilDTO.getIdPerfil() != null){
+        if (perfilDTO.getIdPerfil() != null) {
             perfil.setIdPerfil(perfilDTO.getIdPerfil());
         }
         perfil.setNombre(perfilDTO.getNombrePerfil());
         return perfil;
     }
-    
-    public Direccion getDireccion(DireccionDTO direccionDTO){
+
+    public Direccion getDireccion(DireccionDTO direccionDTO) {
         Direccion direccion = new Direccion();
         direccion.setNombreDireccion(direccionDTO.getNombreDireccion());
-        if(direccionDTO.getIdDireccion() != null){
+        if (direccionDTO.getIdDireccion() != null) {
             direccion.setIdDireccion(direccionDTO.getIdDireccion());
         }
-        if(direccionDTO.getFechaInicial() != null){
+        if (direccionDTO.getFechaInicial() != null) {
             direccion.setFechaInicial(direccionDTO.getFechaInicial());
         }
-        
-        if(direccionDTO.getFechaFinal() != null){
+
+        if (direccionDTO.getFechaFinal() != null) {
             direccion.setFechaFinal(direccionDTO.getFechaFinal());
         }
-        
+
         return direccion;
     }
-    
-    public DireccionDTO getDireccionDTO(Direccion direccion){
+
+    public DireccionDTO getDireccionDTO(Direccion direccion) {
         DireccionDTO direccionDTO = new DireccionDTO();
         direccionDTO.setIdDireccion(direccion.getIdDireccion());
         direccionDTO.setNombreDireccion(direccion.getNombreDireccion());
         direccionDTO.setFechaInicial(new java.sql.Timestamp(direccion.getFechaInicial().getTime()));
-        if(direccion.getFechaFinal() != null){
+        if (direccion.getFechaFinal() != null) {
             direccionDTO.setFechaFinal(new java.sql.Timestamp(direccion.getFechaFinal().getTime()));
         }
-        
+
         return direccionDTO;
-        
+
     }
-    
+
+    public Empresa getEmpresa(EmpresaDTO empresaDTO) {
+        Empresa empresa = new Empresa();
+        if (empresaDTO.getIdEmpresa() != null) {
+            empresa.setIdEmpresa(empresaDTO.getIdEmpresa());
+        }
+        empresa.setDescripcionEmpresa(empresaDTO.getDescripcionEmpresa());
+        empresa.setNombreEmpresa(empresaDTO.getNombreEmpresa());
+        return empresa;
+
+    }
+
+    public EmpresaDTO getEmpresaDTO(Empresa empresa) {
+        EmpresaDTO empresaDTO = new EmpresaDTO();
+        empresaDTO.setIdEmpresa(empresa.getIdEmpresa());
+        empresaDTO.setDescripcionEmpresa(empresa.getDescripcionEmpresa());
+        empresaDTO.setNombreEmpresa(empresa.getNombreEmpresa());
+        return empresaDTO;
+    }
 }

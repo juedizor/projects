@@ -7,6 +7,7 @@ package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
 import co.com.jj.appform.entity.Direccion;
+import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.entity.TipoDocumento;
@@ -18,7 +19,6 @@ import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.business.iface.GestionPersonalIface;
-import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
@@ -74,9 +74,15 @@ public class GestionPersonalImpl implements GestionPersonalIface {
                 TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(personaDTO.getTipoDocumento());
                 persona.setIdTipoDocumento(tipoDocumento);
                 Usuario usuario = ENTITY_UTILS.getUsuario(personaDTO.getUsuario());
-
-                Perfil perfil = ENTITY_UTILS.getPerfil(personaDTO.getUsuario().getPerfil());
-                usuario.setIdPerfil(perfil);
+                
+                if(personaDTO.getEmpresa() != null){
+                    Perfil perfil = perfilIfaceDAO.findByNombre("ADMINISTRADOR");
+                    usuario.setIdPerfil(perfil);
+                }else{
+                    Perfil perfil = ENTITY_UTILS.getPerfil(personaDTO.getUsuario().getPerfil());
+                    usuario.setIdPerfil(perfil);
+                }
+                
                 Direccion direccion = ENTITY_UTILS.getDireccion(personaDTO.getDireccion());
                 direccion.setFechaInicial(fechaReg);
                 if (personaDTO.getIdPersona() != null) {
@@ -85,6 +91,7 @@ public class GestionPersonalImpl implements GestionPersonalIface {
                     personaIfaceDAO.merge(persona); // actualiza los datos de persona si aplica
                     Usuario user = usuarioIfaceDAO.findById(usuario.getIdUsuario());
                     usuario.setContrasena(user.getContrasena());
+                    usuario.setIdEmpresa(user.getIdEmpresa());
                     usuario.setIdPersona(persona);
                     usuarioIfaceDAO.merge(usuario); // actualiza los datos de usuario si aplica
                     Direccion dirPersona = direccionIfaceDAO.findByIdPersona(persona.getIdPersona());
@@ -112,11 +119,20 @@ public class GestionPersonalImpl implements GestionPersonalIface {
                     // en este punto entra en proceso de registro de datos
                     persona.setFechaRegistro(fechaReg);
                     personaIfaceDAO.save(persona);
+                    if(personaDTO.getEmpresa() != null){
+                        Empresa empresa = ENTITY_UTILS.getEmpresa(personaDTO.getEmpresa());
+                        empresa.setIdPersona(persona);
+                        persona.setEmpresaList(Arrays.asList(empresa));
+                    }else{
+                        //Empresa empresa = ENTITY_UTILS.getEmpresa(personaDTO.getEmpresaAsociada());
+                        //usuario.setIdEmpresa(empresa);
+                    }
                     usuario.setFechaCreacion(fechaReg);
                     usuario.setIdPersona(persona);
                     persona.setUsuarioList(Arrays.asList(usuario));
                     direccion.setIdPersona(persona);
                     persona.setDireccionList(Arrays.asList(direccion));
+                    
                     persistenceApp.getEntityTransaction().commit();
                     return Respuestas.CREADO;
                 }

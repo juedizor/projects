@@ -20,6 +20,7 @@ public class UsuarioDTO {
     private boolean activo;
     private PerfilDTO perfil;
     private PersonaDTO persona;
+    private EmpresaDTO empresa;
 
     public UsuarioDTO() {
     }
@@ -79,8 +80,13 @@ public class UsuarioDTO {
     public void setPersona(PersonaDTO persona) {
         this.persona = persona;
     }
-    
-    
 
+    public EmpresaDTO getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(EmpresaDTO empresa) {
+        this.empresa = empresa;
+    }
 
 }

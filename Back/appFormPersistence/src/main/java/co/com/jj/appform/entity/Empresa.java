@@ -6,7 +6,9 @@
 package co.com.jj.appform.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,9 +42,7 @@ public class Empresa implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_empresa")
     private Integer idEmpresa;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "nombre_empresa")
     private String nombreEmpresa;
     @Basic(optional = false)
@@ -49,8 +50,10 @@ public class Empresa implements Serializable {
     @Size(min = 1, max = 500)
     @Column(name = "descripcion_empresa")
     private String descripcionEmpresa;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
+    private List<Cliente> clienteList;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    @ManyToOne
+    @ManyToOne(optional = false, cascade = {CascadeType.ALL})
     private Persona idPersona;
 
     public Empresa() {
@@ -60,9 +63,8 @@ public class Empresa implements Serializable {
         this.idEmpresa = idEmpresa;
     }
 
-    public Empresa(Integer idEmpresa, String nombreEmpresa, String descripcionEmpresa) {
+    public Empresa(Integer idEmpresa, String descripcionEmpresa) {
         this.idEmpresa = idEmpresa;
-        this.nombreEmpresa = nombreEmpresa;
         this.descripcionEmpresa = descripcionEmpresa;
     }
 
@@ -88,6 +90,14 @@ public class Empresa implements Serializable {
 
     public void setDescripcionEmpresa(String descripcionEmpresa) {
         this.descripcionEmpresa = descripcionEmpresa;
+    }
+
+    public List<Cliente> getClienteList() {
+        return clienteList;
+    }
+
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
 
     public Persona getIdPersona() {

@@ -45,6 +45,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Persona.findByFechaModificacion", query = "SELECT p FROM Persona p WHERE p.fechaModificacion = :fechaModificacion")})
 public class Persona implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPesona")
+    private List<Cliente> clienteList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,7 +88,7 @@ public class Persona implements Serializable {
     private List<Direccion> direccionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Usuario> usuarioList;
-    @OneToMany(mappedBy = "idPersona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<Empresa> empresaList;
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
     @ManyToOne(optional = false)
@@ -185,6 +188,7 @@ public class Persona implements Serializable {
         this.direccionList = direccionList;
     }
 
+
     public List<Usuario> getUsuarioList() {
         return usuarioList;
     }
@@ -232,6 +236,14 @@ public class Persona implements Serializable {
     @Override
     public String toString() {
         return "co.com.jj.appform.entity.Persona[ idPersona=" + idPersona + " ]";
+    }
+
+    public List<Cliente> getClienteList() {
+        return clienteList;
+    }
+
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
     
 }

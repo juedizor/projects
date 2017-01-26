@@ -6,11 +6,13 @@
 package co.com.jj.rastreapp;
 
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
+import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.appform.persistence.impl.DireccionImplDAO;
+import co.com.jj.appform.persistence.impl.EmpresaImplDAO;
 import co.com.jj.appform.persistence.impl.PerfilImplDAO;
 import co.com.jj.appform.persistence.impl.PersonaImplDAO;
 import co.com.jj.appform.persistence.impl.TipoDocumentoImplDAO;
@@ -34,6 +36,7 @@ public class MainApp  extends SpringBootServletInitializer {
     private static TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
     private static PerfilIfaceDAO perfilIfaceDAO;
     private static DireccionIfaceDAO direccionIfaceDAO;
+    private static EmpresaIfaceDAO empresaIfaceDAO;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -85,6 +88,15 @@ public class MainApp  extends SpringBootServletInitializer {
         
         return direccionIfaceDAO;
     }
+    @Bean
+    public EmpresaIfaceDAO getEmpresaIfaceDAO(){
+        if(empresaIfaceDAO == null){
+            empresaIfaceDAO = new EmpresaImplDAO();
+        }
+        
+        return empresaIfaceDAO;
+    }
+    
     
     
 }
