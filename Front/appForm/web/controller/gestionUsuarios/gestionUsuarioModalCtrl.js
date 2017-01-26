@@ -13,7 +13,7 @@ app.controller('gestionUsuariosCtrl',
 		var self = this; // se almacena el contexto del controlador dentro de la variable self
 
 		
-		this.persona = new PersonasResource(); // datos de la persona que esta en la vista		
+		this.usuario = new UsuariosResource(); // datos de la persona que esta en la vista		
 		
 		/*
 			tanto los datos de tipos de documentos y perfiles ya estan cargados en el scope
@@ -53,10 +53,14 @@ app.controller('gestionUsuariosCtrl',
 		
 		// funcion para realizar el proceso de registro de usuarios
 		this.guardar = function(){
-			var response = self.persona.$save();		
+			var usr = $cookieStore.get('usuario');
+			self.usuario.empresa = {};
+			angular.copy(usr.empresa, self.usuario.empresa);
+			var response = self.usuario.$save();		
 			response.then(function(success){
 				self.mostrarMsgTransaccion = true;
 				self.msgTransaccion = success.description;
+				self.classMsgTransaccion = "alert-success-custom";
 				var responseUser = [];
 				var usr = $cookieStore.get('usuario');
 				responseUser = UsuariosResource.getUsers({nombreUsuario: usr.nombreUsuario}).$promise.then(function(success){
@@ -68,8 +72,9 @@ app.controller('gestionUsuariosCtrl',
 				self.msgTransaccion = error.data.description;
 				self.classMsgTransaccion = "alert-danger-custom";
 			});
-	        self.formPersona.$setPristine();
-			self.formPersona.$setUntouched();
+	        self.formUsuario.$setPristine();
+			self.formUsuario.$setUntouched();
+			self.password2 = "";
 			
 		}
 
@@ -86,7 +91,7 @@ app.controller('gestionUsuariosCtrl',
         this.numDocumento = "";
         this.nombreUsuario = "";
         this.email = "";
-        this.formPersona = null;
+        this.formUsuario = null;
 
 
         this.personasResource = PersonasResource;
@@ -100,32 +105,21 @@ app.controller('gestionUsuariosCtrl',
 			self.cargarTiposDoc($scope.tiposDoc);
 			self.mostrarMsgTransaccion = false;
 			self.msgTransaccion = "";
-			self.persona = new PersonasResource();
+			self.usuario = new UsuariosResource();
 			self.tipoDocumentos = {};
 			self.profile = {};			
-			if(!angular.isUndefined(self.formPersona)){
-				self.formPersona.$setPristine();	
-				self.formPersona.$setUntouched();
+			if(!angular.isUndefined(self.formUsuario)){
+				self.formUsuario.$setPristine();	
+				self.formUsuario.$setUntouched();
 			}
 
 			if(!self.registro){
-				// cargue de user a object persona
-				var person = {};
-				angular.copy(user.user.persona, person);
-				person.usuario = {};
-				person.usuario.perfil = {};
-				person.usuario['activo'] = user.user.activo;
-				person.usuario['contrasena'] = user.user.contrasena;
-				person.usuario['fechaCreacion'] = user.user.fechaCreacion;
-				person.usuario['idUsuario'] = user.user.idUsuario;
-				person.usuario['nombreUsuario'] = user.user.nombreUsuario;
-				angular.copy(user.user.perfil, person.usuario.perfil);
-
 				self.required = false;
-				self.persona = new PersonasResource(person);
-				self.numDocumento = self.persona.numeroDocumento;
-				self.nombreUsuario = self.persona.usuario.nombreUsuario;
-				self.email = self.persona.email;
+				self.usuario = new UsuariosResource(user);
+				angular.copy(self.usuario.user, self.usuario);
+				self.numDocumento = self.usuario.persona.numeroDocumento;
+				self.nombreUsuario = self.usuario.nombreUsuario;
+				self.email = self.usuario.persona.email;
 				angular.element("#numDocError").addClass(self.styleFormGroup);
 				angular.element("#fieldEmail").addClass(self.styleFormGroup);
 				angular.element("#fieldPerfil").addClass(self.styleFormGroup);

@@ -3,10 +3,12 @@ app.controller('gestionEmpresaModalCtrl',
 	'$rootScope', 
 	'PersonasResource', 
 	'UsuariosResource',
+	'$cookieStore', 	
 	function($scope, 
 		$rootScope, 
 		PersonasResource, 
-		UsuariosResource){
+		UsuariosResource, 
+		$cookieStore){
 	
 
 	var self = this;	
@@ -24,8 +26,23 @@ app.controller('gestionEmpresaModalCtrl',
     this.contrasena2 = "";
     this.required = true;
 
+    this.mostrarMsgTransaccion = false; // muestra el mensaje de finalizacion de la transaccion al momento de guardar
+	this.msgTransaccion = ""; // texto del mensaje de la transaccion
+	this.classMsgTransaccion = "alert-success-custom"; // clase css a aplicar en el mensaje, en la transaccion
+
     this.guardar = function(){
-    	console.log(self.persona)
+		var response = self.persona.$save();
+    	response.then(function(success){
+    		self.mostrarMsgTransaccion = true;
+			self.msgTransaccion = success.description;
+    	}, function(error){
+    		self.mostrarMsgTransaccion = true;
+			self.msgTransaccion = error.data.description;
+			self.classMsgTransaccion = "alert-danger-custom";
+    	})
+    	self.formEmpresa.$setPristine();
+		self.formEmpresa.$setUntouched();
+		self.contrasena2 = "";
     }
 
     $rootScope.$on('changeTipoDoc', function(event, data){

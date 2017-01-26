@@ -1,5 +1,5 @@
 <div ng-controller = "gestionUsuariosCtrl as gestionUser" class="modal fade" id="modal_usuario" data-keyboard=”false” data-backdrop>
-  <form name="gestionUser.formPersona" ng-submit = "gestionUser.guardar()" novalidate="novalidate">
+  <form name="gestionUser.formUsuario" ng-submit = "gestionUser.guardar()" novalidate="novalidate">
       <div class="modal-dialog" style="width: 70%;">
 
         <div class="modal-content">
@@ -22,7 +22,7 @@
                     <div id = "fieldTipoDoc" class="form-group" >
                       <label>Tipo de Documento</label>
                       <dir-tipo-documentos obligatorio = "required" docs = "gestionUser.tiposDoc" 
-                      tipos = "gestionUser.persona.tipoDocumento">
+                      tipos = "gestionUser.usuario.persona.tipoDocumento">
                       </dir-tipo-documentos>
                     </div>
                   </div>
@@ -31,22 +31,22 @@
                       <label>Número de Documento</label>
                       <input class="form-control" 
                       type="number" 
-                      ng-model="gestionUser.persona.numeroDocumento"
+                      ng-model="gestionUser.usuario.persona.numeroDocumento"
                       placeholder="Número de Documento"
                       type="text"
                       name = "numeroDocumento" 
                       required = ""
                       validar-campo-resource
-                      valueinput = "gestionUser.persona.numeroDocumento"
+                      valueinput = "gestionUser.usuario.persona.numeroDocumento"
                       valueid = "'numDocError'"
                       method = "gestionUser.personasResource.getPersona"
-                      params = "{tipoDoc: gestionUser.persona.tipoDocumento.idTipoDocumento, 
-                      numeroDoc: gestionUser.persona.numeroDocumento}"
+                      params = "{tipoDoc: gestionUser.usuario.persona.tipoDocumento.idTipoDocumento, 
+                      numeroDoc: gestionUser.usuario.persona.numeroDocumento}"
                       idmsgerr = "'errorNumDoc'"
-                      form = "gestionUser.formPersona"
+                      form = "gestionUser.formUsuario"
                       valueant = "gestionUser.numDocumento" 
                       msgerror = "'Persona Existe en el Sistema'" 
-                      namefield = "gestionUser.formPersona.numeroDocumento"/>
+                      namefield = "gestionUser.formUsuario.numeroDocumento"/>
                       <div id = "errorNumDoc" style="display: none" 
                      class="help-block has-error error-msg"></div> 
                     </div>
@@ -55,7 +55,7 @@
                     <div id = "fieldNombre1" class="form-group">
                       <label>Primer Nombre</label>
                       <input class="form-control" 
-                      ng-model="gestionUser.persona.nombre1" 
+                      ng-model="gestionUser.usuario.persona.nombre1" 
                       placeholder="Primer Nombre" 
                       type="text" 
                       name = "nombre1" 
@@ -70,7 +70,7 @@
                     <div id = "fieldNombre2" class="form-group">
                       <label>Segundo Nombre</label>
                       <input class="form-control" 
-                      ng-model="gestionUser.persona.nombre2" 
+                      ng-model="gestionUser.usuario.persona.nombre2" 
                       placeholder="Segundo Nombre" 
                       type="text" 
                       name = "nombre2" 
@@ -81,7 +81,7 @@
                     <div id= "fieldApellido1" class="form-group">
                       <label>Primer Apellido</label>
                       <input class="form-control" 
-                      ng-model="gestionUser.persona.apellido1" 
+                      ng-model="gestionUser.usuario.persona.apellido1" 
                       placeholder="Primer Apellido" 
                       type="text" 
                       name = "apellido1" 
@@ -93,7 +93,7 @@
                     <div  id = "fieldApellido2" class="form-group">
                       <label>Segundo Apellido</label>
                       <input class="form-control" 
-                      ng-model="gestionUser.persona.apellido2" 
+                      ng-model="gestionUser.usuario.persona.apellido2" 
                       placeholder="Segundo Apellido" 
                       type="text" 
                       name = "apellido2" 
@@ -107,22 +107,22 @@
                     <div id = "fieldEmail" class="form-group">
                       <label>Correo Electronico</label>
                       <input class="form-control" 
-                      ng-model="gestionUser.persona.email" 
+                      ng-model="gestionUser.usuario.persona.email" 
                       placeholder="Correo Electronico" 
                       type="email" 
                       name = "email" 
                       required = "required" 
                       maxlength="100" 
                       validar-campo-resource
-                      valueinput = "gestionUser.persona.email"
+                      valueinput = "gestionUser.usuario.persona.email"
                       valueid = "'fieldEmail'"
                       method = "gestionUser.personasResource.getPersonaEmail"
                       params = "{email: gestionUser.persona.email}"
                       idmsgerr = "'errorEmail'"
-                      form = "gestionUser.formPersona"
+                      form = "gestionUser.formUsuario"
                       valueant = "gestionUser.email" 
                       msgerror = "'El email ingresado ya existe'" 
-                      namefield = "gestionUser.formPersona.email"/>
+                      namefield = "gestionUser.formUsuario.email"/>
                       <div id = "errorEmail" style="display: none" 
                      class="help-block has-error error-msg"></div> 
                     </div>
@@ -131,21 +131,21 @@
                     <div id = "userError" class = "form-group">
                       <label>Usuario</label>
                       <input class="form-control" 
-                      ng-model="gestionUser.persona.usuario.nombreUsuario"
+                      ng-model="gestionUser.usuario.nombreUsuario"
                       placeholder="Nombre de Usuario" 
                       type="text" 
                       name = "nombreUsuario" 
                       required = "required" 
                       validar-campo-resource
-                      valueinput = "gestionUser.persona.usuario.nombreUsuario"
+                      valueinput = "gestionUser.usuario.nombreUsuario"
                       valueid = "'userError'"
                       method = "gestionUser.usuariosResource.getUser"
-                      params = "{nombreUsuario: gestionUser.persona.usuario.nombreUsuario}"
+                      params = "{nombreUsuario: gestionUser.usuario.nombreUsuario}"
                       idmsgerr = "'errorUser'"
-                      form = "gestionUser.formPersona" 
+                      form = "gestionUser.formUsuario" 
                       valueant = "gestionUser.nombreUsuario" 
                       msgerror = "'Usuario Existe'" 
-                      namefield = "gestionUser.formPersona.nombreUsuario" 
+                      namefield = "gestionUser.formUsuario.nombreUsuario" 
                       maxlength="10"/>
                       <div id = "errorUser" style="display: none" 
                      class="help-block has-error error-msg"></div>
@@ -157,7 +157,7 @@
                   <div class="col-xs-4">
                     <div id = "fieldPerfil"  class="form-group">
                         <label>Perfil</label>
-                        <dir-perfiles obligatorio = "required" profile = "gestionUser.persona.usuario.perfil" perfiles = "gestionUser.perfiles" name = "perfiles"  required = "required"></dir-perfiles>
+                        <dir-perfiles obligatorio = "required" profile = "gestionUser.usuario.perfil" perfiles = "gestionUser.perfiles" name = "perfiles"  required = "required"></dir-perfiles>
                     </div>
                   </div>
 
@@ -166,7 +166,7 @@
                           <label>Dirección</label>
                           <input id = "dir" 
                           class="form-control" 
-                          ng-model="gestionUser.persona.direccion.nombreDireccion" 
+                          ng-model="gestionUser.usuario.persona.direccion.nombreDireccion" 
                           placeholder="Ingrese la dirección" 
                           type="text" 
                           name = "direccion" 
@@ -181,15 +181,15 @@
                           <label>Contraseña</label>
                           <input id = "pass1" 
                           class="form-control" 
-                          ng-model="gestionUser.persona.usuario.contrasena" 
+                          ng-model="gestionUser.usuario.contrasena" 
                           placeholder="Digite una Contraseña" type="password" 
                           name = "contrasena1"
                           ng-required = "gestionUser.required" 
                           maxlength="100" 
                           validar-campos-iguales 
-                          form = "gestionUser.formPersona" 
+                          form = "gestionUser.formUsuario" 
                           campo = "gestionUser.password2"
-                          namefield = "gestionUser.formPersona.contrasena1" 
+                          namefield = "gestionUser.formUsuario.contrasena1" 
                           valueid = "'requiredPass1'", 
                           msgerror = "'Contraseñas no conciden'" 
                           idmsgerr = "'errorPass1'"/>
@@ -211,9 +211,9 @@
                             name = "contrasena2" 
                             ng-required="gestionUser.required" 
                             validar-campos-iguales 
-                            form = "gestionUser.formPersona" 
-                            campo = "gestionUser.persona.usuario.contrasena"
-                            namefield = "gestionUser.formPersona.contrasena2" 
+                            form = "gestionUser.formUsuario" 
+                            campo = "gestionUser.usuario.contrasena"
+                            namefield = "gestionUser.formUsuario.contrasena2" 
                             valueid = "'requiredPass2'", 
                             msgerror = "'Contraseñas no conciden'" 
                             idmsgerr = "'errorPass2'"/>
@@ -251,13 +251,13 @@
             </div>
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "gestionUser.closeModal()">Close</button>
             
-            <button type="submit" ng-disabled = "gestionUser.formPersona.$invalid || gestionUser.formPersona.numeroDocumento.$invalid || gestionUser.formPersona.nombreUsuario.$invalid || gestionUser.formPersona.contrasena2.$invalid"  class="btn btn-primary">Guardar</button>
+            <button type="submit" ng-disabled = "gestionUser.formUsuario.$invalid || gestionUser.formUsuario.numeroDocumento.$invalid || gestionUser.formUsuario.nombreUsuario.$invalid || gestionUser.formUsuario.contrasena2.$invalid"  class="btn btn-primary">Guardar</button>
           </div>
         </div>
         <!-- /.modal-content -->
       </div>
   <!-- /.modal-dialog -->
-  <!--<pre>{{gestionUser.formPersona.contrasena2 | json}}</pre>-->
+  <!--<pre>{{gestionUser.formUsuario.contrasena2 | json}}</pre>-->
   </form>
 </div>
 

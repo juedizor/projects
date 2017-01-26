@@ -26,7 +26,9 @@ public interface UsuarioIfaceDAO {
     public Usuario findByNombreUsuario(String nombreUsuario) throws Exception;
 
     public List<Usuario> findByNombreUsuarioContrasena(String nombreUsuario, String contrasena) throws Exception;
-
+    
+    List<Usuario> findByEmpresaAndNotNombreUsuario(int idEmpresa, String nombreUsuario) throws Exception;
+    
     public void setEntityManager(EntityManager manager) throws Exception;
 
 }
