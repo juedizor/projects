@@ -18,7 +18,6 @@ import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.business.iface.GestionPersonalIface;
-import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
