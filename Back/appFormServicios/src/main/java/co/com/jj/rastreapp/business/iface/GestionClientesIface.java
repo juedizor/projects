@@ -5,8 +5,7 @@
  */
 package co.com.jj.rastreapp.business.iface;
 
-import co.com.jj.appform.entity.Persona;
-import javax.persistence.EntityManager;
+import co.com.jj.rastreapp.dto.ClienteDTO;
 
 /**
  *
@@ -15,10 +14,9 @@ import javax.persistence.EntityManager;
 public interface GestionClientesIface {
     
     
-    void save(Persona persona) throws Exception;
+    int registrarCliente(ClienteDTO clienteDTO) throws Exception;
     
-    void merge(Persona persona) throws Exception;
+    int actualizarCliente(ClienteDTO clienteDTO) throws Exception;
     
-    EntityManager setEntityManager(EntityManager manager) throws Exception;
     
 }

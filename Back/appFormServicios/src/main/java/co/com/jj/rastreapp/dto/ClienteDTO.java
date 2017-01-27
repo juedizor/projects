@@ -5,8 +5,6 @@
  */
 package co.com.jj.rastreapp.dto;
 
-import co.com.jj.appform.entity.Persona;
-
 /**
  *
  * @author julio.izquierdo
@@ -14,7 +12,37 @@ import co.com.jj.appform.entity.Persona;
 public class ClienteDTO {
 
     private Integer idCliente;
-    private Persona idPesonaCliente;
-    private Persona idPersona;
+    private PersonaDTO persona;
+    private EmpresaDTO empresa;
+
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public PersonaDTO getPersona() {
+        return persona;
+    }
+
+    public void setPersona(PersonaDTO persona) {
+        this.persona = persona;
+    }
+
+    public EmpresaDTO getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(EmpresaDTO empresa) {
+        this.empresa = empresa;
+    }
+    
+    
+    
+    
+    
+    
 
 }

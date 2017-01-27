@@ -89,12 +89,12 @@ CREATE TABLE usuario (
 CREATE TABLE cliente(
     id_cliente integer auto_increment not null,
     id_empresa integer not null, 
-    id_pesona integer not null, 
+    id_persona integer not null, 
     primary key(id_cliente), 
     foreign key (id_empresa) references empresa(id_empresa)
     on delete cascade
     on update cascade, 
-    foreign key (id_pesona) references persona(id_persona)
+    foreign key (id_persona) references persona(id_persona)
     on delete cascade
     on update cascade
 ); 

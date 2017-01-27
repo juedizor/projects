@@ -5,12 +5,14 @@
  */
 package co.com.jj.rastreapp;
 
+import co.com.jj.appform.persistence.iface.ClienteIfaceDAO;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
+import co.com.jj.appform.persistence.impl.ClienteImplDAO;
 import co.com.jj.appform.persistence.impl.DireccionImplDAO;
 import co.com.jj.appform.persistence.impl.EmpresaImplDAO;
 import co.com.jj.appform.persistence.impl.PerfilImplDAO;
@@ -28,15 +30,15 @@ import org.springframework.context.annotation.Bean;
  * @author jeio
  */
 @SpringBootApplication
-public class MainApp  extends SpringBootServletInitializer {
+public class MainApp extends SpringBootServletInitializer {
 
-    
     private static UsuarioIfaceDAO usuarioIfaceDAO;
     private static PersonaIfaceDAO personaIfaceDAO;
     private static TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
     private static PerfilIfaceDAO perfilIfaceDAO;
     private static DireccionIfaceDAO direccionIfaceDAO;
     private static EmpresaIfaceDAO empresaIfaceDAO;
+    private static ClienteIfaceDAO clienteIfaceDAO;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -46,57 +48,65 @@ public class MainApp  extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(MainApp.class, args);
     }
-    
+
     // generacion de bean 
     @Bean
-    public UsuarioIfaceDAO getUsuarioIfaceDAO(){
-        if(usuarioIfaceDAO == null){
+    public UsuarioIfaceDAO getUsuarioIfaceDAO() {
+        if (usuarioIfaceDAO == null) {
             usuarioIfaceDAO = new UsuarioImplDAO();
         }
         return usuarioIfaceDAO;
     }
-    
+
     @Bean
-    public PersonaIfaceDAO getPersonaIfaceDAO(){
-        if(personaIfaceDAO == null){
+    public PersonaIfaceDAO getPersonaIfaceDAO() {
+        if (personaIfaceDAO == null) {
             personaIfaceDAO = new PersonaImplDAO();
         }
         return personaIfaceDAO;
     }
-    
+
     @Bean
-    public TipoDocumentoIfaceDAO getTipoDocumentoIfaceDAO(){
-        if(tipoDocumentoIfaceDAO == null){
+    public TipoDocumentoIfaceDAO getTipoDocumentoIfaceDAO() {
+        if (tipoDocumentoIfaceDAO == null) {
             tipoDocumentoIfaceDAO = new TipoDocumentoImplDAO();
         }
         return tipoDocumentoIfaceDAO;
     }
-    
+
     @Bean
-    public PerfilIfaceDAO getPerfilIfaceDAO(){
-        if(perfilIfaceDAO == null){
+    public PerfilIfaceDAO getPerfilIfaceDAO() {
+        if (perfilIfaceDAO == null) {
             perfilIfaceDAO = new PerfilImplDAO();
         }
         return perfilIfaceDAO;
     }
-    
+
     @Bean
-    public DireccionIfaceDAO getDireccionIfaceDAO(){
-        if(direccionIfaceDAO == null){
+    public DireccionIfaceDAO getDireccionIfaceDAO() {
+        if (direccionIfaceDAO == null) {
             direccionIfaceDAO = new DireccionImplDAO();
         }
-        
+
         return direccionIfaceDAO;
     }
+
     @Bean
-    public EmpresaIfaceDAO getEmpresaIfaceDAO(){
-        if(empresaIfaceDAO == null){
+    public EmpresaIfaceDAO getEmpresaIfaceDAO() {
+        if (empresaIfaceDAO == null) {
             empresaIfaceDAO = new EmpresaImplDAO();
         }
-        
+
         return empresaIfaceDAO;
     }
-    
-    
-    
+
+    @Bean
+    public ClienteIfaceDAO getClienteIfaceDAO() {
+        if (clienteIfaceDAO == null) {
+            clienteIfaceDAO = new ClienteImplDAO();
+        }
+
+        return clienteIfaceDAO;
+    }
+
 }

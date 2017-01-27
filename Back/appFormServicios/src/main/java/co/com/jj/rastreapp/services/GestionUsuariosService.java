@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
+import co.com.jj.rastreapp.excepcion.Message;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -7,6 +7,7 @@ package co.com.jj.appform.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author julio.izquierdo
+ * @author jeio
  */
 @Entity
 @Table(name = "cliente")
@@ -35,9 +36,9 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_cliente")
     private Integer idCliente;
-    @JoinColumn(name = "id_pesona", referencedColumnName = "id_persona")
-    @ManyToOne(optional = false)
-    private Persona idPesona;
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @ManyToOne(optional = false, cascade = {CascadeType.ALL})
+    private Persona idPersona;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
     @ManyToOne(optional = false)
     private Empresa idEmpresa;
@@ -57,12 +58,12 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Persona getIdPesona() {
-        return idPesona;
+    public Persona getIdPersona() {
+        return idPersona;
     }
 
-    public void setIdPesona(Persona idPesona) {
-        this.idPesona = idPesona;
+    public void setIdPersona(Persona idPersona) {
+        this.idPersona = idPersona;
     }
 
     public Empresa getIdEmpresa() {
