@@ -6,6 +6,7 @@
 package co.com.jj.appform.persistence.iface;
 
 import co.com.jj.appform.entity.Cliente;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -19,5 +20,7 @@ public interface ClienteIfaceDAO {
     void merge(Cliente cliente) throws Exception;
 
     void setEntityManager(EntityManager manager) throws Exception;
+
+    List<Cliente> findByIdEmpresa(int idEmpresa) throws Exception;
 
 }

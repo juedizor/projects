@@ -15,7 +15,8 @@ var app = angular.module('appForm', [
 	'ui.grid.autoResize', 
 	'ui.grid.pagination', 
 	'appForm.empresas', 
-	'appForm.personas'
+	'appForm.personas', 
+	'appForm.clientes'
 	]);
 
 

@@ -6,17 +6,18 @@
 package co.com.jj.rastreapp.business.iface;
 
 import co.com.jj.rastreapp.dto.ClienteDTO;
+import java.util.List;
 
 /**
  *
  * @author julio.izquierdo
  */
 public interface GestionClientesIface {
-    
-    
+
     int registrarCliente(ClienteDTO clienteDTO) throws Exception;
-    
+
     int actualizarCliente(ClienteDTO clienteDTO) throws Exception;
-    
-    
+
+    List<ClienteDTO> buscarClientesPorEmpresa(int idEmpresa) throws Exception;
+
 }

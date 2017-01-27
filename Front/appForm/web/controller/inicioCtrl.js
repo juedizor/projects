@@ -65,6 +65,7 @@ app.controller('inicioCtrl',
 
 	this.registrar = function(){
 		$("#modal_empresa").modal();
+		$rootScope.$emit('limpiarMsg', {});
 	}
 
 

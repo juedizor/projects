@@ -5,16 +5,18 @@
  */
 package co.com.jj.rastreapp.services;
 
-import co.com.jj.appform.persistence.iface.ClienteIfaceDAO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.business.iface.GestionClientesIface;
 import co.com.jj.rastreapp.dto.ClienteDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
 import co.com.jj.rastreapp.excepcion.Message;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,12 +27,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/gestionClientes")
 @CrossOrigin("*")
 public class GestionClienteService {
-    
+
     @Autowired
     GestionClientesIface gestionClientesIface;
-    
-    
-    public Message registrarCliente(@RequestBody ClienteDTO clienteDTO) throws ExceptionGenerics{
+
+    @RequestMapping(value = "/clientes", method = RequestMethod.POST)
+    public Message registrarCliente(@RequestBody ClienteDTO clienteDTO) throws ExceptionGenerics {
         int resultado;
         try {
             resultado = gestionClientesIface.registrarCliente(clienteDTO);
@@ -40,7 +42,7 @@ public class GestionClienteService {
             throw new ExceptionGenerics();
 
         }
-        
+
         Message message;
         if (resultado == Respuestas.EXISTE_REGISTRO) {
             message = new Message("" + Respuestas.EXISTE_REGISTRO, "Cliente Existe");
@@ -52,6 +54,27 @@ public class GestionClienteService {
             }
             return message;
         }
+    }
+
+    @RequestMapping(value = "/clientes/{idEmpresa}", method = RequestMethod.GET)
+    public List<ClienteDTO> getClientes(@PathVariable(value = "idEmpresa") int idEmpresa) throws ExceptionGenerics {
+        List<ClienteDTO> listClienteDTO;
+        try {
+            listClienteDTO = gestionClientesIface.buscarClientesPorEmpresa(idEmpresa);
+        } catch (Exception e) {
+            ExceptionGenerics.setCodigo(Respuestas.ERROR);
+            ExceptionGenerics.setDescripcion(e.getMessage());
+            throw new ExceptionGenerics();
+        }
+
+        if (listClienteDTO != null && !listClienteDTO.isEmpty()) {
+            return listClienteDTO;
+        } else {
+            ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
+            ExceptionGenerics.setDescripcion("No hay datos de clientes");
+            throw new ExceptionGenerics();
+        }
+
     }
 
 }

@@ -28,6 +28,7 @@ public class GestionParamsService {
 
     @Autowired
     GestionParamsIface gestionParamsIface;
+    
 
     @RequestMapping(value = "/tipoDocumentos", method = RequestMethod.GET)
     public List<TipoDocumentoDTO> getTipoDocumentoDTO() throws ExceptionGenerics {

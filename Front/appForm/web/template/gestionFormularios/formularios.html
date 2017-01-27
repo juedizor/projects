@@ -19,9 +19,9 @@
 <!-- /.box-header -->
 <div class="box-body">
 <div ui-i18n="{{lang}}">
-  <div id="grid1" ui-grid="" ui-grid-pagination 
+  <div id="grid1" ui-grid="formulariosCtrl.gridOptions" ui-grid-pagination 
   ui-grid-resize-columns ui-grid-auto-resize class="grid">
-  	<div class="watermark" ng-show="!listarUsuariosCtrl.gridOptions.data.length">No existen datos</div>
+  	<div class="watermark" ng-show="!formulariosCtrl.gridOptions.data.length">No existen datos</div>
   </div>
  </div>
 </div>

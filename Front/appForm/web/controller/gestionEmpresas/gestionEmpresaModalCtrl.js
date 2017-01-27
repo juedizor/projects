@@ -3,12 +3,14 @@ app.controller('gestionEmpresaModalCtrl',
 	'$rootScope', 
 	'PersonasResource', 
 	'UsuariosResource',
-	'$cookieStore', 	
+	'$cookieStore', 
+	'EmpresasResource', 	
 	function($scope, 
 		$rootScope, 
 		PersonasResource, 
 		UsuariosResource, 
-		$cookieStore){
+		$cookieStore, 
+		EmpresasResource){
 	
 
 	var self = this;	
@@ -19,7 +21,7 @@ app.controller('gestionEmpresaModalCtrl',
 
     this.camposNit = false;
     this.required = true;
-    this.persona = new PersonasResource();
+    this.empresa = new EmpresasResource();
     this.usuarioResource = UsuariosResource;
     this.personaResource = PersonasResource;
     this.formEmpresa = {};
@@ -31,7 +33,7 @@ app.controller('gestionEmpresaModalCtrl',
 	this.classMsgTransaccion = "alert-success-custom"; // clase css a aplicar en el mensaje, en la transaccion
 
     this.guardar = function(){
-		var response = self.persona.$save();
+		var response = self.empresa.$save();
     	response.then(function(success){
     		self.mostrarMsgTransaccion = true;
 			self.msgTransaccion = success.description;
@@ -45,15 +47,20 @@ app.controller('gestionEmpresaModalCtrl',
 		self.contrasena2 = "";
     }
 
+    $rootScope.$on('limpiarMsg', function(event, data){
+    	self.mostrarMsgTransaccion = false;
+		self.msgTransaccion = "";
+    });
+
     $rootScope.$on('changeTipoDoc', function(event, data){
     	if(!angular.isUndefined(data.value)){
 	    	if(data.value.codigo == 'NIT'){
 	    		self.camposNit = true;
 	    		self.required = false;
-	    		self.persona.nombre1 = "";
-	    		self.persona.nombre2 = "";
-	    		self.persona.apellido1 = "";
-	    		self.persona.apellido2 = "";
+	    		self.empresa.persona.nombre1 = "";
+	    		self.empresa.persona.nombre2 = "";
+	    		self.empresa.persona.apellido1 = "";
+	    		self.empresa.persona.apellido2 = "";
 	    	}else{
     			self.camposNit = false;
 	    		self.required = true;

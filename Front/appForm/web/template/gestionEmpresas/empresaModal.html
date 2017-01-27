@@ -23,7 +23,7 @@
                       <dir-tipo-documentos 
                       obligatorio = "required" 
                       docs = "modalEmpCtrl.tiposDoc" 
-                      tipos = "modalEmpCtrl.persona.tipoDocumento">
+                      tipos = "modalEmpCtrl.empresa.persona.tipoDocumento">
                       </dir-tipo-documentos>
                     </div>
                   </div>
@@ -32,17 +32,17 @@
                       <label>Número de Documento</label>
                       <input class="form-control" 
                       type="number" 
-                      ng-model="modalEmpCtrl.persona.numeroDocumento"
+                      ng-model="modalEmpCtrl.empresa.persona.numeroDocumento"
                       placeholder="Número de Documento"
                       type="text"
                       name = "numeroDocumento" 
                       required = ""
                       validar-campo-resource
-                      valueinput = "modalEmpCtrl.persona.numeroDocumento"
+                      valueinput = "modalEmpCtrl.empresa.persona.numeroDocumento"
                       valueid = "'numDocError'"
                       method = "modalEmpCtrl.personaResource.getPersona"
-                      params = "{tipoDoc: modalEmpCtrl.persona.tipoDocumento.idTipoDocumento, 
-                      numeroDoc: modalEmpCtrl.persona.numeroDocumento}"
+                      params = "{tipoDoc: modalEmpCtrl.empresa.persona.tipoDocumento.idTipoDocumento, 
+                      numeroDoc: modalEmpCtrl.empresa.persona.numeroDocumento}"
                       idmsgerr = "'errorNumDoc'"
                       form = "modalEmpCtrl.formEmpresa"
                       valueant = "modalEmpCtrl.numDocumento" 
@@ -56,7 +56,7 @@
                     <div id = "fieldNombre1" class="form-group">
                       <label>Primer Nombre</label>
                       <input class="form-control" 
-                      ng-model="modalEmpCtrl.persona.nombre1" 
+                      ng-model="modalEmpCtrl.empresa.persona.nombre1" 
                       placeholder="Primer Nombre" 
                       type="text" 
                       name = "nombre1" 
@@ -71,7 +71,7 @@
                         <div id = "fieldNombreEmpresa" class="form-group">
                           <label>Nombre Empresa</label>
                           <input class="form-control" 
-                          ng-model="modalEmpCtrl.persona.empresa.nombreEmpresa" 
+                          ng-model="modalEmpCtrl.empresa.nombreEmpresa" 
                           placeholder="Nombre de su Empresa" 
                           type="text" 
                           name = "nombreEmpresa" 
@@ -86,7 +86,7 @@
                     <div id = "fieldNombre2" class="form-group">
                       <label>Segundo Nombre</label>
                       <input class="form-control" 
-                      ng-model="modalEmpCtrl.persona.nombre2" 
+                      ng-model="modalEmpCtrl.empresa.persona.nombre2" 
                       placeholder="Segundo Nombre" 
                       type="text" 
                       name = "nombre2" 
@@ -97,7 +97,7 @@
                     <div id= "fieldApellido1" class="form-group">
                       <label>Primer Apellido</label>
                       <input class="form-control" 
-                      ng-model="modalEmpCtrl.persona.apellido1" 
+                      ng-model="modalEmpCtrl.empresa.persona.apellido1" 
                       placeholder="Primer Apellido" 
                       type="text" 
                       name = "apellido1" 
@@ -110,7 +110,7 @@
                     <div  id = "fieldApellido2" class="form-group">
                       <label>Segundo Apellido</label>
                       <input class="form-control" 
-                      ng-model="modalEmpCtrl.persona.apellido2" 
+                      ng-model="modalEmpCtrl.empresa.persona.apellido2" 
                       placeholder="Segundo Apellido" 
                       type="text" 
                       name = "apellido2" 
@@ -124,7 +124,7 @@
                     <div id = "fieldEmail" class="form-group">
                       <label>Correo Electronico</label>
                       <input class="form-control" 
-                      ng-model="modalEmpCtrl.persona.email" 
+                      ng-model="modalEmpCtrl.empresa.persona.email" 
                       placeholder="Correo Electronico" 
                       type="email" 
                       name = "email" 
@@ -148,16 +148,16 @@
                     <div id = "userError" class = "form-group">
                       <label>Usuario</label>
                       <input class="form-control" 
-                      ng-model="modalEmpCtrl.persona.usuario.nombreUsuario"
+                      ng-model="modalEmpCtrl.empresa.persona.usuario.nombreUsuario"
                       placeholder="Nombre de Usuario" 
                       type="text" 
                       name = "nombreUsuario" 
                       required = "required" 
                       validar-campo-resource
-                      valueinput = "modalEmpCtrl.persona.usuario.nombreUsuario"
+                      valueinput = "modalEmpCtrl.empresa.persona.usuario.nombreUsuario"
                       valueid = "'userError'"
                       method = "modalEmpCtrl.usuarioResource.getUser"
-                      params = "{nombreUsuario: modalEmpCtrl.persona.usuario.nombreUsuario}"
+                      params = "{nombreUsuario: modalEmpCtrl.empresa.persona.usuario.nombreUsuario}"
                       idmsgerr = "'errorUser'"
                       form = "modalEmpCtrl.formEmpresa" 
                       valueant = "modalEmpCtrl.nombreUsuario" 
@@ -176,7 +176,7 @@
                           <label>Dirección</label>
                           <input id = "dir" 
                           class="form-control" 
-                          ng-model="modalEmpCtrl.persona.direccion.nombreDireccion" 
+                          ng-model="modalEmpCtrl.empresa.persona.direccion.nombreDireccion" 
                           placeholder="Ingrese la dirección" 
                           type="text" 
                           name = "direccion" 
@@ -188,7 +188,7 @@
                         <label>Contraseña</label>
                         <input id = "pass1" 
                         class="form-control" 
-                        ng-model="modalEmpCtrl.persona.usuario.contrasena" 
+                        ng-model="modalEmpCtrl.empresa.persona.usuario.contrasena" 
                         placeholder="Digite una Contraseña" type="password" 
                         name = "contrasena1"
                         ng-required = "modalEmpCtrl.required" 
@@ -217,7 +217,7 @@
                         ng-required="modalEmpCtrl.required" 
                         validar-campos-iguales 
                         form = "modalEmpCtrl.formEmpresa" 
-                        campo = "modalEmpCtrl.persona.usuario.contrasena"
+                        campo = "modalEmpCtrl.empresa.persona.usuario.contrasena"
                         namefield = "modalEmpCtrl.formEmpresa.contrasena2" 
                         valueid = "'requiredPass2'", 
                         msgerror = "'Contraseñas no conciden'" 
@@ -235,7 +235,7 @@
                         <textarea class="form-control" 
                         id="textDescripcionEmpresa" 
                         name="descripcionEmpresa" 
-                        ng-model = "modalEmpCtrl.persona.empresa.descripcionEmpresa"
+                        ng-model = "modalEmpCtrl.empresa.descripcionEmpresa"
                         required="required">
                         </textarea>
                       </div>

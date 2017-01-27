@@ -1,0 +1,206 @@
+<div ng-controller = "gestionModalClienteCtrl as modaleClientCtrl" class="modal fade" id="moda_clientes" data-keyboard=”false” data-backdrop>
+  <form name="modaleClientCtrl.formClientes" ng-submit = "modaleClientCtrl.guardar()" novalidate="novalidate">
+      <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>-->
+            <h4 class="modal-title">Cliente - Registro</h4>
+          </div>
+
+
+          <div class="modal-body" >
+          
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div id = "fieldTipoDoc" class="form-group" >
+                      <label>Tipo de Documento</label>
+                      <dir-tipo-documentos 
+                      obligatorio = "required" 
+                      docs = "modaleClientCtrl.tiposDoc" 
+                      tipos = "modaleClientCtrl.cliente.persona.tipoDocumento">
+                      </dir-tipo-documentos>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group" id = "numDocError">
+                      <label>Número de Documento</label>
+                      <input class="form-control" 
+                      type="number" 
+                      ng-model="modaleClientCtrl.cliente.persona.numeroDocumento"
+                      placeholder="Número de Documento"
+                      type="text"
+                      name = "numeroDocumento" 
+                      required = ""
+                      validar-campo-resource
+                      valueinput = "modaleClientCtrl.cliente.persona.numeroDocumento"
+                      valueid = "'numDocError'"
+                      method = "modaleClientCtrl.personaResource.getPersona"
+                      params = "{tipoDoc: modaleClientCtrl.cliente.persona.tipoDocumento.idTipoDocumento, 
+                      numeroDoc: modaleClientCtrl.cliente.persona.numeroDocumento}"
+                      idmsgerr = "'errorNumDoc'"
+                      form = "modaleClientCtrl.formClientes"
+                      valueant = "modaleClientCtrl.numDocumento" 
+                      msgerror = "'Persona Existe en el Sistema'" 
+                      namefield = "modaleClientCtrl.formClientes.numeroDocumento"/>
+                      <div id = "errorNumDoc" style="display: none" 
+                     class="help-block has-error error-msg"></div> 
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id = "fieldNombre1" class="form-group">
+                      <label>Primer Nombre</label>
+                      <input class="form-control" 
+                      ng-model="modaleClientCtrl.cliente.persona.nombre1" 
+                      placeholder="Primer Nombre" 
+                      type="text" 
+                      name = "nombre1" 
+                      required="required" 
+                      maxlength="100" />
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div id = "fieldNombre2" class="form-group">
+                      <label>Segundo Nombre</label>
+                      <input class="form-control" 
+                      ng-model="modaleClientCtrl.cliente.persona.nombre2" 
+                      placeholder="Segundo Nombre" 
+                      type="text" 
+                      name = "nombre2" 
+                      maxlength="100"/>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id= "fieldApellido1" class="form-group">
+                      <label>Primer Apellido</label>
+                      <input class="form-control" 
+                      ng-model="modaleClientCtrl.cliente.persona.apellido1" 
+                      placeholder="Primer Apellido" 
+                      type="text" 
+                      name = "apellido1" 
+                      required = "required" 
+                      maxlength="100" 
+                      required="required" />
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div  id = "fieldApellido2" class="form-group">
+                      <label>Segundo Apellido</label>
+                      <input class="form-control" 
+                      ng-model="modaleClientCtrl.cliente.persona.apellido2" 
+                      placeholder="Segundo Apellido" 
+                      type="text" 
+                      name = "apellido2" 
+                      maxlength="100" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id = "fieldNombreEmpresa" class="form-group">
+                          <label>Nombre Empresa</label>
+                          <input class="form-control" 
+                          ng-model="modaleClientCtrl.cliente.persona.empresa.nombreEmpresa" 
+                          placeholder="Nombre de su Empresa" 
+                          type="text" 
+                          name = "nombreEmpresa" 
+                          maxlength="100"
+                          required="required" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-8">
+                    <div id = "fieldEmail" class="form-group">
+                      <label>Correo Electronico</label>
+                      <input class="form-control" 
+                      ng-model="modaleClientCtrl.cliente.persona.email" 
+                      placeholder="Correo Electronico" 
+                      type="email" 
+                      name = "email" 
+                      required = "required" 
+                      maxlength="100" 
+                      validar-campo-resource
+                      valueinput = "modaleClientCtrl.cliente.persona.email"
+                      valueid = "'fieldEmail'"
+                      method = "modaleClientCtrl.personaResource.getPersonaEmail"
+                      params = "{email: modaleClientCtrl.cliente.persona.email}"
+                      idmsgerr = "'errorEmail'"
+                      form = "modaleClientCtrl.formClientes"
+                      valueant = "modaleClientCtrl.email" 
+                      msgerror = "'El email ingresado ya existe'" 
+                      namefield = "modaleClientCtrl.formClientes.email"/>
+                      <div id = "errorEmail" style="display: none" 
+                     class="help-block has-error error-msg"></div> 
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                      <div id = "direccion" class="form-group">
+                          <label>Dirección</label>
+                          <input id = "dir" 
+                          class="form-control" 
+                          ng-model="modaleClientCtrl.cliente.persona.direccion.nombreDireccion" 
+                          placeholder="Ingrese la dirección" 
+                          type="text" 
+                          name = "direccion" 
+                          required="required"/>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12">
+                      <div id = "descripcionEmpresa" class="form-group">
+                        <label>Descripción de la empresa de su cliente</label>  
+                        <textarea class="form-control" 
+                        id="textDescripcionEmpresa" 
+                        name="descripcionEmpresa" 
+                        ng-model = "modaleClientCtrl.cliente.persona.empresa.descripcionEmpresa"
+                        required="required" >
+                        </textarea>
+                      </div>
+                  </div> 
+                </div>
+              </div>
+              <!-- /.box-body -->
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <div ng-show = "modaleClientCtrl.mostrarMsgTransaccion" class="row">
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <div class="alert alert-success-custom" ng-class= "modaleClientCtrl.classMsgTransaccion" role="alert">
+                      {{modaleClientCtrl.msgTransaccion}}
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "modaleClientCtrl.closeModal()">Close</button>
+            
+            <button type="submit" ng-disabled = "modaleClientCtrl.formClientes.$invalid || modaleClientCtrl.formClientes.numeroDocumento.$invalid || modaleClientCtrl.formClientes.email.$invalid" 
+            class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+  <!-- /.modal-dialog -->
+  <!--<pre>{{modaleClientCtrl.formClientes | json}}</pre>-->
+  </form>
+</div>
+
