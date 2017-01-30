@@ -152,7 +152,7 @@
                     </div>
                   </div>
                 </div>
-
+				
                 <div class="row">
                   <div class="col-xs-4">
                     <div id = "fieldPerfil"  class="form-group">
@@ -171,35 +171,63 @@
                           type="text" 
                           name = "direccion" 
                           ng-required="required" />
-                         <!-- <div id = "errorPass2" style="display: none" 
-                           class="help-block has-error error-msg"></div>-->
                       </div>
                   </div>
-
-                  <div class="col-xs-4" ng-show = "gestionUser.registro">
-                      <div id = "requiredPass1" class="form-group">
-                          <label>Contraseña</label>
-                          <input id = "pass1" 
-                          class="form-control" 
-                          ng-model="gestionUser.usuario.contrasena" 
-                          placeholder="Digite una Contraseña" type="password" 
-                          name = "contrasena1"
-                          ng-required = "gestionUser.required" 
-                          maxlength="100" 
-                          validar-campos-iguales 
-                          form = "gestionUser.formUsuario" 
-                          campo = "gestionUser.password2"
-                          namefield = "gestionUser.formUsuario.contrasena1" 
-                          valueid = "'requiredPass1'", 
-                          msgerror = "'Contraseñas no conciden'" 
-                          idmsgerr = "'errorPass1'"/>
-                         <div id = "errorPass1" style="display: none" 
-                           class="help-block has-error error-msg"></div>
+                  <div class="col-xs-4">
+                      <div id = "pais" class="form-group">
+                          <label>Pais</label>
+                          <pais-directive 
+                          pais = "gestionUser.usuario.persona.pais"
+                          obligatorio = "required">
+                          </pais-directive>
                       </div>
                   </div>
                 </div>
 
                 <div class = "row">
+                      <div class="col-xs-4">
+                          <div id = "departamento" class="form-group">
+                            <label>Departamento</label>
+                            <departamento-directive 
+                            departamento = "gestionUser.usuario.persona.departamento"
+                            obligatorio = "required" 
+                            name = "departamento" >
+                            </departamento-directive>
+                          </div>
+                      </div>
+                      <div class="col-xs-4">
+                          <div id = "ciudad" class="form-group">
+                            <label>Ciudad</label>
+                            <ciudad-directive 
+                            ciudad = "gestionUser.usuario.persona.ciudad"
+                            obligatorio = "required">
+                            </ciudad-directive>
+                          </div>
+                      </div>
+                      <div class="col-xs-4" ng-show = "gestionUser.registro">
+                        <div id = "requiredPass1" class="form-group">
+                            <label>Contraseña</label>
+                            <input id = "pass1" 
+                            class="form-control" 
+                            ng-model="gestionUser.usuario.contrasena" 
+                            placeholder="Digite una Contraseña" type="password" 
+                            name = "contrasena1"
+                            ng-required = "gestionUser.required" 
+                            maxlength="100" 
+                            validar-campos-iguales 
+                            form = "gestionUser.formUsuario" 
+                            campo = "gestionUser.password2"
+                            namefield = "gestionUser.formUsuario.contrasena1" 
+                            valueid = "'requiredPass1'", 
+                            msgerror = "'Contraseñas no conciden'" 
+                            idmsgerr = "'errorPass1'"/>
+                           <div id = "errorPass1" style="display: none" 
+                             class="help-block has-error error-msg"></div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xs-4">
                         <div id = "requiredPass2" class="form-group" ng-show = "gestionUser.registro">
                             <label>Repetir Contraseña</label>
@@ -220,12 +248,6 @@
                            <div id = "errorPass2" style="display: none" 
                              class="help-block has-error error-msg"></div>
                         </div>
-                    </div>
-                    <div class="col-xs-4">
-                      
-                    </div>
-                    <div class="col-xs-4">
-                      
                     </div>
                 </div>
 

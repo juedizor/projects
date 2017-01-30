@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS usuario_sede;
 DROP TABLE IF EXISTS cliente;
 DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS empresa_sede;
@@ -7,6 +8,9 @@ DROP TABLE IF EXISTS telefono;
 DROP TABLE IF EXISTS persona;
 DROP TABLE IF EXISTS perfil;
 DROP TABLE IF EXISTS tipo_documento;
+DROP TABLE IF EXISTS ciudad;
+DROP TABLE IF EXISTS departamento;
+DROP TABLE IF EXISTS pais;
 
 
 CREATE TABLE pais(
@@ -72,7 +76,7 @@ CREATE TABLE persona(
     foreign key(id_tipo_documento) references tipo_documento (id_tipo_documento)
     on update cascade
     on delete cascade,
-    foreign key(id_ciudad) references ciudad(id_ciudad), 
+    foreign key(id_ciudad) references ciudad(id_ciudad)
     on delete cascade
     on update cascade,
     unique (id_tipo_documento, numero_documento)
@@ -169,7 +173,7 @@ CREATE TABLE usuario_sede(
     id_usuario_sede integer auto_increment not null, 
     id_usuario integer not null, 
     id_empresa_sede integer not null,
-    primary key(id_usuario_cliente), 
+    primary key(id_usuario_sede), 
     foreign key(id_usuario) references usuario(id_usuario)
     on delete cascade
     on update cascade, 

@@ -16,7 +16,10 @@ var app = angular.module('appForm', [
 	'ui.grid.pagination', 
 	'appForm.empresas', 
 	'appForm.personas', 
-	'appForm.clientes'
+	'appForm.clientes', 
+	'appForm.paises', 
+	'appForm.departamentos', 
+	'appForm.ciudades'
 	]);
 
 

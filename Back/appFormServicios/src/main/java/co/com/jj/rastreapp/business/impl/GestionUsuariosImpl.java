@@ -6,6 +6,7 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+import co.com.jj.appform.entity.Ciudad;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
@@ -24,8 +25,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
+import co.com.jj.rastreapp.dto.CiudadDTO;
+import co.com.jj.rastreapp.dto.DepartamentoDTO;
 import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.EmpresaDTO;
+import co.com.jj.rastreapp.dto.PaisDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
@@ -134,6 +138,12 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
                 personaDTO = ENTITY_UTILS.getPersonaDTO(usuario.getIdPersona());
                 direccionDTO = ENTITY_UTILS.getDireccionDTO(usuario.getIdPersona().getDireccionList().get(usuario.getIdPersona().getDireccionList().size() - 1));
                 tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(usuario.getIdPersona().getIdTipoDocumento());
+                PaisDTO paisDTO = ENTITY_UTILS.getPaisDTO(usuario.getIdPersona().getIdCiudad().getIdDepartamento().getIdPais());
+                DepartamentoDTO departamentoDTO = ENTITY_UTILS.getDepartamentoDTO(usuario.getIdPersona().getIdCiudad().getIdDepartamento());
+                departamentoDTO.setPais(paisDTO);
+                CiudadDTO ciudadDTO = ENTITY_UTILS.getCiudadDTO(usuario.getIdPersona().getIdCiudad());
+                ciudadDTO.setDepartamento(departamentoDTO);
+                personaDTO.setCiudad(ciudadDTO);
                 personaDTO.setTipoDocumento(tipoDocumentoDTO);
                 personaDTO.setDireccion(direccionDTO);
                 usuarioDTO.setPersona(personaDTO);
@@ -175,8 +185,10 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
                 direccion.setFechaInicial(fechaReg);
                 // obtiene los datos del tipo de documento seleccionado
                 TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(usuarioDTO.getPersona().getTipoDocumento());
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(usuarioDTO.getPersona().getCiudad());
                 // obtiene los datos de la persona
                 Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
+                persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);
                 persona.setFechaRegistro(fechaReg);
                 // obtiene los datos del usuario
@@ -228,7 +240,9 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
                 // obtiene los datos del tipo de documento seleccionado
                 TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(usuarioDTO.getPersona().getTipoDocumento());
                 // obtiene los datos de la persona
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(usuarioDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
+                persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);
                 persona.setFechaModificacion(fechaActual);
                 // obtiene los datos del usuario

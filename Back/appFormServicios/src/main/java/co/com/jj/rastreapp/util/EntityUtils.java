@@ -5,14 +5,20 @@
  */
 package co.com.jj.rastreapp.util;
 
+import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.entity.Departamento;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
+import co.com.jj.appform.entity.Pais;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.entity.TipoDocumento;
 import co.com.jj.appform.entity.Usuario;
+import co.com.jj.rastreapp.dto.CiudadDTO;
+import co.com.jj.rastreapp.dto.DepartamentoDTO;
 import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.EmpresaDTO;
+import co.com.jj.rastreapp.dto.PaisDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
@@ -173,5 +179,39 @@ public class EntityUtils {
         empresaDTO.setDescripcionEmpresa(empresa.getDescripcionEmpresa());
         empresaDTO.setNombreEmpresa(empresa.getNombreEmpresa());
         return empresaDTO;
+    }
+
+    public PaisDTO getPaisDTO(Pais pais) {
+        PaisDTO paisDTO = new PaisDTO();
+        paisDTO.setCodigoPais(pais.getCodigoPais());
+        paisDTO.setIdPais(pais.getIdPais());
+        paisDTO.setNombrePais(pais.getNombrePais());
+        return paisDTO;
+    }
+
+    public DepartamentoDTO getDepartamentoDTO(Departamento departamento) {
+        DepartamentoDTO departamentoDTO = new DepartamentoDTO();
+        departamentoDTO.setCodigoDepartamento(departamento.getCodigoDepartamento());
+        departamentoDTO.setIdDepartamento(departamento.getIdDepartamento());
+        departamentoDTO.setNombreDepartamento(departamento.getNombreDepartamento());
+        return departamentoDTO;
+    }
+
+    public CiudadDTO getCiudadDTO(Ciudad ciudad) {
+        CiudadDTO ciudadDTO = new CiudadDTO();
+        ciudadDTO.setCodigoCiudad(ciudad.getCodigoCiudad());
+        ciudadDTO.setIdCiudad(ciudad.getIdCiudad());
+        ciudadDTO.setNombreCiudad(ciudad.getNombreCiudad());
+        return ciudadDTO;
+    }
+
+    public Ciudad getCiudad(CiudadDTO ciudadDTO) {
+        Ciudad ciudad = new Ciudad();
+        if (ciudadDTO.getIdCiudad() != null) {
+            ciudad.setIdCiudad(ciudadDTO.getIdCiudad());
+        }
+        ciudad.setCodigoCiudad(ciudadDTO.getCodigoCiudad());
+        ciudad.setNombreCiudad(ciudadDTO.getNombreCiudad());
+        return ciudad;
     }
 }

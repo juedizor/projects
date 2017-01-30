@@ -102,6 +102,7 @@ app.controller('gestionUsuariosCtrl',
 
 		// funcion para el cargue de informacion de usuario cuando se realiza un proceso de edicio
 		this.getDataUser = function(user) {
+			//console.log(user);
 			self.cargarTiposDoc($scope.tiposDoc);
 			self.mostrarMsgTransaccion = false;
 			self.msgTransaccion = "";
@@ -117,6 +118,10 @@ app.controller('gestionUsuariosCtrl',
 				self.required = false;
 				self.usuario = new UsuariosResource(user);
 				angular.copy(self.usuario.user, self.usuario);
+				self.usuario.persona.pais = {};
+				angular.copy(self.usuario.persona.ciudad.departamento.pais, self.usuario.persona.pais);
+				self.usuario.persona.departamento = {};
+				angular.copy(self.usuario.persona.ciudad.departamento, self.usuario.persona.departamento);
 				self.numDocumento = self.usuario.persona.numeroDocumento;
 				self.nombreUsuario = self.usuario.nombreUsuario;
 				self.email = self.usuario.persona.email;
@@ -132,6 +137,9 @@ app.controller('gestionUsuariosCtrl',
 				angular.element("#fieldNombre2").addClass(self.styleFormGroup);
 				angular.element("#fieldTipoDoc").addClass(self.styleFormGroup);
 				angular.element("#direccion").addClass(self.styleFormGroup);
+				angular.element("#pais").addClass(self.styleFormGroup);
+				angular.element("#departamento").addClass(self.styleFormGroup);
+				angular.element("#ciudad").addClass(self.styleFormGroup);
 			}else{
 				self.required = true;
 				self.numDocumento = "";

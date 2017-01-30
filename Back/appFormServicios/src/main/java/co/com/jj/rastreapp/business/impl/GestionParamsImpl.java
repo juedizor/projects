@@ -6,17 +6,25 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.entity.Departamento;
+import co.com.jj.appform.entity.Pais;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
+import co.com.jj.appform.persistence.iface.DepartamentoIfaceDAO;
+import co.com.jj.appform.persistence.iface.PaisIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.rastreapp.business.iface.GestionParamsIface;
+import co.com.jj.rastreapp.dto.CiudadDTO;
+import co.com.jj.rastreapp.dto.DepartamentoDTO;
+import co.com.jj.rastreapp.dto.PaisDTO;
 import co.com.jj.rastreapp.dto.PerfilDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
 import co.com.jj.rastreapp.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +39,13 @@ public class GestionParamsImpl implements GestionParamsIface {
     TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
     @Autowired
     PerfilIfaceDAO perfilIfaceDAO;
-    
+    @Autowired
+    PaisIfaceDAO paisIfaceDAO;
+    @Autowired
+    DepartamentoIfaceDAO departamentoIfaceDAO;
+    @Autowired
+    CiudadIfaceDAO ciudadIfaceDAO;
+
     private static final EntityUtils ENTITY_UTILS = EntityUtils.getInstance();
     private PersistenceApp persistenceApp;
 
@@ -67,5 +81,53 @@ public class GestionParamsImpl implements GestionParamsIface {
         }
 
         return listPerfilDTO;
+    }
+
+    @Override
+    public List<PaisDTO> obtenerPaises() throws Exception {
+        persistenceApp = new PersistenceApp();
+        paisIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
+        List<Pais> listPais = paisIfaceDAO.findAll();
+        List<PaisDTO> listPaisDTO = new ArrayList();
+        if (listPais != null && !listPais.isEmpty()) {
+            for (Pais pais : listPais) {
+                PaisDTO paisDTO = ENTITY_UTILS.getPaisDTO(pais);
+                listPaisDTO.add(paisDTO);
+            }
+        }
+        return listPaisDTO;
+
+    }
+
+    @Override
+    public List<DepartamentoDTO> obtenerDepartamentoPais(int idPais) throws Exception {
+        persistenceApp = new PersistenceApp();
+        departamentoIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
+        List<Departamento> listDepartamentos = departamentoIfaceDAO.findByIdPais(idPais);
+        List<DepartamentoDTO> listDepartamentoDTOs = new ArrayList<>();
+        if (listDepartamentos != null && !listDepartamentos.isEmpty()) {
+            for (Departamento departamento : listDepartamentos) {
+                DepartamentoDTO departamentoDTO = ENTITY_UTILS.getDepartamentoDTO(departamento);
+                listDepartamentoDTOs.add(departamentoDTO);
+            }
+        }
+
+        return listDepartamentoDTOs;
+    }
+
+    @Override
+    public List<CiudadDTO> obtenerCiudadDepartamento(int idDepartamento) throws Exception {
+        persistenceApp = new PersistenceApp();
+        ciudadIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
+        List<Ciudad> listCiudad = ciudadIfaceDAO.findByIdDepartamento(idDepartamento);
+        List<CiudadDTO> listCiudadDTO = new ArrayList();
+        if (listCiudad != null && !listCiudad.isEmpty()) {
+            for (Ciudad ciudad : listCiudad) {
+                CiudadDTO ciudadDTO = ENTITY_UTILS.getCiudadDTO(ciudad);
+                listCiudadDTO.add(ciudadDTO);
+            }
+        }
+
+        return listCiudadDTO;
     }
 }

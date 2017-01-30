@@ -94,6 +94,10 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_tipo_documento", referencedColumnName = "id_tipo_documento")
     @ManyToOne(optional = false)
     private TipoDocumento idTipoDocumento;
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad")
+    @ManyToOne (optional = false)
+    private Ciudad idCiudad;
+    
 
     public Persona() {
     }
@@ -246,5 +250,16 @@ public class Persona implements Serializable {
     public void setClienteList(List<Cliente> clienteList) {
         this.clienteList = clienteList;
     }
+
+    public Ciudad getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(Ciudad idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+    
+    
+    
     
 }

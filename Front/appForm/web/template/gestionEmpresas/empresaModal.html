@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-8">
+                  <div class="col-xs-4">
                     <div id = "fieldEmail" class="form-group">
                       <label>Correo Electronico</label>
                       <input class="form-control" 
@@ -168,11 +168,8 @@
                      class="help-block has-error error-msg"></div>
                     </div>
                   </div>
-                </div>
-
-                <div class="row">
                   <div class="col-xs-4">
-                    <div id = "direccion" class="form-group">
+                      <div id = "direccion" class="form-group">
                           <label>Dirección</label>
                           <input id = "dir" 
                           class="form-control" 
@@ -183,8 +180,43 @@
                           required = "required"/>
                       </div>
                   </div>
+                </div>
+
+                <div class="row">
                   <div class="col-xs-4">
-                    <div id = "requiredPass1" class="form-group">
+                    <div  class = "form-group">
+                      <label>Pais</label>
+                      <pais-directive 
+                      pais = "modalEmpCtrl.empresa.persona.pais"
+                      obligatorio = "required">
+                      </pais-directive>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                      <div class="form-group">
+                          <label>Departamento</label>
+                          <departamento-directive 
+                          departamento = "modalEmpCtrl.empresa.persona.pais.departamento"
+                          obligatorio = "required">
+                          </departamento-directive>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-4">
+                      <div  class = "form-group">
+                          <label>Ciudad</label>
+                          <ciudad-directive 
+                          ciudad = "modalEmpCtrl.empresa.persona.ciudad"
+                          obligatorio = "required">
+                          </ciudad-directive>
+                      </div>
+                  </div>
+                  
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6">
+                      <div id = "requiredPass1" class="form-group">
                         <label>Contraseña</label>
                         <input id = "pass1" 
                         class="form-control" 
@@ -204,9 +236,8 @@
                          class="help-block has-error error-msg"></div>
                     </div>
                   </div>
-
-                  <div class="col-xs-4">
-                    <div id = "requiredPass2" class="form-group">
+                  <div class="col-xs-6">
+                      <div id = "requiredPass2" class="form-group">
                         <label>Repetir Contraseña</label>
                         <input id = "pass2" 
                         class="form-control" 
@@ -226,8 +257,9 @@
                          class="help-block has-error error-msg"></div>
                     </div>
                   </div>
-                  
+
                 </div>
+
                 <div class="row">
                   <div class="col-xs-12">
                       <div id = "descripcionEmpresa" class="form-group">

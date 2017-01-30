@@ -27,6 +27,7 @@ public class PersonaDTO {
     private TipoDocumentoDTO tipoDocumento;
     private DireccionDTO direccion;
     private EmpresaDTO empresa;
+    private CiudadDTO ciudad;
 
     public PersonaDTO() {
     }
@@ -150,6 +151,12 @@ public class PersonaDTO {
         this.empresa = empresa;
     }
 
-    
+    public CiudadDTO getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(CiudadDTO ciudad) {
+        this.ciudad = ciudad;
+    }
     
 }

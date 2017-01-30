@@ -22,6 +22,11 @@ app.controller('gestionEmpresaModalCtrl',
     this.camposNit = false;
     this.required = true;
     this.empresa = new EmpresasResource();
+    self.empresa.persona = {};
+    self.empresa.persona.tipoDocumento = {};
+    self.empresa.persona.pais = {};
+    self.empresa.persona.pais.departamento = {};
+    self.empresa.persona.ciudad = {};
     this.usuarioResource = UsuariosResource;
     this.personaResource = PersonasResource;
     this.formEmpresa = {};
@@ -31,6 +36,8 @@ app.controller('gestionEmpresaModalCtrl',
     this.mostrarMsgTransaccion = false; // muestra el mensaje de finalizacion de la transaccion al momento de guardar
 	this.msgTransaccion = ""; // texto del mensaje de la transaccion
 	this.classMsgTransaccion = "alert-success-custom"; // clase css a aplicar en el mensaje, en la transaccion
+
+
 
     this.guardar = function(){
 		var response = self.empresa.$save();
@@ -50,6 +57,12 @@ app.controller('gestionEmpresaModalCtrl',
     $rootScope.$on('limpiarMsg', function(event, data){
     	self.mostrarMsgTransaccion = false;
 		self.msgTransaccion = "";
+		self.formEmpresa.$setPristine();
+		self.formEmpresa.$setUntouched();
+		self.contrasena2 = "";
+		self.empresa.persona.tipoDocumento = {};
+		self.empresa.persona.pais = {};
+		self.empresa.persona.ciudad = {};
     });
 
     $rootScope.$on('changeTipoDoc', function(event, data){

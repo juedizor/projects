@@ -6,6 +6,7 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+import co.com.jj.appform.entity.Ciudad;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
@@ -71,8 +72,10 @@ public class GestionEmpresasImpl implements GestionEmpresasIface {
                 Empresa empresa = ENTITY_UTILS.getEmpresa(empresaDTO);
                 TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(empresaDTO.getPersona().getTipoDocumento());
                 Perfil perfil = perfilIfaceDAO.findByNombre("ADMINISTRADOR");
-
+                
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(empresaDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(empresaDTO.getPersona());
+                persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);
                 persona.setFechaRegistro(fechaReg);
                 empresa.setIdPersona(persona);

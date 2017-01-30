@@ -5,16 +5,22 @@
  */
 package co.com.jj.rastreapp;
 
+import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
 import co.com.jj.appform.persistence.iface.ClienteIfaceDAO;
+import co.com.jj.appform.persistence.iface.DepartamentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
+import co.com.jj.appform.persistence.iface.PaisIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
+import co.com.jj.appform.persistence.impl.CiudadImplDAO;
 import co.com.jj.appform.persistence.impl.ClienteImplDAO;
+import co.com.jj.appform.persistence.impl.DepartamentoImplDAO;
 import co.com.jj.appform.persistence.impl.DireccionImplDAO;
 import co.com.jj.appform.persistence.impl.EmpresaImplDAO;
+import co.com.jj.appform.persistence.impl.PaisImplDAO;
 import co.com.jj.appform.persistence.impl.PerfilImplDAO;
 import co.com.jj.appform.persistence.impl.PersonaImplDAO;
 import co.com.jj.appform.persistence.impl.TipoDocumentoImplDAO;
@@ -39,6 +45,9 @@ public class MainApp extends SpringBootServletInitializer {
     private static DireccionIfaceDAO direccionIfaceDAO;
     private static EmpresaIfaceDAO empresaIfaceDAO;
     private static ClienteIfaceDAO clienteIfaceDAO;
+    private static PaisIfaceDAO paisIfaceDAO;
+    private static DepartamentoIfaceDAO departamentoIfaceDAO;
+    private static CiudadIfaceDAO ciudadIfaceDAO;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -107,6 +116,33 @@ public class MainApp extends SpringBootServletInitializer {
         }
 
         return clienteIfaceDAO;
+    }
+
+    @Bean
+    public PaisIfaceDAO getPaisIfaceDAO() {
+        if (paisIfaceDAO == null) {
+            paisIfaceDAO = new PaisImplDAO();
+        }
+
+        return paisIfaceDAO;
+    }
+
+    @Bean
+    public DepartamentoIfaceDAO getDepartamentoIfaceDAO() {
+        if (departamentoIfaceDAO == null) {
+            departamentoIfaceDAO = new DepartamentoImplDAO();
+        }
+
+        return departamentoIfaceDAO;
+    }
+
+    @Bean
+    public CiudadIfaceDAO getCiudadIfaceDAO() {
+        if (ciudadIfaceDAO == null) {
+            ciudadIfaceDAO = new CiudadImplDAO();
+        }
+
+        return ciudadIfaceDAO;
     }
 
 }
