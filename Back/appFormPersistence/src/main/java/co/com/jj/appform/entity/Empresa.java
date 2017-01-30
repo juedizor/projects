@@ -36,6 +36,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Empresa.findByDescripcionEmpresa", query = "SELECT e FROM Empresa e WHERE e.descripcionEmpresa = :descripcionEmpresa")})
 public class Empresa implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +54,10 @@ public class Empresa implements Serializable {
     private String descripcionEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
     private List<Cliente> clienteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
+    private List<EmpresaSede> empresaSedeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresaPrincipal")
+    private List<EmpresaSede> empresaSedeList1;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(optional = false, cascade = {CascadeType.ALL})
     private Persona idPersona;
@@ -131,6 +137,22 @@ public class Empresa implements Serializable {
     @Override
     public String toString() {
         return "co.com.jj.appform.entity.Empresa[ idEmpresa=" + idEmpresa + " ]";
+    }
+
+    public List<EmpresaSede> getEmpresaSedeList() {
+        return empresaSedeList;
+    }
+
+    public void setEmpresaSedeList(List<EmpresaSede> empresaSedeList) {
+        this.empresaSedeList = empresaSedeList;
+    }
+
+    public List<EmpresaSede> getEmpresaSedeList1() {
+        return empresaSedeList1;
+    }
+
+    public void setEmpresaSedeList1(List<EmpresaSede> empresaSedeList1) {
+        this.empresaSedeList1 = empresaSedeList1;
     }
     
 }

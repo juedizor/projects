@@ -20,6 +20,11 @@ app.controller('gestionModalClienteCtrl',
 	this.formClientes = {};
 	this.camposNit = false;
     this.required = true;
+    this.userActual = $cookieStore.get('usuario');
+
+    this.mostrarMsgTransaccion = false; // muestra el mensaje de finalizacion de la transaccion al momento de guardar
+	this.msgTransaccion = ""; // texto del mensaje de la transaccion
+	this.classMsgTransaccion = "alert-success-custom"; // clase css a aplicar en el mensaje, en la transaccion
 
 
 	$rootScope.$on('changeTipoDoc', function(event, data){
@@ -51,19 +56,27 @@ app.controller('gestionModalClienteCtrl',
     });
 
 
+
 	this.guardar = function(){
 		
 		self.cliente.empresa = {};
 		angular.copy(self.userActual.empresa, self.cliente.empresa);
 		var response = self.cliente.$save();
-		response.$promise.then(
+		response.then(
 		function(success){
-			console.log(success);
+			self.mostrarMsgTransaccion = true;
+			self.msgTransaccion = success.description;
+			self.formClientes.$setPristine();
+			self.formClientes.$setUntouched();
+			ClientesResource.getClientes({idEmpresa: self.userActual.empresa.idEmpresa}).$promise.then(function(data){
+		    	$rootScope.$emit("updateCliente", {data});
+		    })
 
 		}, 
 		function(error){
-			console.log(error)
-
+			self.mostrarMsgTransaccion = true;
+			self.msgTransaccion = error.data.description;
+			self.classMsgTransaccion = "alert-danger-custom";
 		})
 
 	}

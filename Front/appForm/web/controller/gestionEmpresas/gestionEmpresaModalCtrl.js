@@ -53,19 +53,7 @@ app.controller('gestionEmpresaModalCtrl',
     });
 
     $rootScope.$on('changeTipoDoc', function(event, data){
-    	if(!angular.isUndefined(data.value)){
-	    	if(data.value.codigo == 'NIT'){
-	    		self.camposNit = true;
-	    		self.required = false;
-	    		self.empresa.persona.nombre1 = "";
-	    		self.empresa.persona.nombre2 = "";
-	    		self.empresa.persona.apellido1 = "";
-	    		self.empresa.persona.apellido2 = "";
-	    	}else{
-    			self.camposNit = false;
-	    		self.required = true;
-	    	}
-    	}
+    	
     });
 
 

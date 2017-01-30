@@ -52,7 +52,7 @@
                      class="help-block has-error error-msg"></div> 
                     </div>
                   </div>
-                  <div ng-hide = "modalEmpCtrl.camposNit" class="col-xs-4">
+                  <div class="col-xs-4">
                     <div id = "fieldNombre1" class="form-group">
                       <label>Primer Nombre</label>
                       <input class="form-control" 
@@ -60,28 +60,13 @@
                       placeholder="Primer Nombre" 
                       type="text" 
                       name = "nombre1" 
-                      ng-required = "modalEmpCtrl.required" 
+                      required = "required" 
                       maxlength="100" />
                     </div>
                   </div>
                 </div>
 
-                <div  ng-show = "modalEmpCtrl.camposNit" class="row">
-                    <div class="col-xs-12">
-                        <div id = "fieldNombreEmpresa" class="form-group">
-                          <label>Nombre Empresa</label>
-                          <input class="form-control" 
-                          ng-model="modalEmpCtrl.empresa.nombreEmpresa" 
-                          placeholder="Nombre de su Empresa" 
-                          type="text" 
-                          name = "nombreEmpresa" 
-                          maxlength="100"
-                          ng-required = "!modalEmpCtrl.required" />
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-hide = "modalEmpCtrl.camposNit" class="row">
+                <div class="row">
                   <div class="col-xs-4">
                     <div id = "fieldNombre2" class="form-group">
                       <label>Segundo Nombre</label>
@@ -117,6 +102,21 @@
                       maxlength="100" />
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id = "fieldNombreEmpresa" class="form-group">
+                          <label>Nombre Empresa</label>
+                          <input class="form-control" 
+                          ng-model="modalEmpCtrl.empresa.nombreEmpresa" 
+                          placeholder="Nombre de su Empresa" 
+                          type="text" 
+                          name = "nombreEmpresa" 
+                          maxlength="100"
+                          required = "required" />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -180,7 +180,7 @@
                           placeholder="Ingrese la dirección" 
                           type="text" 
                           name = "direccion" 
-                          ng-required="required"/>
+                          required = "required"/>
                       </div>
                   </div>
                   <div class="col-xs-4">
