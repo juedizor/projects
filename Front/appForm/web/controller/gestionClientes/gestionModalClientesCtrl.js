@@ -51,9 +51,30 @@ app.controller('gestionModalClienteCtrl',
 
 
     $rootScope.$on("callGetClientes", function(event, data){
+    	
     	// aqui se capturan los datos cuando sea edicion 
-    	console.log(data);
+    	//console.log(data);
+    	self.getDataClient(data);
     });
+
+    this.getDataClient = function(data){
+    	if(!angular.isUndefined(self.formClientes)){
+    		self.formClientes.$setPristine();
+    		self.formClientes.$setUntouched();
+    	}
+
+    	self.valAccion = "Edición";
+    	if(data.registro){
+    		self.valAccion = "Registro";
+    		self.cliente = new ClientesResource();
+    	}else{
+    		self.cliente = new ClientesResource(data.cliente)
+
+    	}
+
+
+    	console.log(data)
+    }
 
 
 

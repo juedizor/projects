@@ -1,11 +1,11 @@
-<div ng-controller = "gestionModalClienteCtrl as modaleClientCtrl" class="modal fade" id="moda_clientes" data-keyboard=”false” data-backdrop>
-  <form name="modaleClientCtrl.formClientes" ng-submit = "modaleClientCtrl.guardar()" novalidate="novalidate">
+<div ng-controller = "gestionModalClienteCtrl as modalClientCtrl" class="modal fade" id="moda_clientes" data-keyboard=”false” data-backdrop>
+  <form name="modalClientCtrl.formClientes" ng-submit = "modalClientCtrl.guardar()" novalidate="novalidate">
       <div class="modal-dialog" style="width: 70%;">
         <div class="modal-content">
           <div class="modal-header">
             <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span></button>-->
-            <h4 class="modal-title">Cliente - Registro</h4>
+            <h4 class="modal-title">Cliente - {{modalClientCtrl.valAccion}}</h4>
           </div>
 
 
@@ -22,8 +22,8 @@
                       <label>Tipo de Documento</label>
                       <dir-tipo-documentos 
                       obligatorio = "required" 
-                      docs = "modaleClientCtrl.tiposDoc" 
-                      tipos = "modaleClientCtrl.cliente.persona.tipoDocumento">
+                      docs = "modalClientCtrl.tiposDoc" 
+                      tipos = "modalClientCtrl.cliente.persona.tipoDocumento">
                       </dir-tipo-documentos>
                     </div>
                   </div>
@@ -32,22 +32,22 @@
                       <label>Número de Documento</label>
                       <input class="form-control" 
                       type="number" 
-                      ng-model="modaleClientCtrl.cliente.persona.numeroDocumento"
+                      ng-model="modalClientCtrl.cliente.persona.numeroDocumento"
                       placeholder="Número de Documento"
                       type="text"
                       name = "numeroDocumento" 
                       required = ""
                       validar-campo-resource
-                      valueinput = "modaleClientCtrl.cliente.persona.numeroDocumento"
+                      valueinput = "modalClientCtrl.cliente.persona.numeroDocumento"
                       valueid = "'numDocError'"
-                      method = "modaleClientCtrl.personaResource.getPersona"
-                      params = "{tipoDoc: modaleClientCtrl.cliente.persona.tipoDocumento.idTipoDocumento, 
-                      numeroDoc: modaleClientCtrl.cliente.persona.numeroDocumento}"
+                      method = "modalClientCtrl.personaResource.getPersona"
+                      params = "{tipoDoc: modalClientCtrl.cliente.persona.tipoDocumento.idTipoDocumento, 
+                      numeroDoc: modalClientCtrl.cliente.persona.numeroDocumento}"
                       idmsgerr = "'errorNumDoc'"
-                      form = "modaleClientCtrl.formClientes"
-                      valueant = "modaleClientCtrl.numDocumento" 
+                      form = "modalClientCtrl.formClientes"
+                      valueant = "modalClientCtrl.numDocumento" 
                       msgerror = "'Persona Existe en el Sistema'" 
-                      namefield = "modaleClientCtrl.formClientes.numeroDocumento"/>
+                      namefield = "modalClientCtrl.formClientes.numeroDocumento"/>
                       <div id = "errorNumDoc" style="display: none" 
                      class="help-block has-error error-msg"></div> 
                     </div>
@@ -56,7 +56,7 @@
                     <div id = "fieldNombre1" class="form-group">
                       <label>Primer Nombre</label>
                       <input class="form-control" 
-                      ng-model="modaleClientCtrl.cliente.persona.nombre1" 
+                      ng-model="modalClientCtrl.cliente.persona.nombre1" 
                       placeholder="Primer Nombre" 
                       type="text" 
                       name = "nombre1" 
@@ -72,7 +72,7 @@
                     <div id = "fieldNombre2" class="form-group">
                       <label>Segundo Nombre</label>
                       <input class="form-control" 
-                      ng-model="modaleClientCtrl.cliente.persona.nombre2" 
+                      ng-model="modalClientCtrl.cliente.persona.nombre2" 
                       placeholder="Segundo Nombre" 
                       type="text" 
                       name = "nombre2" 
@@ -83,7 +83,7 @@
                     <div id= "fieldApellido1" class="form-group">
                       <label>Primer Apellido</label>
                       <input class="form-control" 
-                      ng-model="modaleClientCtrl.cliente.persona.apellido1" 
+                      ng-model="modalClientCtrl.cliente.persona.apellido1" 
                       placeholder="Primer Apellido" 
                       type="text" 
                       name = "apellido1" 
@@ -96,7 +96,7 @@
                     <div  id = "fieldApellido2" class="form-group">
                       <label>Segundo Apellido</label>
                       <input class="form-control" 
-                      ng-model="modaleClientCtrl.cliente.persona.apellido2" 
+                      ng-model="modalClientCtrl.cliente.persona.apellido2" 
                       placeholder="Segundo Apellido" 
                       type="text" 
                       name = "apellido2" 
@@ -110,7 +110,7 @@
                         <div id = "fieldNombreEmpresa" class="form-group">
                           <label>Nombre Empresa</label>
                           <input class="form-control" 
-                          ng-model="modaleClientCtrl.cliente.persona.empresa.nombreEmpresa" 
+                          ng-model="modalClientCtrl.cliente.persona.empresa.nombreEmpresa" 
                           placeholder="Nombre de su Empresa" 
                           type="text" 
                           name = "nombreEmpresa" 
@@ -125,22 +125,22 @@
                     <div id = "fieldEmail" class="form-group">
                       <label>Correo Electronico</label>
                       <input class="form-control" 
-                      ng-model="modaleClientCtrl.cliente.persona.email" 
+                      ng-model="modalClientCtrl.cliente.persona.email" 
                       placeholder="Correo Electronico" 
                       type="email" 
                       name = "email" 
                       required = "required" 
                       maxlength="100" 
                       validar-campo-resource
-                      valueinput = "modaleClientCtrl.cliente.persona.email"
+                      valueinput = "modalClientCtrl.cliente.persona.email"
                       valueid = "'fieldEmail'"
-                      method = "modaleClientCtrl.personaResource.getPersonaEmail"
-                      params = "{email: modaleClientCtrl.cliente.persona.email}"
+                      method = "modalClientCtrl.personaResource.getPersonaEmail"
+                      params = "{email: modalClientCtrl.cliente.persona.email}"
                       idmsgerr = "'errorEmail'"
-                      form = "modaleClientCtrl.formClientes"
-                      valueant = "modaleClientCtrl.email" 
+                      form = "modalClientCtrl.formClientes"
+                      valueant = "modalClientCtrl.email" 
                       msgerror = "'El email ingresado ya existe'" 
-                      namefield = "modaleClientCtrl.formClientes.email"/>
+                      namefield = "modalClientCtrl.formClientes.email"/>
                       <div id = "errorEmail" style="display: none" 
                      class="help-block has-error error-msg"></div> 
                     </div>
@@ -150,7 +150,7 @@
                           <label>Dirección</label>
                           <input id = "dir" 
                           class="form-control" 
-                          ng-model="modaleClientCtrl.cliente.persona.direccion.nombreDireccion" 
+                          ng-model="modalClientCtrl.cliente.persona.direccion.nombreDireccion" 
                           placeholder="Ingrese la dirección" 
                           type="text" 
                           name = "direccion" 
@@ -160,13 +160,48 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-xs-4">
+                        <div id = "pais" class="form-group">
+                          <label>Pais</label>
+                          <pais-directive 
+                          pais = "modalClientCtrl.cliente.usuario.persona.pais"
+                          obligatorio = "required">
+                          </pais-directive>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-4">
+                          <div id = "departamento" class="form-group">
+                            <label>Departamento</label>
+                            <departamento-directive 
+                            departamento = "modalClientCtrl.cliente.usuario.persona.departamento"
+                            obligatorio = "required" 
+                            name = "departamento" >
+                            </departamento-directive>
+                          </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                          <div id = "ciudad" class="form-group">
+                            <label>Ciudad</label>
+                            <ciudad-directive 
+                            ciudad = "modalClientCtrl.cliente.usuario.persona.ciudad"
+                            obligatorio = "required">
+                            </ciudad-directive>
+                          </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
                   <div class="col-xs-12">
                       <div id = "descripcionEmpresa" class="form-group">
                         <label>Descripción de la empresa de su cliente</label>  
                         <textarea class="form-control" 
                         id="textDescripcionEmpresa" 
                         name="descripcionEmpresa" 
-                        ng-model = "modaleClientCtrl.cliente.persona.empresa.descripcionEmpresa"
+                        ng-model = "modalClientCtrl.cliente.persona.empresa.descripcionEmpresa"
                         required="required" >
                         </textarea>
                       </div>
@@ -178,29 +213,29 @@
           </div>
           
           <div class="modal-footer">
-            <div ng-show = "modaleClientCtrl.mostrarMsgTransaccion" class="row">
+            <div ng-show = "modalClientCtrl.mostrarMsgTransaccion" class="row">
                 <div class="col-xs-4">
                 </div>
                 <div class="col-xs-4">
                 </div>
                 <div class="col-xs-4">
                   <div class="form-group">
-                    <div class="alert alert-success-custom" ng-class= "modaleClientCtrl.classMsgTransaccion" role="alert">
-                      {{modaleClientCtrl.msgTransaccion}}
+                    <div class="alert alert-success-custom" ng-class= "modalClientCtrl.classMsgTransaccion" role="alert">
+                      {{modalClientCtrl.msgTransaccion}}
                     </div>
                   </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "modaleClientCtrl.closeModal()">Close</button>
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click = "modalClientCtrl.closeModal()">Close</button>
             
-            <button type="submit" ng-disabled = "modaleClientCtrl.formClientes.$invalid || modaleClientCtrl.formClientes.numeroDocumento.$invalid || modaleClientCtrl.formClientes.email.$invalid" 
+            <button type="submit" ng-disabled = "modalClientCtrl.formClientes.$invalid || modalClientCtrl.formClientes.numeroDocumento.$invalid || modalClientCtrl.formClientes.email.$invalid" 
             class="btn btn-primary">Guardar</button>
           </div>
         </div>
         <!-- /.modal-content -->
       </div>
   <!-- /.modal-dialog -->
-  <!--<pre>{{modaleClientCtrl.formClientes | json}}</pre>-->
+  <!--<pre>{{modalClientCtrl.formClientes | json}}</pre>-->
   </form>
 </div>
 

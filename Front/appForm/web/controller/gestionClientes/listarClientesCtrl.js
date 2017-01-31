@@ -24,7 +24,6 @@ app.controller('clientesCtrl',
 
 
     this.cargarDatosTabla = function(data){
-    	console.log(data);
 		angular.forEach(data, function(value, key) {
 			var cliente = {};
 			cliente["cliente"] = value;
@@ -77,10 +76,12 @@ app.controller('clientesCtrl',
 
  	this.abrirModal = function(data){
  		var cliente = {};
+ 		var registro = true;
  		if(data != null){
  			cliente = data.cliente;
+ 			registro = false;
  		}
- 		$rootScope.$emit('callGetClientes', {cliente});
+ 		$rootScope.$emit('callGetClientes', {cliente, registro});
  		$("#moda_clientes").modal();
  	}
 
