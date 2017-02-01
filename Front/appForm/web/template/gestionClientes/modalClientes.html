@@ -52,7 +52,7 @@
                      class="help-block has-error error-msg"></div> 
                     </div>
                   </div>
-                  <div class="col-xs-4">
+                  <div ng-hide = "modalClientCtrl.camposNit" class="col-xs-4">
                     <div id = "fieldNombre1" class="form-group">
                       <label>Primer Nombre</label>
                       <input class="form-control" 
@@ -60,14 +60,14 @@
                       placeholder="Primer Nombre" 
                       type="text" 
                       name = "nombre1" 
-                      required="required" 
+                      ng-required="modalClientCtrl.required" 
                       maxlength="100" />
                     </div>
                   </div>
                 </div>
 
 
-                <div class="row">
+                <div ng-hide = "modalClientCtrl.camposNit" class="row">
                   <div class="col-xs-4">
                     <div id = "fieldNombre2" class="form-group">
                       <label>Segundo Nombre</label>
@@ -87,7 +87,7 @@
                       placeholder="Primer Apellido" 
                       type="text" 
                       name = "apellido1" 
-                      required = "required" 
+                      ng-required="modalClientCtrl.required" 
                       maxlength="100" 
                       required="required" />
                     </div>
@@ -164,7 +164,7 @@
                         <div id = "pais" class="form-group">
                           <label>Pais</label>
                           <pais-directive 
-                          pais = "modalClientCtrl.cliente.usuario.persona.pais"
+                          pais = "modalClientCtrl.cliente.persona.pais"
                           obligatorio = "required">
                           </pais-directive>
                         </div>
@@ -175,7 +175,7 @@
                           <div id = "departamento" class="form-group">
                             <label>Departamento</label>
                             <departamento-directive 
-                            departamento = "modalClientCtrl.cliente.usuario.persona.departamento"
+                            departamento = "modalClientCtrl.cliente.persona.departamento"
                             obligatorio = "required" 
                             name = "departamento" >
                             </departamento-directive>
@@ -186,7 +186,7 @@
                           <div id = "ciudad" class="form-group">
                             <label>Ciudad</label>
                             <ciudad-directive 
-                            ciudad = "modalClientCtrl.cliente.usuario.persona.ciudad"
+                            ciudad = "modalClientCtrl.cliente.persona.ciudad"
                             obligatorio = "required">
                             </ciudad-directive>
                           </div>

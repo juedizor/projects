@@ -66,7 +66,7 @@ app.controller('clientesCtrl',
 
  	$rootScope.$on("updateClientes", function(event, data){
     	self.cliente.dataCliente = [];
-    	self.cargarDatosTabla(data.cliente);
+    	self.cargarDatosTabla(data.data);
     	self.gridOptions.data = [];
 		self.gridOptions.data = self.cliente.dataCliente;
     })

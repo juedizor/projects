@@ -6,6 +6,7 @@
 package co.com.jj.rastreapp.util;
 
 import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.entity.Departamento;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
@@ -15,6 +16,7 @@ import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.entity.TipoDocumento;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.rastreapp.dto.CiudadDTO;
+import co.com.jj.rastreapp.dto.ClienteDTO;
 import co.com.jj.rastreapp.dto.DepartamentoDTO;
 import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.EmpresaDTO;
@@ -214,4 +216,5 @@ public class EntityUtils {
         ciudad.setNombreCiudad(ciudadDTO.getNombreCiudad());
         return ciudad;
     }
+    
 }

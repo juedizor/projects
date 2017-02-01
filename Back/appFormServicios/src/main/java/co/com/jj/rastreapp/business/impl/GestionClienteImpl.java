@@ -6,6 +6,7 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+import co.com.jj.appform.entity.Ciudad;
 import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
@@ -19,9 +20,12 @@ import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.business.iface.GestionClientesIface;
+import co.com.jj.rastreapp.dto.CiudadDTO;
 import co.com.jj.rastreapp.dto.ClienteDTO;
+import co.com.jj.rastreapp.dto.DepartamentoDTO;
 import co.com.jj.rastreapp.dto.DireccionDTO;
 import co.com.jj.rastreapp.dto.EmpresaDTO;
+import co.com.jj.rastreapp.dto.PaisDTO;
 import co.com.jj.rastreapp.dto.PersonaDTO;
 import co.com.jj.rastreapp.dto.TipoDocumentoDTO;
 import co.com.jj.rastreapp.util.DateUtils;
@@ -76,7 +80,10 @@ public class GestionClienteImpl implements GestionClientesIface {
                 Cliente cliente = new Cliente();
 
                 TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
+                
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
+                persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);
                 persona.setFechaRegistro(fechaReg);
                 cliente.setIdPersona(persona);
@@ -104,7 +111,39 @@ public class GestionClienteImpl implements GestionClientesIface {
 
     @Override
     public int actualizarCliente(ClienteDTO clienteDTO) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(clienteDTO != null){
+             persistenceApp = new PersistenceApp();
+            try {
+                java.sql.Timestamp fechaReg = DATE_UTILS.getFechaActual(); // fecha Actual
+                persistenceApp.getEntityTransaction().begin();
+                /**
+                 * inicializa los DAO para acceso a CRUD
+                 */
+                tipoDocumentoIfaceDAO.setEntityManager(persistenceApp.getManager());
+                perfilIfaceDAO.setEntityManager(persistenceApp.getManager());
+                usuarioIfaceDAO.setEntityManager(persistenceApp.getManager());
+                personaIfaceDAO.setEntityManager(persistenceApp.getManager());
+                direccionIfaceDAO.setEntityManager(persistenceApp.getManager());
+                clienteIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
+                
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(clienteDTO.getIdCliente());
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
+                Direccion direccion = ENTITY_UTILS.getDireccion(clienteDTO.getPersona().getDireccion());
+                Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
+                persona.setFechaModificacion(fechaReg);
+                persona.setIdCiudad(ciudad);
+                cliente.setIdPersona(persona);
+                Empresa empresa = ENTITY_UTILS.getEmpresa(clienteDTO.getEmpresa());
+                cliente.setIdEmpresa(empresa);
+                clienteIfaceDAO.merge(cliente);
+            }catch (Exception e){
+                persistenceApp.getEntityTransaction().rollback();
+                throw new Exception("Error realizando la actualización del cliente:\n" + e.getMessage());
+            }
+        }
+        
+        return Respuestas.ERROR;
     }
 
     @Override
@@ -117,7 +156,13 @@ public class GestionClienteImpl implements GestionClientesIface {
             for (Cliente cliente : listClientes) {
                 ClienteDTO clienteDTO = new ClienteDTO();
                 EmpresaDTO empresaDTO = ENTITY_UTILS.getEmpresaDTO(cliente.getIdPersona().getEmpresaList().get(0));
+                PaisDTO paisDTO = ENTITY_UTILS.getPaisDTO(cliente.getIdPersona().getIdCiudad().getIdDepartamento().getIdPais());
+                DepartamentoDTO departamentoDTO = ENTITY_UTILS.getDepartamentoDTO(cliente.getIdPersona().getIdCiudad().getIdDepartamento());
+                departamentoDTO.setPais(paisDTO);
+                CiudadDTO ciudadDTO = ENTITY_UTILS.getCiudadDTO(cliente.getIdPersona().getIdCiudad());
+                ciudadDTO.setDepartamento(departamentoDTO);
                 PersonaDTO personaDTO = ENTITY_UTILS.getPersonaDTO(cliente.getIdPersona());
+                personaDTO.setCiudad(ciudadDTO);
                 DireccionDTO direccionDTO = ENTITY_UTILS.getDireccionDTO(cliente.getIdPersona().getDireccionList().get(cliente.getIdPersona().getDireccionList().size() - 1));
                 TipoDocumentoDTO tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(cliente.getIdPersona().getIdTipoDocumento());
                 personaDTO.setDireccion(direccionDTO);

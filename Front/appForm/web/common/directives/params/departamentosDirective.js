@@ -11,12 +11,14 @@ app.directive('departamentoDirective',['DepartamentosResource', '$rootScope',
 		link: function(scope, element, attr){
 
 			$rootScope.$on('changePais', function(event, data){
-				console.log(scope.departamento)
 				if(!angular.isUndefined(data.value)){
 					if(!angular.isUndefined(data.value.idPais)){
 						var depart = DepartamentosResource.getDepartamentos({idPais: data.value.idPais});
 						depart.$promise.then(function(data){
 							scope.departamentos = data;	
+						}, 
+						function(error){
+							scope.departamentos = {};	
 						})
 					}else{
 						scope.departamentos = {};	

@@ -53,27 +53,57 @@ app.controller('gestionModalClienteCtrl',
     $rootScope.$on("callGetClientes", function(event, data){
     	
     	// aqui se capturan los datos cuando sea edicion 
-    	//console.log(data);
     	self.getDataClient(data);
     });
 
+	this.styleFormGroup = "form-group has-success";	
     this.getDataClient = function(data){
+    	self.camposNit = false;
+		self.required = true;
+		angular.element("#errorNumDoc").html("");
+		angular.element("#errorEmail").html("");
     	if(!angular.isUndefined(self.formClientes)){
     		self.formClientes.$setPristine();
     		self.formClientes.$setUntouched();
     	}
-
+    	self.mostrarMsgTransaccion = false;
+		self.msgTransaccion = "";
     	self.valAccion = "Edición";
     	if(data.registro){
     		self.valAccion = "Registro";
     		self.cliente = new ClientesResource();
     	}else{
-    		self.cliente = new ClientesResource(data.cliente)
+    		self.cliente = new ClientesResource(data)
+    		angular.copy(self.cliente.cliente, self.cliente);
+    		self.cliente.persona.pais = {};
+    		angular.copy(self.cliente.persona.ciudad.departamento.pais, self.cliente.persona.pais);
+    		self.cliente.persona.departamento = {};
+    		angular.copy(self.cliente.persona.ciudad.departamento, self.cliente.persona.departamento);
+    		angular.element("#numDocError").addClass(self.styleFormGroup);
+			angular.element("#fieldEmail").addClass(self.styleFormGroup);
+			if(self.cliente.persona.nombre1){
+				angular.element("#fieldNombre1").addClass(self.styleFormGroup);
+				angular.element("#fieldApellido1").addClass(self.styleFormGroup);
+			}
+
+			if(self.cliente.persona.nombre2){
+				angular.element("#fieldNombre2").addClass(self.styleFormGroup);
+			}
+
+			if(self.cliente.persona.apellido2){
+				angular.element("#fieldApellido2").addClass(self.styleFormGroup);
+			}
+			
+			
+			angular.element("#fieldNombreEmpresa").addClass(self.styleFormGroup);
+			angular.element("#fieldTipoDoc").addClass(self.styleFormGroup);
+			angular.element("#direccion").addClass(self.styleFormGroup);
+			angular.element("#pais").addClass(self.styleFormGroup);
+			angular.element("#departamento").addClass(self.styleFormGroup);
+			angular.element("#ciudad").addClass(self.styleFormGroup);
+			angular.element("#descripcionEmpresa").addClass(self.styleFormGroup);
 
     	}
-
-
-    	console.log(data)
     }
 
 
@@ -90,7 +120,7 @@ app.controller('gestionModalClienteCtrl',
 			self.formClientes.$setPristine();
 			self.formClientes.$setUntouched();
 			ClientesResource.getClientes({idEmpresa: self.userActual.empresa.idEmpresa}).$promise.then(function(data){
-		    	$rootScope.$emit("updateCliente", {data});
+		    	$rootScope.$emit("updateClientes", {data});
 		    })
 
 		}, 

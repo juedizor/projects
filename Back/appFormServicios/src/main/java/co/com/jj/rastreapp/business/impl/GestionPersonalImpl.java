@@ -153,13 +153,15 @@ public class GestionPersonalImpl implements GestionPersonalIface {
         Persona persona = personaIfaceDAO.findByTipoDocumentoNumeroDocumento(tipoDoc, numeroDoc);
         PersonaDTO personaDTO = null;
         TipoDocumentoDTO tipoDocumentoDTO;
-        UsuarioDTO usuarioDTO;
+        UsuarioDTO usuarioDTO = null;
         if (persona != null) {
             personaDTO = ENTITY_UTILS.getPersonaDTO(persona);
             tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(persona.getIdTipoDocumento());
-            usuarioDTO = ENTITY_UTILS.getUsuarioDTO(persona.getUsuarioList().get(0));
-            PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(persona.getUsuarioList().get(0).getIdPerfil());
-            usuarioDTO.setPerfil(perfilDTO);
+            if(persona.getUsuarioList() != null && !persona.getUsuarioList().isEmpty()){
+                usuarioDTO = ENTITY_UTILS.getUsuarioDTO(persona.getUsuarioList().get(0));
+                PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(persona.getUsuarioList().get(0).getIdPerfil());
+                usuarioDTO.setPerfil(perfilDTO);
+            }
             personaDTO.setTipoDocumento(tipoDocumentoDTO);
             personaDTO.setUsuario(usuarioDTO);
         }

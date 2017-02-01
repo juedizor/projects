@@ -35,7 +35,12 @@ public class GestionClienteService {
     public Message registrarCliente(@RequestBody ClienteDTO clienteDTO) throws ExceptionGenerics {
         int resultado;
         try {
-            resultado = gestionClientesIface.registrarCliente(clienteDTO);
+            if(clienteDTO.getIdCliente() != null){
+                resultado = 0;
+            }else{
+                resultado = gestionClientesIface.registrarCliente(clienteDTO);
+            }
+            
         } catch (Exception e) {
             ExceptionGenerics.setCodigo(Respuestas.ERROR);
             ExceptionGenerics.setDescripcion(e.getMessage());
