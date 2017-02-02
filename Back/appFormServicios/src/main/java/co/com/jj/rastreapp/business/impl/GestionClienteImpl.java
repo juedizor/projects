@@ -129,14 +129,35 @@ public class GestionClienteImpl implements GestionClientesIface {
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(clienteDTO.getIdCliente());
                 Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
-                Direccion direccion = ENTITY_UTILS.getDireccion(clienteDTO.getPersona().getDireccion());
+                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
                 Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
+                persona.setIdTipoDocumento(tipoDocumento);
+                Direccion direccion = ENTITY_UTILS.getDireccion(clienteDTO.getPersona().getDireccion());
+                List<Direccion> listDireccion = new ArrayList<>();
+                Direccion dirPersona = direccionIfaceDAO.findByIdPersona(clienteDTO.getPersona().getIdPersona());
+                if(!dirPersona.getNombreDireccion().equals(direccion.getNombreDireccion())){
+                    dirPersona.setFechaFinal(fechaReg);
+                    dirPersona.setIdPersona(persona);
+                    listDireccion.add(dirPersona);
+                    direccion.setIdDireccion(null);
+                    direccion.setIdPersona(persona);
+                    direccion.setFechaInicial(fechaReg);
+                    listDireccion.add(direccion);
+                    persona.setDireccionList(listDireccion);
+                }
+                
                 persona.setFechaModificacion(fechaReg);
                 persona.setIdCiudad(ciudad);
                 cliente.setIdPersona(persona);
-                Empresa empresa = ENTITY_UTILS.getEmpresa(clienteDTO.getEmpresa());
+                Empresa empresa = ENTITY_UTILS.getEmpresa(clienteDTO.getPersona().getEmpresa());
+                empresa.setIdPersona(persona);
+                cliente.getIdPersona().setEmpresaList(Arrays.asList(empresa));
+                empresa = ENTITY_UTILS.getEmpresa(clienteDTO.getEmpresa());
+                empresa.setIdPersona(persona);
                 cliente.setIdEmpresa(empresa);
                 clienteIfaceDAO.merge(cliente);
+                persistenceApp.getEntityTransaction().commit();
+                return Respuestas.ACTUALIZADO;
             }catch (Exception e){
                 persistenceApp.getEntityTransaction().rollback();
                 throw new Exception("Error realizando la actualización del cliente:\n" + e.getMessage());

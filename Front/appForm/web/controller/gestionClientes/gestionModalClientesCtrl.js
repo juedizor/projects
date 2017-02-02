@@ -56,6 +56,8 @@ app.controller('gestionModalClienteCtrl',
     	self.getDataClient(data);
     });
 
+    this.numDocumento = "";
+    this.email = "";
 	this.styleFormGroup = "form-group has-success";	
     this.getDataClient = function(data){
     	self.camposNit = false;
@@ -69,9 +71,12 @@ app.controller('gestionModalClienteCtrl',
     	self.mostrarMsgTransaccion = false;
 		self.msgTransaccion = "";
     	self.valAccion = "Edición";
+    	this.styleFormGroup = "form-group has-success";	
     	if(data.registro){
     		self.valAccion = "Registro";
     		self.cliente = new ClientesResource();
+    		self.numDocumento = "";
+    		self.email = "";
     	}else{
     		self.cliente = new ClientesResource(data)
     		angular.copy(self.cliente.cliente, self.cliente);
@@ -79,6 +84,8 @@ app.controller('gestionModalClienteCtrl',
     		angular.copy(self.cliente.persona.ciudad.departamento.pais, self.cliente.persona.pais);
     		self.cliente.persona.departamento = {};
     		angular.copy(self.cliente.persona.ciudad.departamento, self.cliente.persona.departamento);
+    		self.numDocumento = self.cliente.persona.numeroDocumento;
+    		self.email = self.cliente.persona.email;
     		angular.element("#numDocError").addClass(self.styleFormGroup);
 			angular.element("#fieldEmail").addClass(self.styleFormGroup);
 			if(self.cliente.persona.nombre1){

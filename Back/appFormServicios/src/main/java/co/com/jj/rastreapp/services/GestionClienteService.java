@@ -36,7 +36,7 @@ public class GestionClienteService {
         int resultado;
         try {
             if(clienteDTO.getIdCliente() != null){
-                resultado = 0;
+                resultado = gestionClientesIface.actualizarCliente(clienteDTO);
             }else{
                 resultado = gestionClientesIface.registrarCliente(clienteDTO);
             }

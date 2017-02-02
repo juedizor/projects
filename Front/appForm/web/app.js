@@ -19,7 +19,8 @@ var app = angular.module('appForm', [
 	'appForm.clientes', 
 	'appForm.paises', 
 	'appForm.departamentos', 
-	'appForm.ciudades'
+	'appForm.ciudades', 
+	'appForm.dataClienteBridge'
 	]);
 
 

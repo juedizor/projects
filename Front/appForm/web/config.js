@@ -30,6 +30,12 @@ app.config(['$routeProvider', function($routeProvider){
 			controllerAs: 'clientesCtrl'
 			
 		})
+		.when('/sedes', {
+			templateUrl: 'template/gestionClientes/gestionSedes/sedes.html', 
+			controller: 'listarSedesCtrl', 
+			controllerAs: 'sedesCtrl'
+			
+		})
 		.otherwise({
 			redirecTo: '/'
 		})
