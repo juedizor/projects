@@ -6,11 +6,11 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.entity.Departamento;
 import co.com.jj.appform.entity.Pais;
 import co.com.jj.appform.entity.Perfil;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
 import co.com.jj.appform.persistence.iface.DepartamentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.PaisIfaceDAO;
@@ -53,11 +53,11 @@ public class GestionParamsImpl implements GestionParamsIface {
     public List<TipoDocumentoDTO> obtenerTiposDocumentos() throws Exception {
         persistenceApp = new PersistenceApp();
         tipoDocumentoIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
-        List<TipoDocumento> listTipoDocumento = tipoDocumentoIfaceDAO.findAll();
+        List<TipoDocumentoVO> listTipoDocumento = tipoDocumentoIfaceDAO.findAll();
         TipoDocumentoDTO tipoDocumentoDTO;
         List<TipoDocumentoDTO> listTipoDocumentoDTO = new ArrayList<>();
         if (listTipoDocumento != null && !listTipoDocumento.isEmpty()) {
-            for (TipoDocumento tipoDocumento : listTipoDocumento) {
+            for (TipoDocumentoVO tipoDocumento : listTipoDocumento) {
                 tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(tipoDocumento);
                 listTipoDocumentoDTO.add(tipoDocumentoDTO);
             }
@@ -119,10 +119,10 @@ public class GestionParamsImpl implements GestionParamsIface {
     public List<CiudadDTO> obtenerCiudadDepartamento(int idDepartamento) throws Exception {
         persistenceApp = new PersistenceApp();
         ciudadIfaceDAO.setEntityManager(persistenceApp.getEntityManager());
-        List<Ciudad> listCiudad = ciudadIfaceDAO.findByIdDepartamento(idDepartamento);
+        List<CiudadVO> listCiudad = ciudadIfaceDAO.findByIdDepartamento(idDepartamento);
         List<CiudadDTO> listCiudadDTO = new ArrayList();
         if (listCiudad != null && !listCiudad.isEmpty()) {
-            for (Ciudad ciudad : listCiudad) {
+            for (CiudadVO ciudad : listCiudad) {
                 CiudadDTO ciudadDTO = ENTITY_UTILS.getCiudadDTO(ciudad);
                 listCiudadDTO.add(ciudadDTO);
             }

@@ -6,7 +6,7 @@
 package co.com.jj.appform.persistence.impl;
 
 import co.com.jj.appform.PersistenceApp;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,13 +20,13 @@ public class TipoDocumentoImplDAO implements TipoDocumentoIfaceDAO {
     private EntityManager manager;
 
     @Override
-    public List<TipoDocumento> findAll() throws Exception {
+    public List<TipoDocumentoVO> findAll() throws Exception {
         return manager.createNamedQuery("TipoDocumento.findAll").getResultList();
     }
 
     @Override
-    public TipoDocumento findById(int idTipoDocumento) throws Exception {
-        List<TipoDocumento> listTipoDocumento = manager.
+    public TipoDocumentoVO findById(int idTipoDocumento) throws Exception {
+        List<TipoDocumentoVO> listTipoDocumento = manager.
                 createNamedQuery("TipoDocumento.findByIdTipoDocumento").
                 setParameter("idTipoDocumento", idTipoDocumento)
                 .getResultList();

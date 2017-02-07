@@ -5,21 +5,14 @@
  */
 package co.com.jj.appform.persistence.iface;
 
-import co.com.jj.appform.entity.Empresa;
-import javax.persistence.EntityManager;
+import co.com.jj.appform.vo.EmpresaVO;
 
 /**
  *
  * @author julio.izquierdo
  */
-public interface EmpresaIfaceDAO {
+public interface EmpresaIfaceDAO extends PersistenciaIfaceDAO<EmpresaVO>{
 
-    void save(Empresa empresa);
-
-    void merge(Empresa empresa);
-
-    Empresa findByIdPersona(int idPersona) throws Exception;
-
-    void setEntityManager(EntityManager manager) throws Exception;
+    EmpresaVO findByIdPersona(int idPersona) throws Exception;
 
 }

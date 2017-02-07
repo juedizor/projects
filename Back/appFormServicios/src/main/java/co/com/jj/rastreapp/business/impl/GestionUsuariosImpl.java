@@ -6,12 +6,12 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
@@ -184,8 +184,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
                 Direccion direccion = ENTITY_UTILS.getDireccion(usuarioDTO.getPersona().getDireccion());
                 direccion.setFechaInicial(fechaReg);
                 // obtiene los datos del tipo de documento seleccionado
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(usuarioDTO.getPersona().getTipoDocumento());
-                Ciudad ciudad = ENTITY_UTILS.getCiudad(usuarioDTO.getPersona().getCiudad());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(usuarioDTO.getPersona().getTipoDocumento());
+                CiudadVO ciudad = ENTITY_UTILS.getCiudad(usuarioDTO.getPersona().getCiudad());
                 // obtiene los datos de la persona
                 Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
                 persona.setIdCiudad(ciudad);
@@ -238,9 +238,9 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
                 Direccion direccion = ENTITY_UTILS.getDireccion(usuarioDTO.getPersona().getDireccion());
                 direccion.setFechaInicial(fechaActual);
                 // obtiene los datos del tipo de documento seleccionado
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(usuarioDTO.getPersona().getTipoDocumento());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(usuarioDTO.getPersona().getTipoDocumento());
                 // obtiene los datos de la persona
-                Ciudad ciudad = ENTITY_UTILS.getCiudad(usuarioDTO.getPersona().getCiudad());
+                CiudadVO ciudad = ENTITY_UTILS.getCiudad(usuarioDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(usuarioDTO.getPersona());
                 persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);

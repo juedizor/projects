@@ -5,7 +5,7 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,17 +20,17 @@ public class CiudadImplDAO implements CiudadIfaceDAO {
     private EntityManager manager;
 
     @Override
-    public List<Ciudad> findAll() throws Exception {
+    public List<CiudadVO> findAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Ciudad> findByIdDepartamento(int idDepartamento) throws Exception {
+    public List<CiudadVO> findByIdDepartamento(int idDepartamento) throws Exception {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT c FROM Ciudad c WHERE c.idDepartamento.idDepartamento = :idDepartamento");
         Query query = manager.createQuery(sql.toString());
         query.setParameter("idDepartamento", idDepartamento);
-        List<Ciudad> listCiudad = query.getResultList();
+        List<CiudadVO> listCiudad = query.getResultList();
         if (listCiudad != null && !listCiudad.isEmpty()) {
             return listCiudad;
         }

@@ -5,11 +5,9 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
+import co.com.jj.appform.vo.DireccionVO;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -17,40 +15,26 @@ import javax.persistence.Query;
  */
 public class DireccionImplDAO implements DireccionIfaceDAO {
 
-    private EntityManager manager;
-
-    @Override
-    public void save(Direccion direccion) {
-        manager.persist(direccion);
+    public DireccionVO findByIdPersona(int idPersona) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void merge(Direccion direccion) {
-        manager.merge(direccion);
+    public void save(DireccionVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Direccion findById(int idDireccion) throws Exception {
-        return null;
+    public void merge(DireccionVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Direccion findByIdPersona(int idPersona) throws Exception {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT d FROM Direccion d WHERE d.idPersona.idPersona = :idPersona AND d.fechaFinal IS NULL");
-        Query query = manager.createQuery(sql.toString());
-        query.setParameter("idPersona", idPersona);
-        List<Direccion> listDireccion = query.getResultList();
-        if (listDireccion != null && !listDireccion.isEmpty()) {
-            return listDireccion.get(0);
-        }
-
-        return null;
+    public List<DireccionVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
+    public List<DireccionVO> findById(DireccionVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 
 }

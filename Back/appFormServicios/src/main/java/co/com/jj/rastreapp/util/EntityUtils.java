@@ -5,7 +5,7 @@
  */
 package co.com.jj.rastreapp.util;
 
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.entity.Departamento;
 import co.com.jj.appform.entity.Direccion;
@@ -13,7 +13,7 @@ import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Pais;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.rastreapp.dto.CiudadDTO;
 import co.com.jj.rastreapp.dto.ClienteDTO;
@@ -45,7 +45,7 @@ public class EntityUtils {
         return entityUtils;
     }
 
-    public TipoDocumentoDTO getTipoDocumentoDTO(TipoDocumento tipoDocumento) {
+    public TipoDocumentoDTO getTipoDocumentoDTO(TipoDocumentoVO tipoDocumento) {
         TipoDocumentoDTO tipoDocumentoDTO = new TipoDocumentoDTO();
         tipoDocumentoDTO.setCodigo(tipoDocumento.getCodigo());
         tipoDocumentoDTO.setIdTipoDocumento(tipoDocumento.getIdTipoDocumento());
@@ -53,8 +53,8 @@ public class EntityUtils {
         return tipoDocumentoDTO;
     }
 
-    public TipoDocumento getTipoDocumento(TipoDocumentoDTO tipoDocumentoDTO) {
-        TipoDocumento tipoDocumento = new TipoDocumento();
+    public TipoDocumentoVO getTipoDocumento(TipoDocumentoDTO tipoDocumentoDTO) {
+        TipoDocumentoVO tipoDocumento = new TipoDocumentoVO();
         tipoDocumento.setIdTipoDocumento(tipoDocumentoDTO.getIdTipoDocumento());
         tipoDocumento.setCodigo(tipoDocumentoDTO.getCodigo());
         tipoDocumento.setNombre(tipoDocumentoDTO.getNombre());
@@ -199,7 +199,7 @@ public class EntityUtils {
         return departamentoDTO;
     }
 
-    public CiudadDTO getCiudadDTO(Ciudad ciudad) {
+    public CiudadDTO getCiudadDTO(CiudadVO ciudad) {
         CiudadDTO ciudadDTO = new CiudadDTO();
         ciudadDTO.setCodigoCiudad(ciudad.getCodigoCiudad());
         ciudadDTO.setIdCiudad(ciudad.getIdCiudad());
@@ -207,8 +207,8 @@ public class EntityUtils {
         return ciudadDTO;
     }
 
-    public Ciudad getCiudad(CiudadDTO ciudadDTO) {
-        Ciudad ciudad = new Ciudad();
+    public CiudadVO getCiudad(CiudadDTO ciudadDTO) {
+        CiudadVO ciudad = new CiudadVO();
         if (ciudadDTO.getIdCiudad() != null) {
             ciudad.setIdCiudad(ciudadDTO.getIdCiudad());
         }

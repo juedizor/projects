@@ -6,12 +6,12 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Persona;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.persistence.iface.ClienteIfaceDAO;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
@@ -79,9 +79,9 @@ public class GestionClienteImpl implements GestionClientesIface {
 
                 Cliente cliente = new Cliente();
 
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
                 
-                Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
+                CiudadVO ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
                 persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);
@@ -128,8 +128,8 @@ public class GestionClienteImpl implements GestionClientesIface {
                 
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(clienteDTO.getIdCliente());
-                Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
+                CiudadVO ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
                 Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
                 persona.setIdTipoDocumento(tipoDocumento);
                 Direccion direccion = ENTITY_UTILS.getDireccion(clienteDTO.getPersona().getDireccion());

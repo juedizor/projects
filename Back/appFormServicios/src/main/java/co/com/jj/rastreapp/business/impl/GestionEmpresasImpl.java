@@ -6,12 +6,12 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
@@ -70,10 +70,10 @@ public class GestionEmpresasImpl implements GestionEmpresasIface {
                 empresaIfaceDAO.setEntityManager(persistenceApp.getManager());
 
                 Empresa empresa = ENTITY_UTILS.getEmpresa(empresaDTO);
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(empresaDTO.getPersona().getTipoDocumento());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(empresaDTO.getPersona().getTipoDocumento());
                 Perfil perfil = perfilIfaceDAO.findByNombre("ADMINISTRADOR");
                 
-                Ciudad ciudad = ENTITY_UTILS.getCiudad(empresaDTO.getPersona().getCiudad());
+                CiudadVO ciudad = ENTITY_UTILS.getCiudad(empresaDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(empresaDTO.getPersona());
                 persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);

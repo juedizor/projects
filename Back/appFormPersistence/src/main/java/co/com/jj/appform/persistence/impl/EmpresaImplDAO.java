@@ -5,11 +5,9 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
+import co.com.jj.appform.vo.EmpresaVO;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -17,34 +15,30 @@ import javax.persistence.Query;
  */
 public class EmpresaImplDAO implements EmpresaIfaceDAO {
 
-    private EntityManager manager;
-
-    @Override
-    public Empresa findByIdPersona(int idPersona) throws Exception {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT e FROM Empresa e WHERE e.idPersona.idPersona = :idPersona");
-        Query query = manager.createQuery(sql.toString());
-        query.setParameter("idPersona", idPersona);
-        List<Empresa> listEmpresa = query.getResultList();
-        if (listEmpresa != null && !listEmpresa.isEmpty()) {
-            return listEmpresa.get(0);
-        }
-        return null;
+    public EmpresaVO findByIdPersona(int idPersona) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) throws Exception {
-        this.manager = manager;
+    public void save(EmpresaVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void save(Empresa empresa) {
-        manager.persist(empresa);
+    public void merge(EmpresaVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void merge(Empresa empresa) {
-        manager.merge(empresa);
+    public List<EmpresaVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<EmpresaVO> findById(EmpresaVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
+    
+   
+
 
 }

@@ -5,11 +5,9 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.persistence.iface.ClienteIfaceDAO;
+import co.com.jj.appform.vo.ClienteVO;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -17,34 +15,26 @@ import javax.persistence.Query;
  */
 public class ClienteImplDAO implements ClienteIfaceDAO {
 
-    private EntityManager manager;
-
-    @Override
-    public void save(Cliente cliente) throws Exception {
-        manager.persist(cliente);
+    public List<ClienteVO> findByIdEmpresa(int idEmpresa) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void merge(Cliente cliente) throws Exception {
-        manager.merge(cliente);
+    public void save(ClienteVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) throws Exception {
-        this.manager = manager;
+    public void merge(ClienteVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Cliente> findByIdEmpresa(int idEmpresa) throws Exception {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT c FROM Cliente c WHERE c.idEmpresa.idEmpresa = :idEmpresa");
-        Query query = manager.createQuery(sql.toString());
-        query.setParameter("idEmpresa", idEmpresa);
-        List<Cliente> listClientes = query.getResultList();
-        if (listClientes != null && !listClientes.isEmpty()) {
-            return listClientes;
-        }
-        return null;
+    public List<ClienteVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<ClienteVO> findById(ClienteVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
 }

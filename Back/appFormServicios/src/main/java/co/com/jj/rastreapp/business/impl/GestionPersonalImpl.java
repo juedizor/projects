@@ -10,7 +10,7 @@ import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
@@ -71,7 +71,7 @@ public class GestionPersonalImpl implements GestionPersonalIface {
                 direccionIfaceDAO.setEntityManager(persistenceApp.getManager());
 
                 Persona persona = ENTITY_UTILS.getPersona(personaDTO);
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(personaDTO.getTipoDocumento());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(personaDTO.getTipoDocumento());
                 persona.setIdTipoDocumento(tipoDocumento);
                 Usuario usuario = ENTITY_UTILS.getUsuario(personaDTO.getUsuario());
                 

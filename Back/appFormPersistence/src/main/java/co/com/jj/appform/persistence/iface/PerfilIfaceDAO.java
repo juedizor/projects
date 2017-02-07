@@ -5,18 +5,14 @@
  */
 package co.com.jj.appform.persistence.iface;
 
-import co.com.jj.appform.entity.Perfil;
-import java.util.List;
-import javax.persistence.EntityManager;
+import co.com.jj.appform.vo.PerfilVO;
 
 /**
  *
  * @author jeio
  */
-public interface PerfilIfaceDAO {
+public interface PerfilIfaceDAO extends PersistenciaIfaceDAO<PerfilVO>{
     
-    public void setEntityManager(EntityManager manager);
-    public List<Perfil> findAll() throws Exception;
-    public Perfil findByNombre(String nombre) throws Exception;
+    public PerfilVO findByNombre(String nombre) throws Exception;
     
 }
