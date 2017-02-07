@@ -5,6 +5,10 @@
  */
 package co.com.jj.appform;
 
+import co.com.jj.appform.persistence.daofactory.CreateInstance;
+import co.com.jj.appform.persistence.daofactory.FactoryUsuarioDAO;
+import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
+
 /**
  *
  * @author jeio
@@ -12,11 +16,8 @@ package co.com.jj.appform;
 public class Test {
     
     public static void main(String[] args) throws Exception {
-//        PersistenceApp mainApp = PersistenceApp.getInstance();
-//        Query query = mainApp.getEntityManager().createNamedQuery("Usuario.findByNombreUsuarioActivo");
-//        query.setParameter("nombreUsuario", "juedizor");
-//        query.setParameter("activo", true);
-//        query.getResultList();
+        UsuarioIfaceDAO usuarioIfaceDAO = (UsuarioIfaceDAO) CreateInstance.getInstance().newInstance(FactoryUsuarioDAO.getInstance());
+        usuarioIfaceDAO.findByNombreUsuario("juedizor");
     }
     
 }

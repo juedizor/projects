@@ -5,6 +5,9 @@
  */
 package co.com.jj.appform.persistence.iface;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 /**
  * interface para establecer conexión a base de datos
  *
@@ -18,9 +21,9 @@ public interface DataAccessGenericIface {
 
     void getConection() throws Exception;
     
-    void initTransaction() throws Exception;
+    NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() throws Exception;
     
-    void commitTransaction() throws Exception;
+    JdbcTemplate getJdbcTemplate() throws Exception;
     
-    void rollBackTransaccion() throws Exception;
+    
 }

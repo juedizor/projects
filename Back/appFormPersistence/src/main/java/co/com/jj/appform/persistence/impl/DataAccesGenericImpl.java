@@ -8,8 +8,9 @@ package co.com.jj.appform.persistence.impl;
 import co.com.jj.appform.persistence.iface.DataAccessGenericIface;
 import co.com.jj.appform.persistence.utils.ConfiguracionIface;
 import co.com.jj.appform.persistence.utils.ConfiguracionImpl;
-import java.sql.Connection;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
  *
@@ -17,26 +18,24 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 public class DataAccesGenericImpl implements DataAccessGenericIface {
 
-    private static DataAccessGenericIface dataAccessGenericIface;
-    private DriverManagerDataSource dataSource;
-    private Connection connection;
+    
+    private BasicDataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private static ConfiguracionIface CONFIGURACION_IFACE;
+    public static String sql;
 
-    private DataAccesGenericImpl() {
-
+    public DataAccesGenericImpl() throws Exception {
+        CONFIGURACION_IFACE = ConfiguracionImpl.getInstance();
     }
 
-    public static DataAccessGenericIface getInstance() throws Exception {
-        if (dataAccessGenericIface == null) {
-            dataAccessGenericIface = new DataAccesGenericImpl();
-            CONFIGURACION_IFACE = ConfiguracionImpl.getInstance();
-        }
-
-        return dataAccessGenericIface;
-    }
 
     @Override
     public void closeConection() throws Exception {
+        if(dataSource != null){
+            dataSource.close();
+            dataSource = null;
+        }
     }
 
     @Override
@@ -47,9 +46,10 @@ public class DataAccesGenericImpl implements DataAccessGenericIface {
         String user = CONFIGURACION_IFACE.getUser();
         String pass = CONFIGURACION_IFACE.getPass();
         String port = CONFIGURACION_IFACE.getPort();
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + bd + "";
+        String gestor = CONFIGURACION_IFACE.getGestor();
+        String url = "jdbc:"+gestor+"://" + host + ":" + port + "/" + bd + "";
         if (dataSource == null) {
-            dataSource = new DriverManagerDataSource();
+            dataSource = new BasicDataSource();
             dataSource.setDriverClassName(driver);
             dataSource.setUrl(url);
             dataSource.setUsername(user);
@@ -59,27 +59,40 @@ public class DataAccesGenericImpl implements DataAccessGenericIface {
 
     @Override
     public void getConection() throws Exception {
-        if (connection == null) {
-            if (dataSource == null) {
-                openConection();
-            }
-            connection = dataSource.getConnection();
+        if (dataSource == null) {
+            openConection();
+        }
+    }
+    
+    private void setJdbcTemplate() throws Exception {
+        if(dataSource != null){
+            jdbcTemplate = new JdbcTemplate(dataSource);
+        }else{
+            openConection();
+            setJdbcTemplate();
+        }
+    }
+
+    
+    private void setNamedParameterJdbcTemplate() throws Exception {
+        if(dataSource != null){
+            namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+        }else{
+            openConection();
+            setNamedParameterJdbcTemplate();
         }
     }
 
     @Override
-    public void initTransaction() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public JdbcTemplate getJdbcTemplate() throws Exception {
+        setJdbcTemplate();
+        return jdbcTemplate;
     }
 
     @Override
-    public void commitTransaction() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void rollBackTransaccion() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() throws Exception {
+        setNamedParameterJdbcTemplate();
+        return namedParameterJdbcTemplate;
     }
 
 }

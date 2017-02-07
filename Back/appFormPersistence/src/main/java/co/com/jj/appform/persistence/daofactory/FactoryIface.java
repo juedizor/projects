@@ -12,6 +12,6 @@ package co.com.jj.appform.persistence.daofactory;
  */
 public interface FactoryIface<T> {
     
-    public T newInstance();
+    public T newInstance() throws Exception;
     
 }

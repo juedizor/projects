@@ -27,7 +27,7 @@ public class FactoryEmpresaDAO implements FactoryIface<EmpresaImplDAO> {
     }
 
     @Override
-    public EmpresaImplDAO newInstance() {
+    public EmpresaImplDAO newInstance() { 
         return new EmpresaImplDAO();
     }
 
