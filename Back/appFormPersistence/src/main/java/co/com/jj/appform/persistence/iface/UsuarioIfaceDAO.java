@@ -5,30 +5,20 @@
  */
 package co.com.jj.appform.persistence.iface;
 
-import co.com.jj.appform.entity.Usuario;
+import co.com.jj.appform.vo.UsuarioVO;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author jeio
  */
-public interface UsuarioIfaceDAO {
+public interface UsuarioIfaceDAO extends PersistenciaIfaceDAO<UsuarioVO>{
 
-    public void save(Usuario usuario) throws Exception;
+    public UsuarioVO findByNombreUsuario(String nombreUsuario) throws Exception;
 
-    public void merge(Usuario usuario) throws Exception;
-
-    List<Usuario> findAll() throws Exception;
+    public List<UsuarioVO> findByNombreUsuarioContrasena(String nombreUsuario, String contrasena) throws Exception;
     
-    public Usuario findById(int id) throws Exception;
-
-    public Usuario findByNombreUsuario(String nombreUsuario) throws Exception;
-
-    public List<Usuario> findByNombreUsuarioContrasena(String nombreUsuario, String contrasena) throws Exception;
+    List<UsuarioVO> findByEmpresaAndNotNombreUsuario(int idEmpresa, String nombreUsuario) throws Exception;
     
-    List<Usuario> findByEmpresaAndNotNombreUsuario(int idEmpresa, String nombreUsuario) throws Exception;
-    
-    public void setEntityManager(EntityManager manager) throws Exception;
 
 }

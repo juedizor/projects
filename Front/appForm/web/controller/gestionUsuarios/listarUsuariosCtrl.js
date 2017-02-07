@@ -68,10 +68,10 @@ app.controller('listarUsuariosCtrl',
 	      { name: 'Accion', 
 	      	displayName:'',  
 	      	enableHiding: false, 
-	      	cellTemplate: 'template/link/editarUsuario.html',
+	      	cellTemplate: 'template/link/opcionesTableClientes.html',
 	      	enableFiltering: false, 
   			enableSorting: false, 
-  			enableColumnMenu: false, width: '4%'}
+  			enableColumnMenu: false, width: '8%'}
 	    ]
  	}
 

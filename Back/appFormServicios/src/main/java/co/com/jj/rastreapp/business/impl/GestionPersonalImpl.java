@@ -10,7 +10,7 @@ import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
 import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.entity.Persona;
-import co.com.jj.appform.entity.TipoDocumento;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import co.com.jj.appform.entity.Usuario;
 import co.com.jj.appform.persistence.iface.DireccionIfaceDAO;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
@@ -71,7 +71,7 @@ public class GestionPersonalImpl implements GestionPersonalIface {
                 direccionIfaceDAO.setEntityManager(persistenceApp.getManager());
 
                 Persona persona = ENTITY_UTILS.getPersona(personaDTO);
-                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(personaDTO.getTipoDocumento());
+                TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(personaDTO.getTipoDocumento());
                 persona.setIdTipoDocumento(tipoDocumento);
                 Usuario usuario = ENTITY_UTILS.getUsuario(personaDTO.getUsuario());
                 
@@ -153,13 +153,15 @@ public class GestionPersonalImpl implements GestionPersonalIface {
         Persona persona = personaIfaceDAO.findByTipoDocumentoNumeroDocumento(tipoDoc, numeroDoc);
         PersonaDTO personaDTO = null;
         TipoDocumentoDTO tipoDocumentoDTO;
-        UsuarioDTO usuarioDTO;
+        UsuarioDTO usuarioDTO = null;
         if (persona != null) {
             personaDTO = ENTITY_UTILS.getPersonaDTO(persona);
             tipoDocumentoDTO = ENTITY_UTILS.getTipoDocumentoDTO(persona.getIdTipoDocumento());
-            usuarioDTO = ENTITY_UTILS.getUsuarioDTO(persona.getUsuarioList().get(0));
-            PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(persona.getUsuarioList().get(0).getIdPerfil());
-            usuarioDTO.setPerfil(perfilDTO);
+            if(persona.getUsuarioList() != null && !persona.getUsuarioList().isEmpty()){
+                usuarioDTO = ENTITY_UTILS.getUsuarioDTO(persona.getUsuarioList().get(0));
+                PerfilDTO perfilDTO = ENTITY_UTILS.getPerfilDTO(persona.getUsuarioList().get(0).getIdPerfil());
+                usuarioDTO.setPerfil(perfilDTO);
+            }
             personaDTO.setTipoDocumento(tipoDocumentoDTO);
             personaDTO.setUsuario(usuarioDTO);
         }

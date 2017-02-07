@@ -5,32 +5,32 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Pais;
 import co.com.jj.appform.persistence.iface.PaisIfaceDAO;
+import co.com.jj.appform.vo.PaisVO;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author julio.izquierdo
  */
 public class PaisImplDAO implements PaisIfaceDAO{
-    
-    private EntityManager manager;
 
-    @Override
-    public List<Pais> findAll() throws Exception {
-        return manager.createNamedQuery("Pais.findAll").getResultList();
-    }
-
-    @Override
-    public Pais findById(int idTipoDocumento) throws Exception {
+    public void save(PaisVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
+    public void merge(PaisVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<PaisVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<PaisVO> findById(PaisVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }

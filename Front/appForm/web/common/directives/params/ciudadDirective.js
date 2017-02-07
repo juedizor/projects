@@ -18,6 +18,9 @@ app.directive("ciudadDirective",
 							var ciudad = CiudadResource.getCiudades({idDepartamento: data.value.idDepartamento});
 							ciudad.$promise.then(function(data){
 								scope.ciudades = data;	
+							}, 
+							function(error){
+								scope.ciudades = {};
 							})						
 						}else{
 							scope.ciudades = {};	

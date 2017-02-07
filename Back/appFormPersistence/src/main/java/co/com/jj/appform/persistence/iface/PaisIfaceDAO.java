@@ -5,18 +5,14 @@
  */
 package co.com.jj.appform.persistence.iface;
 
-import co.com.jj.appform.entity.Pais;
-import java.util.List;
-import javax.persistence.EntityManager;
+import co.com.jj.appform.vo.PaisVO;
 
 /**
  *
  * @author julio.izquierdo
  */
-public interface PaisIfaceDAO {
+public interface PaisIfaceDAO extends PersistenciaIfaceDAO<PaisVO>{
     
-    public List<Pais> findAll() throws Exception;
-    public Pais findById(int idTipoDocumento) throws Exception;
-    public void setEntityManager(EntityManager manager);
+    
     
 }

@@ -5,11 +5,9 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Departamento;
 import co.com.jj.appform.persistence.iface.DepartamentoIfaceDAO;
+import co.com.jj.appform.vo.DepartamentoVO;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -17,30 +15,26 @@ import javax.persistence.Query;
  */
 public class DepartamentoImplDAO implements DepartamentoIfaceDAO {
 
-    private EntityManager manager;
-
-    @Override
-    public List<Departamento> findAll() throws Exception {
+    public List<DepartamentoVO> findByIdPais(int idPais) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Departamento> findByIdPais(int idPais) throws Exception {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT d FROM Departamento d WHERE d.idPais.idPais = :idPais");
-        Query query = manager.createQuery(sql.toString());
-        query.setParameter("idPais", idPais);
-        List<Departamento> listDepartamentos = query.getResultList();
-        if (listDepartamentos != null && !listDepartamentos.isEmpty()) {
-            return listDepartamentos;
-        }
-
-        return null;
+    public void save(DepartamentoVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
+    public void merge(DepartamentoVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<DepartamentoVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<DepartamentoVO> findById(DepartamentoVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
 
 }

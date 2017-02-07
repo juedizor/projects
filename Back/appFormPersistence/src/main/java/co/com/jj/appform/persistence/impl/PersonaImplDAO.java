@@ -5,11 +5,9 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Persona;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
+import co.com.jj.appform.vo.PersonaVO;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -17,61 +15,30 @@ import javax.persistence.Query;
  */
 public class PersonaImplDAO implements PersonaIfaceDAO {
 
-    private EntityManager manager;
-
-    @Override
-    public void save(Persona persona) throws Exception {
-        manager.persist(persona);
+    public PersonaVO findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT p FROM Persona p WHERE p.idTipoDocumento.idTipoDocumento = :idTipoDocumento ");
-        sql.append("AND p.numeroDocumento = :numeroDocumento");
-        Query query = manager.createQuery(sql.toString());
-        query.setParameter("idTipoDocumento", tipoDocumento);
-        query.setParameter("numeroDocumento", numeroDocumento);
-        List<Persona> listPersona = query.getResultList();
-        if (listPersona != null && !listPersona.isEmpty()) {
-            return listPersona.get(0);
-        }
-
-        return null;
-
+    public PersonaVO findByEmail(String email) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void merge(Persona persona) throws Exception {
-        manager.merge(persona);
+    public void save(PersonaVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
+    public void merge(PersonaVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Persona findByEmail(String email) throws Exception {
-        Query query = manager.createNamedQuery("Persona.findByEmail");
-        query.setParameter("email", email);
-        List<Persona> listPersona = query.getResultList();
-        if (listPersona != null && !listPersona.isEmpty()) {
-            return listPersona.get(0);
-        }
-        return null;
+    public List<PersonaVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Persona findById(int idPersona) throws Exception {
-        Query query = manager.createNamedQuery("Persona.findByIdPersona");
-        query.setParameter("idPersona", idPersona);
-        List<Persona> listPersona = query.getResultList();
-        if (listPersona != null && !listPersona.isEmpty()) {
-            return listPersona.get(0);
-        }
-        return null;
-
+    public List<PersonaVO> findById(PersonaVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
 }

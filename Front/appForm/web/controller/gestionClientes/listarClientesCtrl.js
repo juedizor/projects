@@ -4,11 +4,15 @@ app.controller('clientesCtrl',
 	'ClientesResource',
 	'$cookieStore',
 	'$rootScope', 
+	'$location',
+	'DataClienteBridge', 
 	function($scope, 
 		i18nService, 
 		ClientesResource, 
 		$cookieStore,
-		$rootScope){
+		$rootScope, 
+		$location, 
+		DataClienteBridge){
 	$scope.setActive('gClientes');
 
 
@@ -57,16 +61,16 @@ app.controller('clientesCtrl',
 	      { name: 'Accion', 
 	      	displayName:'',  
 	      	enableHiding: false, 
-	      	cellTemplate: 'template/link/editarCliente.html',
+	      	cellTemplate: 'template/link/opcionesTableClientes.html',
 	      	enableFiltering: false, 
   			enableSorting: false, 
-  			enableColumnMenu: false, width: '4%'}
+  			enableColumnMenu: false, width: '8%'}
 	    ]
  	}
 
  	$rootScope.$on("updateClientes", function(event, data){
     	self.cliente.dataCliente = [];
-    	self.cargarDatosTabla(data.cliente);
+    	self.cargarDatosTabla(data.data);
     	self.gridOptions.data = [];
 		self.gridOptions.data = self.cliente.dataCliente;
     })
@@ -83,6 +87,13 @@ app.controller('clientesCtrl',
  		}
  		$rootScope.$emit('callGetClientes', {cliente, registro});
  		$("#moda_clientes").modal();
+ 	}
+
+ 	this.gestionarEmpresaSede = function(data){
+ 		var cliente = data.cliente;
+ 		DataClienteBridge.cliente = cliente;
+ 		$location.url("/sedes");
+ 		
  	}
 
 

@@ -5,10 +5,9 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.entity.Perfil;
 import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
+import co.com.jj.appform.vo.PerfilVO;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
@@ -16,31 +15,24 @@ import javax.persistence.EntityManager;
  */
 public class PerfilImplDAO implements PerfilIfaceDAO{
 
-    private EntityManager manager;
-    
-    @Override
-    public List<Perfil> findAll() throws Exception {
-        return manager.createNamedQuery("Perfil.findAll").getResultList();
+    public PerfilVO findByNombre(String nombre) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Perfil findByNombre(String nombre) throws Exception {
-        List<Perfil> listPerfil = manager.
-                createNamedQuery("Perfil.findByNombre").
-                setParameter("nombre", nombre).getResultList();
-        if(listPerfil != null && !listPerfil.isEmpty()){
-            return listPerfil.get(0);
-        }
-        return null;
+    public void save(PerfilVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
+    public void merge(PerfilVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
+
+    public List<PerfilVO> findAll() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<PerfilVO> findById(PerfilVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

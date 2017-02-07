@@ -5,7 +5,7 @@
  */
 package co.com.jj.appform.persistence.iface;
 
-import co.com.jj.appform.entity.Ciudad;
+import co.com.jj.appform.vo.CiudadVO;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -15,9 +15,9 @@ import javax.persistence.EntityManager;
  */
 public interface CiudadIfaceDAO {
 
-    public List<Ciudad> findAll() throws Exception;
+    public List<CiudadVO> findAll() throws Exception;
 
-    public List<Ciudad> findByIdDepartamento(int idDepartamento) throws Exception;
+    public List<CiudadVO> findByIdDepartamento(int idDepartamento) throws Exception;
 
     public void setEntityManager(EntityManager manager);
 

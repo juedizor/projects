@@ -5,25 +5,16 @@
  */
 package co.com.jj.appform.persistence.iface;
 
-import co.com.jj.appform.entity.Persona;
-import javax.persistence.EntityManager;
+import co.com.jj.appform.vo.PersonaVO;
 
 /**
  *
  * @author jeio
  */
-public interface PersonaIfaceDAO {
+public interface PersonaIfaceDAO extends PersistenciaIfaceDAO<PersonaVO>{
 
-    public void save(Persona persona) throws Exception;
-
-    public void merge(Persona persona) throws Exception;
+    PersonaVO findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception;
     
-    Persona findById(int idPersona) throws Exception;
-
-    Persona findByTipoDocumentoNumeroDocumento(int tipoDocumento, Long numeroDocumento) throws Exception;
-    
-    Persona findByEmail(String email) throws Exception;
-
-    public void setEntityManager(EntityManager manager);
+    PersonaVO findByEmail(String email) throws Exception;
 
 }
