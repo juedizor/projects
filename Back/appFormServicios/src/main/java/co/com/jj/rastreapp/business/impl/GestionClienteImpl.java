@@ -6,6 +6,7 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+import co.com.jj.appform.entity.Ciudad;
 import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
@@ -76,7 +77,9 @@ public class GestionClienteImpl implements GestionClientesIface {
                 Cliente cliente = new Cliente();
 
                 TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
                 Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
+                persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);
                 persona.setFechaRegistro(fechaReg);
                 cliente.setIdPersona(persona);
