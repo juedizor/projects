@@ -25,16 +25,14 @@ public class DataAccesGenericImpl implements DataAccessGenericIface {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private static ConfiguracionIface CONFIGURACION_IFACE;
-    public static String sql;
 
     protected DataAccesGenericImpl() throws Exception {
         CONFIGURACION_IFACE = ConfiguracionImpl.getInstance();
     }
 
-
     @Override
     public void closeConection() throws Exception {
-        if(dataSource != null){
+        if (dataSource != null) {
             dataSource.close();
             dataSource = null;
             txManager = null;
@@ -43,15 +41,15 @@ public class DataAccesGenericImpl implements DataAccessGenericIface {
 
     @Override
     public void setDataSource() throws Exception {
-        String driver = CONFIGURACION_IFACE.getDriver();
-        String bd = CONFIGURACION_IFACE.getBd();
-        String host = CONFIGURACION_IFACE.getHost();
-        String user = CONFIGURACION_IFACE.getUser();
-        String pass = CONFIGURACION_IFACE.getPass();
-        String port = CONFIGURACION_IFACE.getPort();
-        String gestor = CONFIGURACION_IFACE.getGestor();
-        String url = "jdbc:"+gestor+"://" + host + ":" + port + "/" + bd + "";
         if (dataSource == null) {
+            String driver = CONFIGURACION_IFACE.getDriver();
+            String bd = CONFIGURACION_IFACE.getBd();
+            String host = CONFIGURACION_IFACE.getHost();
+            String user = CONFIGURACION_IFACE.getUser();
+            String pass = CONFIGURACION_IFACE.getPass();
+            String port = CONFIGURACION_IFACE.getPort();
+            String gestor = CONFIGURACION_IFACE.getGestor();
+            String url = "jdbc:" + gestor + "://" + host + ":" + port + "/" + bd + "";
             dataSource = new BasicDataSource();
             dataSource.setDriverClassName(driver);
             dataSource.setUrl(url);
@@ -66,26 +64,25 @@ public class DataAccesGenericImpl implements DataAccessGenericIface {
         if (dataSource == null) {
             setDataSource();
         }
-        
+
         return dataSource;
     }
-    
+
     private void setJdbcTemplate() throws Exception {
-        if(dataSource != null){
-            if(jdbcTemplate == null){
+        if (dataSource != null) {
+            if (jdbcTemplate == null) {
                 jdbcTemplate = new JdbcTemplate(txManager.getDataSource());
             }
-        }else{
+        } else {
             setDataSource();
             setJdbcTemplate();
         }
     }
 
-    
     private void setNamedParameterJdbcTemplate() throws Exception {
-        if(dataSource != null){
+        if (dataSource != null) {
             namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(txManager.getDataSource());
-        }else{
+        } else {
             setDataSource();
             setNamedParameterJdbcTemplate();
         }

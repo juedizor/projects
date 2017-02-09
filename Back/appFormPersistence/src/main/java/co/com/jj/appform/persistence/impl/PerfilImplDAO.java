@@ -15,24 +15,31 @@ import java.util.List;
  */
 public class PerfilImplDAO implements PerfilIfaceDAO{
 
+    @Override
     public PerfilVO findByNombre(String nombre) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void save(PerfilVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void merge(PerfilVO object) throws Exception {
+    @Override
+    public void merge(PerfilVO object, PerfilVO objectAct) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public List<PerfilVO> findAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<PerfilVO> findById(PerfilVO object) throws Exception {
+    @Override
+    public List<PerfilVO> findByPrimaryKey(PerfilVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }

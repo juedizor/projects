@@ -6,7 +6,10 @@
 package co.com.jj.rastreapp;
 
 import co.com.jj.appform.persistence.daofactory.CreateInstance;
+import co.com.jj.appform.persistence.daofactory.createdao.FactoryDireccionDAO;
+import co.com.jj.appform.persistence.daofactory.createdao.FactoryEmpresaDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryPersonaDAO;
+import co.com.jj.appform.persistence.daofactory.createdao.FactoryTipoDocumentoDAO;
 import co.com.jj.appform.persistence.impl.generics.FactoryDataAccesGenerics;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryTransaction;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryUsuarioDAO;
@@ -36,7 +39,7 @@ import org.springframework.context.annotation.Bean;
  * @author jeio
  */
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class MainApp extends SpringBootServletInitializer {
 
     private static UsuarioIfaceDAO usuarioIfaceDAO;
@@ -50,7 +53,6 @@ public class MainApp extends SpringBootServletInitializer {
     private static PaisIfaceDAO paisIfaceDAO;
     private static DepartamentoIfaceDAO departamentoIfaceDAO;
     private static CiudadIfaceDAO ciudadIfaceDAO;
-    
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -66,13 +68,13 @@ public class MainApp extends SpringBootServletInitializer {
     public UsuarioIfaceDAO getUsuarioIfaceDAO() throws Exception {
         if (usuarioIfaceDAO == null) {
             CreateInstance<UsuarioIfaceDAO> instace = new CreateInstance<>();
-            usuarioIfaceDAO =  instace.newInstance(FactoryUsuarioDAO.getInstance());
+            usuarioIfaceDAO = instace.newInstance(FactoryUsuarioDAO.getInstance());
         }
         return usuarioIfaceDAO;
     }
-    
+
     @Bean
-    public TransactionIface getTransactionIface() throws Exception{
+    public TransactionIface getTransactionIface() throws Exception {
         CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
         DataAccessGenericIface dataAccesGenericIface = instace.newInstance(FactoryDataAccesGenerics.getInstance());
         transactionIface = FactoryTransaction.getInstance().newInstance(dataAccesGenericIface.getDataSourceTransactionManager());
@@ -87,14 +89,15 @@ public class MainApp extends SpringBootServletInitializer {
         }
         return personaIfaceDAO;
     }
-//
-//    @Bean
-//    public TipoDocumentoIfaceDAO getTipoDocumentoIfaceDAO() {
-//        if (tipoDocumentoIfaceDAO == null) {
-//            tipoDocumentoIfaceDAO = new TipoDocumentoImplDAO();
-//        }
-//        return tipoDocumentoIfaceDAO;
-//    }
+
+    @Bean
+    public TipoDocumentoIfaceDAO getTipoDocumentoIfaceDAO() throws Exception {
+        if (tipoDocumentoIfaceDAO == null) {
+            CreateInstance<TipoDocumentoIfaceDAO> instane = new CreateInstance<>();
+            tipoDocumentoIfaceDAO = instane.newInstance(FactoryTipoDocumentoDAO.getInstance());
+        }
+        return tipoDocumentoIfaceDAO;
+    }
 //
 //    @Bean
 //    public PerfilIfaceDAO getPerfilIfaceDAO() {
@@ -103,24 +106,26 @@ public class MainApp extends SpringBootServletInitializer {
 //        }
 //        return perfilIfaceDAO;
 //    }
-//
-//    @Bean
-//    public DireccionIfaceDAO getDireccionIfaceDAO() {
-//        if (direccionIfaceDAO == null) {
-//            direccionIfaceDAO = new DireccionImplDAO();
-//        }
-//
-//        return direccionIfaceDAO;
-//    }
-//
-//    @Bean
-//    public EmpresaIfaceDAO getEmpresaIfaceDAO() {
-//        if (empresaIfaceDAO == null) {
-//            empresaIfaceDAO = new EmpresaImplDAO();
-//        }
-//
-//        return empresaIfaceDAO;
-//    }
+
+    @Bean
+    public DireccionIfaceDAO getDireccionIfaceDAO() throws Exception {
+        if (direccionIfaceDAO == null) {
+            CreateInstance<DireccionIfaceDAO> instance = new CreateInstance<>();
+            direccionIfaceDAO = instance.newInstance(FactoryDireccionDAO.getInstance());
+        }
+
+        return direccionIfaceDAO;
+    }
+
+    @Bean
+    public EmpresaIfaceDAO getEmpresaIfaceDAO() throws Exception {
+        if (empresaIfaceDAO == null) {
+            CreateInstance<EmpresaIfaceDAO> instance = new CreateInstance<>();
+            empresaIfaceDAO = instance.newInstance(FactoryEmpresaDAO.getInstance());
+        }
+
+        return empresaIfaceDAO;
+    }
 //
 //    @Bean
 //    public ClienteIfaceDAO getClienteIfaceDAO() {

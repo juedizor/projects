@@ -6,32 +6,31 @@
 package co.com.jj.appform.persistence.daofactory.createdao;
 
 import co.com.jj.appform.persistence.daofactory.FactoryIface;
-import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
-import co.com.jj.appform.persistence.impl.EmpresaImplDAO;
+import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
+import co.com.jj.appform.persistence.impl.TipoDocumentoImplDAO;
 
 /**
  *
- * @author jeio
+ * @author julio.izquierdo
  */
-public class FactoryEmpresaDAO implements FactoryIface<EmpresaIfaceDAO> {
+public class FactoryTipoDocumentoDAO implements FactoryIface<TipoDocumentoIfaceDAO>{
 
     private static FactoryIface factoryIface;
-
-    private FactoryEmpresaDAO() {
+    
+    private FactoryTipoDocumentoDAO() {
     }
 
     public static FactoryIface getInstance() {
         if (factoryIface == null) {
-            factoryIface = new FactoryEmpresaDAO();
+            factoryIface = new FactoryTipoDocumentoDAO();
         }
 
         return factoryIface;
     }
-
+    
     @Override
-    public EmpresaIfaceDAO newInstance() throws Exception { 
-        return new EmpresaImplDAO();
+    public TipoDocumentoIfaceDAO newInstance() throws Exception {
+        return new TipoDocumentoImplDAO();
     }
-
-
+    
 }

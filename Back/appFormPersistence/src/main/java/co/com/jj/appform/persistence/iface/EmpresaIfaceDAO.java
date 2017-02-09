@@ -12,8 +12,8 @@ import co.com.jj.appform.vo.EmpresaVO;
  *
  * @author julio.izquierdo
  */
-public interface EmpresaIfaceDAO extends PersistenciaIfaceDAO<EmpresaVO>{
+public interface EmpresaIfaceDAO extends PersistenciaIfaceDAO<EmpresaVO, EmpresaVO>{
 
-    EmpresaVO findByIdPersona(int idPersona) throws Exception;
+    
 
 }

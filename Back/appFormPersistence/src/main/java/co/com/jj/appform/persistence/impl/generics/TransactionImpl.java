@@ -25,10 +25,9 @@ public class TransactionImpl<T> extends TransactionTemplate implements Transacti
     public TransactionImpl(PlatformTransactionManager platformTransactionManager) throws Exception {
         super(platformTransactionManager);
     }
-    
 
     @Override
-    public TransactionTemplate getTransactionTemplate() throws Exception{
+    public TransactionTemplate getTransactionTemplate() throws Exception {
         return transactionTemplate;
     }
 
@@ -41,7 +40,7 @@ public class TransactionImpl<T> extends TransactionTemplate implements Transacti
     public void setTransactionTemplate(PlatformTransactionManager platformTransactionManager) throws Exception {
         transactionTemplate = new TransactionTemplate(platformTransactionManager);
     }
-    
+
     @Override
     public <T extends Object> T execute(TransactionCallbackIface<T> action) throws TransactionException, Exception {
         T t = null;
@@ -49,14 +48,11 @@ public class TransactionImpl<T> extends TransactionTemplate implements Transacti
         try {
             t = action.ejecutar();
             getTransactionManager().commit(status);
-        }catch (Exception e){
+        } catch (Exception e) {
             getTransactionManager().rollback(status);
             throw new Exception(e.getMessage(), e);
         }
         return t;
     }
-    
-    
-    
-    
+
 }

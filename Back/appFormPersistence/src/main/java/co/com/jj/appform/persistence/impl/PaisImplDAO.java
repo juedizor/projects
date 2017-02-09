@@ -15,21 +15,27 @@ import java.util.List;
  */
 public class PaisImplDAO implements PaisIfaceDAO{
 
+    @Override
     public void save(PaisVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void merge(PaisVO object) throws Exception {
+    @Override
+    public void merge(PaisVO object, PaisVO objectAct) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public List<PaisVO> findAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<PaisVO> findById(PaisVO object) throws Exception {
+    @Override
+    public List<PaisVO> findByPrimaryKey(PaisVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
     
     
     

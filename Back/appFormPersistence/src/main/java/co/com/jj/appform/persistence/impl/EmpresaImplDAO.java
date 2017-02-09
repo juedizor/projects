@@ -5,9 +5,13 @@
  */
 package co.com.jj.appform.persistence.impl;
 
+import co.com.jj.appform.persistence.daofactory.CreateInstance;
 import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
+import co.com.jj.appform.persistence.iface.generics.DataAccessGenericIface;
+import co.com.jj.appform.persistence.impl.generics.FactoryDataAccesGenerics;
 import co.com.jj.appform.vo.EmpresaVO;
 import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 /**
  *
@@ -15,30 +19,62 @@ import java.util.List;
  */
 public class EmpresaImplDAO implements EmpresaIfaceDAO {
 
-    public EmpresaVO findByIdPersona(int idPersona) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private final DataAccessGenericIface DATA_ACCESS_GENERIC_IFACE;
+
+    public EmpresaImplDAO() throws Exception {
+        CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
+        DATA_ACCESS_GENERIC_IFACE = instace.newInstance(FactoryDataAccesGenerics.getInstance());
     }
 
+    @Override
     public void save(EmpresaVO object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO empresa (codigo_tipo_documento, "
+                + "numero_documento, "
+                + "nombre_empresa, "
+                + "descripcion_empresa, "
+                + "fecha_registro, "
+                + "fecha_modificacion) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+        Object[] params = {
+            object.getCodigoTipoDocumento(),
+            object.getNumeroDocumento(),
+            object.getNombreEmpresa(),
+            object.getDescripcionEmpresa(),
+            object.getFechaRegistro(),
+            object.getFechaModificacion()
+        };
+        DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().update(sql, params);
     }
 
-    public void merge(EmpresaVO object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public void merge(EmpresaVO object, EmpresaVO objectAct) throws Exception {
+        String sql = "UPDATE empresa SET "
+                + "codigo_tipo_documento = ?, "
+                + "numero_documento = ?, "
+                + "nombre_empresa = ?, "
+                + "descripcion_empresa = ?, "
+                + "fecha_modificacion = ? "
+                + "WHERE codigo_tipo_documento = ? AND numero_documento = ?";
+        Object[] params = {objectAct.getCodigoTipoDocumento(),
+            objectAct.getNumeroDocumento()};
+        DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().update(sql, params);
+
     }
 
+    @Override
     public List<EmpresaVO> findAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM empresa";
+        return DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<EmpresaVO>());
     }
 
-    public List<EmpresaVO> findById(EmpresaVO object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public List<EmpresaVO> findByPrimaryKey(EmpresaVO object) throws Exception {
+        String sql = "SELECT * FROM empresa WHERE codigo_tipo_documento = ? "
+                + "AND numero_documento = ?";
+        return DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql,
+                new BeanPropertyRowMapper<EmpresaVO>(),
+                object.getCodigoTipoDocumento(),
+                object.getNumeroDocumento());
     }
-
-    
-    
-    
-   
-
 
 }

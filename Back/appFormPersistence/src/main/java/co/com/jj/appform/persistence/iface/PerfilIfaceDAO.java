@@ -12,7 +12,7 @@ import co.com.jj.appform.vo.PerfilVO;
  *
  * @author jeio
  */
-public interface PerfilIfaceDAO extends PersistenciaIfaceDAO<PerfilVO>{
+public interface PerfilIfaceDAO extends PersistenciaIfaceDAO<PerfilVO, PerfilVO>{
     
     public PerfilVO findByNombre(String nombre) throws Exception;
     

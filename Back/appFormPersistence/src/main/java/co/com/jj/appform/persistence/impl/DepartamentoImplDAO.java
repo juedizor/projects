@@ -15,25 +15,32 @@ import java.util.List;
  */
 public class DepartamentoImplDAO implements DepartamentoIfaceDAO {
 
+    @Override
     public List<DepartamentoVO> findByIdPais(int idPais) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void save(DepartamentoVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void merge(DepartamentoVO object) throws Exception {
+    @Override
+    public void merge(DepartamentoVO object, DepartamentoVO objectAct) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public List<DepartamentoVO> findAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<DepartamentoVO> findById(DepartamentoVO object) throws Exception {
+    @Override
+    public List<DepartamentoVO> findByPrimaryKey(DepartamentoVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 
    
 

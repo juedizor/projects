@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author julio.izquierdo
  */
-public interface DepartamentoIfaceDAO extends PersistenciaIfaceDAO<DepartamentoVO>{
+public interface DepartamentoIfaceDAO extends PersistenciaIfaceDAO<DepartamentoVO, DepartamentoVO>{
     
     public List<DepartamentoVO> findByIdPais(int idPais) throws Exception;
     

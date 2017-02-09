@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author jeio
  */
-public interface UsuarioIfaceDAO extends PersistenciaIfaceDAO<UsuarioVO>{
+public interface UsuarioIfaceDAO extends PersistenciaIfaceDAO<UsuarioVO, UsuarioVO>{
 
     public UsuarioVO findByNombreUsuario(String nombreUsuario) throws Exception;
 

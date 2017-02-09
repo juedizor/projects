@@ -5,7 +5,7 @@
  */
 package co.com.jj.appform.persistence.daofactory;
 
-import co.com.jj.appform.persistence.impl.generics.TransactionImpl;
+import co.com.jj.appform.persistence.iface.generics.TransactionIface;
 import org.springframework.transaction.PlatformTransactionManager;
 
 /**
@@ -14,6 +14,6 @@ import org.springframework.transaction.PlatformTransactionManager;
  */
 public interface FactoryTransactionIface {
     
-    public TransactionImpl newInstance(PlatformTransactionManager platformTransactionManager) throws Exception;
+    public TransactionIface newInstance(PlatformTransactionManager platformTransactionManager) throws Exception;
     
 }

@@ -11,16 +11,17 @@ import java.util.List;
  *
  * @author jeio
  * @param <T>
+ * @param <T2>
  */
-public interface PersistenciaIfaceDAO<T> {
+public interface PersistenciaIfaceDAO<T, T2> {
 
     void save(T object) throws Exception;
 
-    void merge(T object) throws Exception;
+    void merge(T object, T2 objectAct) throws Exception;
 
     List<T> findAll() throws Exception;
 
-    List<T> findById(T object) throws Exception;
+    List<T> findByPrimaryKey(T object) throws Exception;
     
 
 }

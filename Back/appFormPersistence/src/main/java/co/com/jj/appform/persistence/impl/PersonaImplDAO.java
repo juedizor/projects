@@ -64,7 +64,7 @@ public class PersonaImplDAO implements PersonaIfaceDAO {
     }
 
     @Override
-    public void merge(PersonaVO object) throws Exception {
+    public void merge(PersonaVO object, PersonaVO objectAct) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -74,7 +74,7 @@ public class PersonaImplDAO implements PersonaIfaceDAO {
     }
 
     @Override
-    public List<PersonaVO> findById(PersonaVO object) throws Exception {
+    public List<PersonaVO> findByPrimaryKey(PersonaVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

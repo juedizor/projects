@@ -12,7 +12,7 @@ import co.com.jj.appform.vo.PaisVO;
  *
  * @author julio.izquierdo
  */
-public interface PaisIfaceDAO extends PersistenciaIfaceDAO<PaisVO>{
+public interface PaisIfaceDAO extends PersistenciaIfaceDAO<PaisVO, PaisVO>{
     
     
     

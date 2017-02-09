@@ -12,8 +12,8 @@ import co.com.jj.appform.vo.DireccionVO;
  *
  * @author julio.izquierdo
  */
-public interface DireccionIfaceDAO extends PersistenciaIfaceDAO<DireccionVO>{
+public interface DireccionIfaceDAO extends PersistenciaIfaceDAO<DireccionVO, DireccionVO>{
 
-    DireccionVO findByIdPersona(int idPersona) throws Exception;
+    DireccionVO findDireccion(DireccionVO direccionVO) throws Exception;
 
 }

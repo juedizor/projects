@@ -24,6 +24,7 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
     public UsuarioImplDAO() throws Exception {
         CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
         DATA_ACCESS_GENERIC_IFACE = instace.newInstance(FactoryDataAccesGenerics.getInstance());
+        
     }
 
     @Override
@@ -78,18 +79,30 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
     }
 
     @Override
-    public void merge(UsuarioVO object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void merge(UsuarioVO object, UsuarioVO objectAct) throws Exception {
+        String sql = "UPDATE usuario SET "
+                + "codigo_perfil = ?, "
+                + "codigo_tipo_documento = ?, "
+                + "numero_documento = ?, "
+                + "nombre_usuario = ?, "
+                + "contrasena = ?, "
+                + "activo = ?, "
+                + "fecha_modificacion = ? "
+                + "WHERE id_usuario = ?";
+        Object[] params = {objectAct.getIdUsuario()};
+        DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().update(sql, params);
     }
 
     @Override
     public List<UsuarioVO> findAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM usuario";
+        return DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<UsuarioVO>());
     }
 
     @Override
-    public List<UsuarioVO> findById(UsuarioVO object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<UsuarioVO> findByPrimaryKey(UsuarioVO object) throws Exception {
+        String sql = "SELECT * FROM usuario WHERE id_usuario = ?";
+        return DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<UsuarioVO>(), object.getIdUsuario());
     }
 
 }
