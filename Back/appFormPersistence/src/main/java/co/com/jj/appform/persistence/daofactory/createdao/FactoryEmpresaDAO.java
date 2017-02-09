@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.jj.appform.persistence.daofactory;
+package co.com.jj.appform.persistence.daofactory.createdao;
 
+import co.com.jj.appform.persistence.daofactory.FactoryIface;
 import co.com.jj.appform.persistence.impl.EmpresaImplDAO;
 
 /**
@@ -30,5 +31,6 @@ public class FactoryEmpresaDAO implements FactoryIface<EmpresaImplDAO> {
     public EmpresaImplDAO newInstance() { 
         return new EmpresaImplDAO();
     }
+
 
 }

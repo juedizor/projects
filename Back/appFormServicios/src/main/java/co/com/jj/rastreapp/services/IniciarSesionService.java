@@ -5,6 +5,7 @@
  */
 package co.com.jj.rastreapp.services;
 
+import co.com.jj.appform.vo.UsuarioVO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class IniciarSesionService {
         if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena() != null) {
             if (!inicioSesionDTO.getUsuario().trim().isEmpty() && !inicioSesionDTO.getContrasena().trim().isEmpty()) {
                 try {
-                    usuarioDTO = aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
+                    aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
                             inicioSesionDTO.getContrasena().trim());
                 } catch (Exception e) {
                     ExceptionGenerics.setCodigo(Respuestas.ERROR);

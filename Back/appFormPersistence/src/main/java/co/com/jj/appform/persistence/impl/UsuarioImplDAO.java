@@ -5,7 +5,10 @@
  */
 package co.com.jj.appform.persistence.impl;
 
+import co.com.jj.appform.persistence.daofactory.CreateInstance;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
+import co.com.jj.appform.persistence.iface.generics.DataAccessGenericIface;
+import co.com.jj.appform.persistence.impl.generics.FactoryDataAccesGenerics;
 import co.com.jj.appform.vo.UsuarioVO;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,16 +17,21 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
  *
  * @author jeio
  */
-public class UsuarioImplDAO extends DataAccesGenericImpl implements UsuarioIfaceDAO {
+public class UsuarioImplDAO implements UsuarioIfaceDAO {
+
+    private final DataAccessGenericIface DATA_ACCESS_GENERIC_IFACE;
 
     public UsuarioImplDAO() throws Exception {
-        super();
+        CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
+        DATA_ACCESS_GENERIC_IFACE = instace.newInstance(FactoryDataAccesGenerics.getInstance());
     }
 
     @Override
     public UsuarioVO findByNombreUsuario(String nombreUsuario) throws Exception {
-        sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
-        List<UsuarioVO> listUsuarioVOs = getJdbcTemplate().query(sql, new BeanPropertyRowMapper(UsuarioVO.class), nombreUsuario);
+        String sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
+        List<UsuarioVO> listUsuarioVOs = DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql,
+                new BeanPropertyRowMapper(UsuarioVO.class),
+                nombreUsuario);
         if (listUsuarioVOs != null && !listUsuarioVOs.isEmpty()) {
             return listUsuarioVOs.get(0);
         }
@@ -32,7 +40,11 @@ public class UsuarioImplDAO extends DataAccesGenericImpl implements UsuarioIface
 
     @Override
     public List<UsuarioVO> findByNombreUsuarioContrasena(String nombreUsuario, String contrasena) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM usuario WHERE nombre_usuario = ? AND contrasena = ?";
+        List<UsuarioVO> listUsuarioVOs = DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql,
+                new BeanPropertyRowMapper(UsuarioVO.class),
+                nombreUsuario, contrasena);
+        return listUsuarioVOs;
     }
 
     @Override
@@ -42,7 +54,27 @@ public class UsuarioImplDAO extends DataAccesGenericImpl implements UsuarioIface
 
     @Override
     public void save(UsuarioVO object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO usuario (codigo_perfil, "
+                + "codigo_tipo_documento, "
+                + "numero_documento, "
+                + "nombre_usuario, "
+                + "contrasena, "
+                + "fecha_creacion, "
+                + "activo, "
+                + "fecha_modificacion) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] params = {
+            object.getCodigoPerfil(),
+            object.getCodigoTipoDocumento(),
+            object.getNumeroDocumento(),
+            object.getNombreUsuario(),
+            object.getContrasena(),
+            object.getFechaCreacion(),
+            object.isActivo(),
+            object.getFechaModificacion()
+        };
+        DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().update(sql, params);
+
     }
 
     @Override
