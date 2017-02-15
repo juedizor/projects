@@ -6,7 +6,11 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.PersistenceApp;
+<<<<<<< HEAD
+import co.com.jj.appform.entity.Ciudad;
+=======
 import co.com.jj.appform.vo.CiudadVO;
+>>>>>>> 938eb6c289761f751e3bfda2c526ad0e3a2ebcc8
 import co.com.jj.appform.entity.Cliente;
 import co.com.jj.appform.entity.Direccion;
 import co.com.jj.appform.entity.Empresa;
@@ -79,9 +83,14 @@ public class GestionClienteImpl implements GestionClientesIface {
 
                 Cliente cliente = new Cliente();
 
+<<<<<<< HEAD
+                TipoDocumento tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
+                Ciudad ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
+=======
                 TipoDocumentoVO tipoDocumento = ENTITY_UTILS.getTipoDocumento(clienteDTO.getPersona().getTipoDocumento());
                 
                 CiudadVO ciudad = ENTITY_UTILS.getCiudad(clienteDTO.getPersona().getCiudad());
+>>>>>>> 938eb6c289761f751e3bfda2c526ad0e3a2ebcc8
                 Persona persona = ENTITY_UTILS.getPersona(clienteDTO.getPersona());
                 persona.setIdCiudad(ciudad);
                 persona.setIdTipoDocumento(tipoDocumento);

@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS telefono_sede;
 DROP TABLE IF EXISTS direccion_sede;
 DROP TABLE IF EXISTS sede_empresa;
 DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS perfil;
 DROP TABLE IF EXISTS empresa;
 DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS telefono;
@@ -10,7 +11,6 @@ DROP TABLE IF EXISTS persona;
 DROP TABLE IF EXISTS ciudad;
 DROP TABLE IF EXISTS departamento;
 DROP TABLE IF EXISTS pais;
-DROP TABLE IF EXISTS perfil;
 DROP TABLE IF EXISTS tipo_documento;
 DROP TABLE IF EXISTS tipo_sede;
 
@@ -28,14 +28,6 @@ CREATE TABLE tipo_documento
 	descripcion_tipo_documento VARCHAR(50) NOT NULL,
 	codigo_corto CHAR(3) NOT NULL,
 	PRIMARY KEY (codigo_tipo_documento)
-) 
-;
-
-CREATE TABLE perfil
-(
-	codigo_perfil VARCHAR(50) NOT NULL,
-	nombre_perfil VARCHAR(50) NOT NULL,
-	PRIMARY KEY (codigo_perfil)
 ) 
 ;
 
@@ -196,6 +188,22 @@ ALTER TABLE empresa ADD CONSTRAINT FK_empresa_persona
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
 
+CREATE TABLE perfil
+(
+	codigo_perfil VARCHAR(50) NOT NULL,
+	nombre_perfil VARCHAR(50) NOT NULL,
+	codigo_tipo_documento INTEGER NOT NULL,
+	numero_documento BIGINT NOT NULL,
+	PRIMARY KEY (codigo_perfil),
+	KEY (codigo_tipo_documento, numero_documento)
+) 
+;
+
+
+ALTER TABLE perfil ADD CONSTRAINT FK_perfil_empresa 
+	FOREIGN KEY (codigo_tipo_documento, numero_documento) REFERENCES empresa (codigo_tipo_documento, numero_documento)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
 
 CREATE TABLE cliente
 (

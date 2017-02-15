@@ -20,6 +20,7 @@ public class ConfiguracionImpl implements ConfiguracionIface {
     private String bd;
     private String port;
     private String host;
+    private String gestor;
     private static ConfiguracionIface configuracionIface;
 
     private ConfiguracionImpl() {
@@ -48,36 +49,48 @@ public class ConfiguracionImpl implements ConfiguracionIface {
         user = resourceBundle.getString(USER);
         port = resourceBundle.getString(PORT);
         host = resourceBundle.getString(HOST);
+        gestor = resourceBundle.getString(GESTOR);
     }
 
+    @Override
     public String getDriver() {
         return driver;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }
 
+    @Override
     public String getUser() {
         return user;
     }
 
+    @Override
     public String getPass() {
         return pass;
     }
 
+    @Override
     public String getBd() {
         return bd;
     }
 
+    @Override
     public String getPort() {
         return port;
     }
 
+    @Override
     public String getHost() {
         return host;
     }
-    
-    
+
+    @Override
+    public String getGestor() {
+        return gestor;
+    }
+
 
 }

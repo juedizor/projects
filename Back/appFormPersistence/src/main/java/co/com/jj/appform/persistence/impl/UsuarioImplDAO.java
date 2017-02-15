@@ -8,17 +8,28 @@ package co.com.jj.appform.persistence.impl;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.appform.vo.UsuarioVO;
 import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 /**
  *
  * @author jeio
  */
-public class UsuarioImplDAO implements UsuarioIfaceDAO {
+public class UsuarioImplDAO extends DataAccesGenericImpl implements UsuarioIfaceDAO {
 
-    
+    public UsuarioImplDAO() throws Exception {
+        super();
+    }
+
     @Override
     public UsuarioVO findByNombreUsuario(String nombreUsuario) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
+        List<UsuarioVO> listUsuarioVOs = getJdbcTemplate().query(sql,
+                new BeanPropertyRowMapper(UsuarioVO.class),
+                nombreUsuario);
+        if (listUsuarioVOs != null && !listUsuarioVOs.isEmpty()) {
+            return listUsuarioVOs.get(0);
+        }
+        return null;
     }
 
     @Override
@@ -32,25 +43,23 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
     }
 
     @Override
-    public void save(UsuarioVO object) throws Exception{
+    public void save(UsuarioVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void merge(UsuarioVO object) throws Exception{
+    public void merge(UsuarioVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<UsuarioVO> findAll() throws Exception{
+    public List<UsuarioVO> findAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<UsuarioVO> findById(UsuarioVO object) throws Exception{
+    public List<UsuarioVO> findById(UsuarioVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
 
 }
