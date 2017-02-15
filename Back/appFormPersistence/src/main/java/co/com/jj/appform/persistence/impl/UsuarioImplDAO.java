@@ -29,13 +29,8 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
 
     @Override
     public UsuarioVO findByNombreUsuario(String nombreUsuario) throws Exception {
-<<<<<<< HEAD
-        sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
-        List<UsuarioVO> listUsuarioVOs = getJdbcTemplate().query(sql,
-=======
         String sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
         List<UsuarioVO> listUsuarioVOs = DATA_ACCESS_GENERIC_IFACE.getJdbcTemplate().query(sql,
->>>>>>> 18a0713c8067793599ce8cd6953b3b5648f07493
                 new BeanPropertyRowMapper(UsuarioVO.class),
                 nombreUsuario);
         if (listUsuarioVOs != null && !listUsuarioVOs.isEmpty()) {
