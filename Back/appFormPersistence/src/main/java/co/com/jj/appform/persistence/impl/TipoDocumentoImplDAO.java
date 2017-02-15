@@ -5,11 +5,12 @@
  */
 package co.com.jj.appform.persistence.impl;
 
-import co.com.jj.appform.PersistenceApp;
-import co.com.jj.appform.vo.TipoDocumentoVO;
+import co.com.jj.appform.persistence.daofactory.CreateInstance;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
+import co.com.jj.appform.persistence.iface.generics.DataAccessGenericIface;
+import co.com.jj.appform.persistence.impl.generics.FactoryDataAccesGenerics;
+import co.com.jj.appform.vo.TipoDocumentoVO;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
@@ -17,31 +18,31 @@ import javax.persistence.EntityManager;
  */
 public class TipoDocumentoImplDAO implements TipoDocumentoIfaceDAO {
 
-    private EntityManager manager;
+    private final DataAccessGenericIface DATA_ACCESS_GENERIC_IFACE;
+    
+    public TipoDocumentoImplDAO() throws Exception {
+        CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
+        DATA_ACCESS_GENERIC_IFACE = instace.newInstance(FactoryDataAccesGenerics.getInstance());
+    }
+
+    @Override
+    public void save(TipoDocumentoVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void merge(TipoDocumentoVO object, TipoDocumentoVO objectAct) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public List<TipoDocumentoVO> findAll() throws Exception {
-        return manager.createNamedQuery("TipoDocumento.findAll").getResultList();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TipoDocumentoVO findById(int idTipoDocumento) throws Exception {
-        List<TipoDocumentoVO> listTipoDocumento = manager.
-                createNamedQuery("TipoDocumento.findByIdTipoDocumento").
-                setParameter("idTipoDocumento", idTipoDocumento)
-                .getResultList();
-        if (listTipoDocumento != null && !listTipoDocumento.isEmpty()) {
-            return listTipoDocumento.get(0);
-        }
-        return null;
-
+    public List<TipoDocumentoVO> findByPrimaryKey(TipoDocumentoVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
-    }
-    
-    
 
 }

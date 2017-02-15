@@ -5,6 +5,7 @@
  */
 package co.com.jj.appform.persistence.iface;
 
+import co.com.jj.appform.persistence.iface.generics.PersistenciaIfaceDAO;
 import co.com.jj.appform.vo.DepartamentoVO;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author julio.izquierdo
  */
-public interface DepartamentoIfaceDAO extends PersistenciaIfaceDAO<DepartamentoVO>{
+public interface DepartamentoIfaceDAO extends PersistenciaIfaceDAO<DepartamentoVO, DepartamentoVO>{
     
     public List<DepartamentoVO> findByIdPais(int idPais) throws Exception;
     

@@ -5,6 +5,7 @@
  */
 package co.com.jj.rastreapp.business.iface;
 
+import co.com.jj.appform.vo.UsuarioVO;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface GestionUsuariosIface {
 
     int actualizarUsuario(UsuarioDTO usuarioDTO) throws Exception;
 
-    public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception;
+    public UsuarioVO getUserActivo(String nombreUsuario, String contrasena) throws Exception;
 
     public UsuarioDTO getUser(String nombreUsuario) throws Exception;
 

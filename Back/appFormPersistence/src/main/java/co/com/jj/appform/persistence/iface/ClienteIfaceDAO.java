@@ -5,6 +5,7 @@
  */
 package co.com.jj.appform.persistence.iface;
 
+import co.com.jj.appform.persistence.iface.generics.PersistenciaIfaceDAO;
 import co.com.jj.appform.vo.ClienteVO;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author jeio
  */
-public interface ClienteIfaceDAO extends PersistenciaIfaceDAO<ClienteVO>{
+public interface ClienteIfaceDAO extends PersistenciaIfaceDAO<ClienteVO, ClienteVO>{
     
     List<ClienteVO> findByIdEmpresa(int idEmpresa) throws Exception;
 

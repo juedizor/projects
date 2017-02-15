@@ -15,25 +15,32 @@ import java.util.List;
  */
 public class ClienteImplDAO implements ClienteIfaceDAO {
 
+    @Override
     public List<ClienteVO> findByIdEmpresa(int idEmpresa) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void save(ClienteVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void merge(ClienteVO object) throws Exception {
+    @Override
+    public void merge(ClienteVO object, ClienteVO objectAct) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public List<ClienteVO> findAll() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<ClienteVO> findById(ClienteVO object) throws Exception {
+    @Override
+    public List<ClienteVO> findByPrimaryKey(ClienteVO object) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
     
 

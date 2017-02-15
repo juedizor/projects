@@ -6,7 +6,7 @@
 package co.com.jj.appform;
 
 import co.com.jj.appform.persistence.daofactory.CreateInstance;
-import co.com.jj.appform.persistence.daofactory.FactoryUsuarioDAO;
+import co.com.jj.appform.persistence.daofactory.createdao.FactoryUsuarioDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 
 /**
@@ -16,8 +16,8 @@ import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 public class Test {
     
     public static void main(String[] args) throws Exception {
-        UsuarioIfaceDAO usuarioIfaceDAO = (UsuarioIfaceDAO) CreateInstance.getInstance().newInstance(FactoryUsuarioDAO.getInstance());
-        usuarioIfaceDAO.findByNombreUsuario("juedizor");
+       // UsuarioIfaceDAO usuarioIfaceDAO = (UsuarioIfaceDAO) CreateInstance.getInstance().newInstance(FactoryUsuarioDAO.getInstance());
+       // usuarioIfaceDAO.findByNombreUsuario("juedizor");
     }
     
 }

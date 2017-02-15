@@ -5,13 +5,14 @@
  */
 package co.com.jj.appform.persistence.iface;
 
+import co.com.jj.appform.persistence.iface.generics.PersistenciaIfaceDAO;
 import co.com.jj.appform.vo.PaisVO;
 
 /**
  *
  * @author julio.izquierdo
  */
-public interface PaisIfaceDAO extends PersistenciaIfaceDAO<PaisVO>{
+public interface PaisIfaceDAO extends PersistenciaIfaceDAO<PaisVO, PaisVO>{
     
     
     

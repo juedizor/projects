@@ -5,6 +5,7 @@
  */
 package co.com.jj.appform.persistence.iface;
 
+import co.com.jj.appform.persistence.iface.generics.PersistenciaIfaceDAO;
 import co.com.jj.appform.vo.UsuarioVO;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author jeio
  */
-public interface UsuarioIfaceDAO extends PersistenciaIfaceDAO<UsuarioVO>{
+public interface UsuarioIfaceDAO extends PersistenciaIfaceDAO<UsuarioVO, UsuarioVO>{
 
     public UsuarioVO findByNombreUsuario(String nombreUsuario) throws Exception;
 

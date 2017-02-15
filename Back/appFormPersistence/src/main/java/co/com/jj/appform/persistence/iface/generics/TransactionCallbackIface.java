@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.jj.appform.persistence.daofactory;
+package co.com.jj.appform.persistence.iface.generics;
 
 /**
  *
- * @author jeio
+ * @author julio.izquierdo
  * @param <T>
  */
-public interface FactoryIface<T> {
-    
-    public T newInstance() throws Exception;
-    
-    
+public interface TransactionCallbackIface<T extends Object> {
+
+    public T ejecutar() throws Exception;
+
 }

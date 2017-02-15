@@ -8,8 +8,6 @@ package co.com.jj.appform.persistence.impl;
 import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -17,7 +15,20 @@ import javax.persistence.Query;
  */
 public class CiudadImplDAO implements CiudadIfaceDAO {
 
-    private EntityManager manager;
+    @Override
+    public List<CiudadVO> findByIdDepartamento(int idDepartamento) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save(CiudadVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void merge(CiudadVO object, CiudadVO objectAct) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public List<CiudadVO> findAll() throws Exception {
@@ -25,22 +36,10 @@ public class CiudadImplDAO implements CiudadIfaceDAO {
     }
 
     @Override
-    public List<CiudadVO> findByIdDepartamento(int idDepartamento) throws Exception {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT c FROM Ciudad c WHERE c.idDepartamento.idDepartamento = :idDepartamento");
-        Query query = manager.createQuery(sql.toString());
-        query.setParameter("idDepartamento", idDepartamento);
-        List<CiudadVO> listCiudad = query.getResultList();
-        if (listCiudad != null && !listCiudad.isEmpty()) {
-            return listCiudad;
-        }
-
-        return null;
+    public List<CiudadVO> findByPrimaryKey(CiudadVO object) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setEntityManager(EntityManager manager) {
-        this.manager = manager;
-    }
+    
 
 }

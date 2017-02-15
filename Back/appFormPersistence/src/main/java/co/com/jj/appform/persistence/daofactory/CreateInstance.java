@@ -12,16 +12,7 @@ package co.com.jj.appform.persistence.daofactory;
  */
 public class CreateInstance<T> {
 
-    private static CreateInstance createInstance;
-
-    private CreateInstance() {
-    }
-
-    public static CreateInstance getInstance() {
-        if (createInstance == null) {
-            createInstance = new CreateInstance();
-        }
-        return createInstance;
+    public CreateInstance() {
     }
 
     public T newInstance(FactoryIface<T> factoryIface) throws Exception {

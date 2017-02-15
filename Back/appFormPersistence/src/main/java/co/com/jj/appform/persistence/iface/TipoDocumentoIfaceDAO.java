@@ -5,18 +5,13 @@
  */
 package co.com.jj.appform.persistence.iface;
 
+import co.com.jj.appform.persistence.iface.generics.PersistenciaIfaceDAO;
 import co.com.jj.appform.vo.TipoDocumentoVO;
-import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author jeio
  */
-public interface TipoDocumentoIfaceDAO {
-    
-    public List<TipoDocumentoVO> findAll() throws Exception;
-    public TipoDocumentoVO findById(int idTipoDocumento) throws Exception;
-    public void setEntityManager(EntityManager manager);
+public interface TipoDocumentoIfaceDAO extends PersistenciaIfaceDAO<TipoDocumentoVO, TipoDocumentoVO>{
     
 }

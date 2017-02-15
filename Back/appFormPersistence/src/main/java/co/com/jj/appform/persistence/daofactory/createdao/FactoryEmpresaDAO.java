@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.jj.appform.persistence.daofactory;
+package co.com.jj.appform.persistence.daofactory.createdao;
 
+import co.com.jj.appform.persistence.daofactory.FactoryIface;
+import co.com.jj.appform.persistence.iface.EmpresaIfaceDAO;
 import co.com.jj.appform.persistence.impl.EmpresaImplDAO;
 
 /**
  *
  * @author jeio
  */
-public class FactoryEmpresaDAO implements FactoryIface<EmpresaImplDAO> {
+public class FactoryEmpresaDAO implements FactoryIface<EmpresaIfaceDAO> {
 
     private static FactoryIface factoryIface;
 
@@ -27,8 +29,9 @@ public class FactoryEmpresaDAO implements FactoryIface<EmpresaImplDAO> {
     }
 
     @Override
-    public EmpresaImplDAO newInstance() { 
+    public EmpresaIfaceDAO newInstance() throws Exception { 
         return new EmpresaImplDAO();
     }
+
 
 }
