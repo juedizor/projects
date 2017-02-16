@@ -5,10 +5,8 @@
  */
 package co.com.jj.appform.persistence.iface.generics;
 
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  *
@@ -17,13 +15,8 @@ import org.springframework.transaction.support.TransactionTemplate;
  */
 public interface TransactionIface<T> {
 
-    TransactionTemplate getTransactionTemplate() throws Exception;
-    
-    void setTransactionTemplate(PlatformTransactionManager platformTransactionManager) throws Exception;
-
     DefaultTransactionDefinition getDefaultTransactionDefinition() throws Exception;
-    
-    public <T> T execute(TransactionCallbackIface<T> action) throws TransactionException, Exception;
-    
-    
+
+    public <T extends Object> T execute(TransactionCallbackIface<T> action) throws TransactionException, Exception;
+
 }

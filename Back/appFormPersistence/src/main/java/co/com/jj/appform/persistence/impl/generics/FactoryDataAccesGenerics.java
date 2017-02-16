@@ -7,7 +7,6 @@ package co.com.jj.appform.persistence.impl.generics;
 
 import co.com.jj.appform.persistence.daofactory.FactoryIface;
 import co.com.jj.appform.persistence.iface.generics.DataAccessGenericIface;
-import co.com.jj.appform.persistence.impl.generics.DataAccesGenericImpl;
 
 /**
  *

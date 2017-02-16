@@ -31,8 +31,7 @@ public class GestionEmpresasImpl implements GestionEmpresasIface {
     PersonaIfaceDAO personaIfaceDAO;
     @Autowired
     TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
-    @Autowired
-    PerfilIfaceDAO perfilIfaceDAO;
+    
     @Autowired
     EmpresaIfaceDAO empresaIfaceDAO;
     @Autowired

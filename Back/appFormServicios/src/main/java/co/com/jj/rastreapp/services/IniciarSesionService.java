@@ -5,7 +5,6 @@
  */
 package co.com.jj.rastreapp.services;
 
-import co.com.jj.appform.vo.UsuarioVO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class IniciarSesionService {
 
     @Autowired
-    GestionUsuariosIface aeUsuarioIface;
+    GestionUsuariosIface gestionUsuariosIface;
 
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     public UsuarioDTO verificarUsuario(@RequestBody InicioSesionDTO inicioSesionDTO) throws ExceptionGenerics {
@@ -36,7 +35,7 @@ public class IniciarSesionService {
         if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena() != null) {
             if (!inicioSesionDTO.getUsuario().trim().isEmpty() && !inicioSesionDTO.getContrasena().trim().isEmpty()) {
                 try {
-                    aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
+                    gestionUsuariosIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
                             inicioSesionDTO.getContrasena().trim());
                 } catch (Exception e) {
                     ExceptionGenerics.setCodigo(Respuestas.ERROR);
