@@ -5,7 +5,6 @@
  */
 package co.com.jj.appform.cloneclasstoclass;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 /**
