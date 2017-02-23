@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.jj.appform.persistence.iface.generics;
+package co.com.jj.appform.appformtransaction.iface;
 
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.DefaultTransactionDefinition;

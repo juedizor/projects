@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.jj.appform.persistence.iface.generics;
+package co.com.jj.appform.cloneclasstoclass;
 
 /**
  *
  * @author julio.izquierdo
- * @param <T>
+ * @param <T1>
+ * @param <T2>
  */
-public interface TransactionCallbackIface<T extends Object> {
+public interface CopyClassIface<T1, T2> {
 
-    public T ejecutar() throws Exception;
-
+    T2 copyDataClassToClass(T1 class1, T2 class2) throws IllegalArgumentException, IllegalAccessException;
 }

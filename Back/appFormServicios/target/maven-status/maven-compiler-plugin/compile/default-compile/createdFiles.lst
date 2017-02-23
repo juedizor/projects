@@ -1,4 +1,5 @@
 co\com\jj\rastreapp\dto\EmpresaDTO.class
+co\com\jj\rastreapp\util\ReadProperties.class
 co\com\jj\rastreapp\dto\UsuarioDTO.class
 co\com\jj\rastreapp\excepcion\ExceptionGenerics.class
 co\com\jj\rastreapp\MainApp.class
@@ -22,5 +23,6 @@ co\com\jj\rastreapp\services\IniciarSesionService.class
 co\com\jj\rastreapp\dto\FormulariosDTO.class
 co\com\jj\rastreapp\business\iface\GestionEmpresasIface.class
 co\com\jj\rastreapp\business\iface\GestionPersonalIface.class
+co\com\jj\rastreapp\business\impl\GestionEmpresasImpl.class
 co\com\jj\rastreapp\dto\TipoDocumentoDTO.class
 co\com\jj\rastreapp\business\iface\GestionFormulariosIface.class

@@ -5,9 +5,11 @@
  */
 package co.com.jj.rastreapp.business.impl;
 
+import co.com.jj.appform.appformtransaction.iface.TransactionIface;
+import co.com.jj.appform.cloneclasstoclass.CopyClassIface;
+import co.com.jj.appform.cloneclasstoclass.CopyClassImpl;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
-import co.com.jj.appform.persistence.iface.generics.TransactionIface;
 import co.com.jj.appform.vo.UsuarioVO;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.util.DateUtils;
+import java.lang.reflect.Field;
 
 /**
  *
@@ -53,10 +56,13 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
     }
 
     @Override
-    public UsuarioVO getUserActivo(String nombreUsuario, String contrasena) throws Exception {
+    public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception {
         List<UsuarioVO> lisUsuarioVOs = usuarioIfaceDAO.findByNombreUsuarioContrasena(nombreUsuario, contrasena);
         if (lisUsuarioVOs != null && !lisUsuarioVOs.isEmpty()) {
-            return lisUsuarioVOs.get(0);
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            CopyClassIface<UsuarioVO, UsuarioDTO> copy = new CopyClassImpl<>();
+            usuarioDTO = copy.copyDataClassToClass(lisUsuarioVOs.get(0), usuarioDTO);
+            return usuarioDTO;
         }
         return null;
     }

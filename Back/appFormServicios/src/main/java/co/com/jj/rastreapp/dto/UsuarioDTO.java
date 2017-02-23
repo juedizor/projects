@@ -14,13 +14,13 @@ import java.sql.Timestamp;
 public class UsuarioDTO {
 
     private Integer idUsuario;
+    private String codigoPerfil;
+    private Integer codigoTipoDocumento;
+    private Long numeroDocumento;
     private String nombreUsuario;
-    private String contrasena;
     private java.sql.Timestamp fechaCreacion;
     private boolean activo;
-    private PerfilDTO perfil;
-    private PersonaDTO persona;
-    private EmpresaDTO empresa;
+    private java.sql.Timestamp fechaModificacion;
 
     public UsuarioDTO() {
     }
@@ -33,20 +33,36 @@ public class UsuarioDTO {
         this.idUsuario = idUsuario;
     }
 
+    public String getCodigoPerfil() {
+        return codigoPerfil;
+    }
+
+    public void setCodigoPerfil(String codigoPerfil) {
+        this.codigoPerfil = codigoPerfil;
+    }
+
+    public Integer getCodigoTipoDocumento() {
+        return codigoTipoDocumento;
+    }
+
+    public void setCodigoTipoDocumento(Integer codigoTipoDocumento) {
+        this.codigoTipoDocumento = codigoTipoDocumento;
+    }
+
+    public Long getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(Long numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
     public String getNombreUsuario() {
         return nombreUsuario;
     }
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public Timestamp getFechaCreacion() {
@@ -65,28 +81,14 @@ public class UsuarioDTO {
         this.activo = activo;
     }
 
-    public PerfilDTO getPerfil() {
-        return perfil;
+    public Timestamp getFechaModificacion() {
+        return fechaModificacion;
     }
 
-    public void setPerfil(PerfilDTO perfil) {
-        this.perfil = perfil;
+    public void setFechaModificacion(Timestamp fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
-
-    public PersonaDTO getPersona() {
-        return persona;
-    }
-
-    public void setPersona(PersonaDTO persona) {
-        this.persona = persona;
-    }
-
-    public EmpresaDTO getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(EmpresaDTO empresa) {
-        this.empresa = empresa;
-    }
+    
+    
 
 }

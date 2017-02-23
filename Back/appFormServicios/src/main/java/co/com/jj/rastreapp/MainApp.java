@@ -5,13 +5,14 @@
  */
 package co.com.jj.rastreapp;
 
+import co.com.jj.appform.appformtransaction.factory.FactoryTransaction;
+import co.com.jj.appform.appformtransaction.iface.TransactionIface;
 import co.com.jj.appform.persistence.daofactory.CreateInstance;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryDireccionDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryEmpresaDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryPersonaDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryTipoDocumentoDAO;
 import co.com.jj.appform.persistence.impl.generics.FactoryDataAccesGenerics;
-import co.com.jj.appform.persistence.daofactory.createdao.FactoryTransaction;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryUsuarioDAO;
 import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
 import co.com.jj.appform.persistence.iface.ClienteIfaceDAO;
@@ -24,8 +25,6 @@ import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.appform.persistence.iface.generics.DataAccessGenericIface;
-import co.com.jj.appform.persistence.iface.generics.TransactionIface;
-import co.com.jj.appform.persistence.impl.generics.DataAccesGenericImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -73,7 +72,7 @@ public class MainApp extends SpringBootServletInitializer {
         return usuarioIfaceDAO;
     }
 
-    @Bean
+    @Bean 
     public TransactionIface getTransactionIface() throws Exception {
         CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
         DataAccessGenericIface dataAccesGenericIface = instace.newInstance(FactoryDataAccesGenerics.getInstance());

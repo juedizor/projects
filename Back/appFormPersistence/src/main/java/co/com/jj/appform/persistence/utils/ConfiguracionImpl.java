@@ -5,6 +5,10 @@
  */
 package co.com.jj.appform.persistence.utils;
 
+import co.com.jj.appform.msginternacionalizacion.ReadMsgIface;
+import co.com.jj.appform.msginternacionalizacion.factory.ConcretRead;
+import co.com.jj.appform.msginternacionalizacion.factory.Creator;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -23,8 +27,8 @@ public class ConfiguracionImpl implements ConfiguracionIface {
     private String gestor;
     private static ConfiguracionIface configuracionIface;
 
-    private ConfiguracionImpl() {
-
+    private ConfiguracionImpl() throws Exception {
+        ReadProperties.getInstance().setMensajes();
     }
 
     public static ConfiguracionIface getInstance() throws Exception {
@@ -33,23 +37,21 @@ public class ConfiguracionImpl implements ConfiguracionIface {
             try {
                 configuracionIface.readParamsConection();
             } catch (Exception e) {
-                throw new Exception("Error obteniendo la configuracion inicial " + e.getMessage());
+                throw new Exception(ReadProperties.getInstance().getMapMsgException().get("error_configuracion") + e.getMessage());
             }
         }
-
         return configuracionIface;
     }
 
     @Override
-    public void readParamsConection() {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(RESOURCE);
-        driver = resourceBundle.getString(DRIVER);
-        bd = resourceBundle.getString(BD);
-        pass = resourceBundle.getString(PASS);
-        user = resourceBundle.getString(USER);
-        port = resourceBundle.getString(PORT);
-        host = resourceBundle.getString(HOST);
-        gestor = resourceBundle.getString(GESTOR);
+    public void readParamsConection() throws Exception {
+        driver = ReadProperties.getInstance().getMapMsgConfig().get(DRIVER);
+        bd = ReadProperties.getInstance().getMapMsgConfig().get(BD);
+        pass = ReadProperties.getInstance().getMapMsgConfig().get(PASS);
+        user = ReadProperties.getInstance().getMapMsgConfig().get(USER);
+        port = ReadProperties.getInstance().getMapMsgConfig().get(PORT);
+        host = ReadProperties.getInstance().getMapMsgConfig().get(HOST);
+        gestor = ReadProperties.getInstance().getMapMsgConfig().get(GESTOR);
     }
 
     @Override
@@ -91,6 +93,5 @@ public class ConfiguracionImpl implements ConfiguracionIface {
     public String getGestor() {
         return gestor;
     }
-
 
 }
