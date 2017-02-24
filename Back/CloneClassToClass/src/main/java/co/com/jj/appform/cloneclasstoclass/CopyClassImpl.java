@@ -5,7 +5,10 @@
  */
 package co.com.jj.appform.cloneclasstoclass;
 
+import co.com.jj.appform.cloneclasstoclass.util.ReadProperties;
 import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +17,14 @@ import java.lang.reflect.Field;
  * @param <T2>
  */
 public class CopyClassImpl<T1, T2> implements CopyClassIface<T1, T2> {
+
+    static {
+        try {
+            ReadProperties.getInstance().setMensajes();
+        } catch (Exception ex) {
+            Logger.getLogger(CopyClassImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private void setFieldClassToClass(Field[] fieldClassRaiz, Field[] fieldClassDestino, T1 class1, T2 class2) throws IllegalArgumentException, IllegalAccessException {
         for (Field field1 : fieldClassRaiz) {
@@ -24,21 +35,24 @@ public class CopyClassImpl<T1, T2> implements CopyClassIface<T1, T2> {
                     field2.setAccessible(true);
                     field2.set(class2, field1.get(class1));
                     fieldClassDestino[i] = field2;
+                    field2.setAccessible(false);
                     break;
                 }
                 i++;
+                
             }
+            field1.setAccessible(false);
         }
     }
 
     @Override
     public T2 copyDataClassToClass(T1 class1, T2 class2) throws IllegalArgumentException, IllegalAccessException {
         if (class1 == null) {
-            throw new IllegalAccessException("Params 1 no posee instancia");
+            throw new IllegalAccessException(ReadProperties.getInstance().getMapMsg().get("error_class_params_1"));
         }
 
         if (class2 == null) {
-            throw new IllegalAccessException("Params 2 no posee instancia");
+            throw new IllegalAccessException(ReadProperties.getInstance().getMapMsg().get("error_class_params_2"));
         }
 
         Class classRaiz = class1.getClass();

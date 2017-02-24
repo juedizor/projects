@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  */
 public class UsuarioVO {
 
+    
     private Integer idUsuario;
     private String codigoPerfil;
     private Integer codigoTipoDocumento;

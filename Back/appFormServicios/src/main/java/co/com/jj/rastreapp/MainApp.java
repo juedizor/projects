@@ -10,6 +10,7 @@ import co.com.jj.appform.appformtransaction.iface.TransactionIface;
 import co.com.jj.appform.persistence.daofactory.CreateInstance;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryDireccionDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryEmpresaDAO;
+import co.com.jj.appform.persistence.daofactory.createdao.FactoryPerfilDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryPersonaDAO;
 import co.com.jj.appform.persistence.daofactory.createdao.FactoryTipoDocumentoDAO;
 import co.com.jj.appform.persistence.impl.generics.FactoryDataAccesGenerics;
@@ -25,6 +26,9 @@ import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.TipoDocumentoIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.appform.persistence.iface.generics.DataAccessGenericIface;
+import co.com.jj.appform.persistence.utils.ReadProperties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -53,6 +57,14 @@ public class MainApp extends SpringBootServletInitializer {
     private static DepartamentoIfaceDAO departamentoIfaceDAO;
     private static CiudadIfaceDAO ciudadIfaceDAO;
 
+    static {
+        try {
+            ReadProperties.getInstance().setMensajes();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(MainApp.class);
@@ -72,7 +84,7 @@ public class MainApp extends SpringBootServletInitializer {
         return usuarioIfaceDAO;
     }
 
-    @Bean 
+    @Bean
     public TransactionIface getTransactionIface() throws Exception {
         CreateInstance<DataAccessGenericIface> instace = new CreateInstance<>();
         DataAccessGenericIface dataAccesGenericIface = instace.newInstance(FactoryDataAccesGenerics.getInstance());
@@ -97,14 +109,15 @@ public class MainApp extends SpringBootServletInitializer {
         }
         return tipoDocumentoIfaceDAO;
     }
-//
-//    @Bean
-//    public PerfilIfaceDAO getPerfilIfaceDAO() {
-//        if (perfilIfaceDAO == null) {
-//            perfilIfaceDAO = new PerfilImplDAO();
-//        }
-//        return perfilIfaceDAO;
-//    }
+
+    @Bean
+    public PerfilIfaceDAO getPerfilIfaceDAO() throws Exception {
+        if (perfilIfaceDAO == null) {
+            CreateInstance<PerfilIfaceDAO> instance = new CreateInstance<>();
+            perfilIfaceDAO = instance.newInstance(FactoryPerfilDAO.getInstance());
+        }
+        return perfilIfaceDAO;
+    }
 
     @Bean
     public DireccionIfaceDAO getDireccionIfaceDAO() throws Exception {

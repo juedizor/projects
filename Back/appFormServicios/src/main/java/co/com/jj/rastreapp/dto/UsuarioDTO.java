@@ -20,7 +20,10 @@ public class UsuarioDTO {
     private String nombreUsuario;
     private java.sql.Timestamp fechaCreacion;
     private boolean activo;
+    private String contrasena;
     private java.sql.Timestamp fechaModificacion;
+    private PersonaDTO persona;
+    private PerfilDTO perfil;
 
     public UsuarioDTO() {
     }
@@ -88,7 +91,12 @@ public class UsuarioDTO {
     public void setFechaModificacion(Timestamp fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 }

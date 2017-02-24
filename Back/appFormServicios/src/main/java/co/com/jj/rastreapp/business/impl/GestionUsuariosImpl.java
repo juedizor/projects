@@ -8,6 +8,7 @@ package co.com.jj.rastreapp.business.impl;
 import co.com.jj.appform.appformtransaction.iface.TransactionIface;
 import co.com.jj.appform.cloneclasstoclass.CopyClassIface;
 import co.com.jj.appform.cloneclasstoclass.CopyClassImpl;
+import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
 import co.com.jj.appform.vo.UsuarioVO;
@@ -35,8 +36,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 //    PersonaIfaceDAO personaIfaceDAO;
 //    @Autowired
 //    TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
-//    @Autowired
-//    PerfilIfaceDAO perfilIfaceDAO;
+    @Autowired
+    PerfilIfaceDAO perfilIfaceDAO;
 //    @Autowired
 //    EmpresaIfaceDAO empresaIfaceDAO;
 //    @Autowired
@@ -46,7 +47,11 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 
     @Override
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsuarioVO usuarioVO = new UsuarioVO();
+        CopyClassIface<UsuarioDTO, UsuarioVO> copy = new CopyClassImpl<>();
+        usuarioVO = copy.copyDataClassToClass(usuarioDTO, usuarioVO);
+        System.out.println("");
+        return 0;
     }
 
     @Override
@@ -61,6 +66,7 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
             UsuarioDTO usuarioDTO = new UsuarioDTO();
             CopyClassIface<UsuarioVO, UsuarioDTO> copy = new CopyClassImpl<>();
             usuarioDTO = copy.copyDataClassToClass(lisUsuarioVOs.get(0), usuarioDTO);
+            usuarioDTO.setContrasena("");
             return usuarioDTO;
         }
         return null;
