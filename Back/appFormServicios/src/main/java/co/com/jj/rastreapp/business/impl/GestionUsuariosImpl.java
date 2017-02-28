@@ -82,7 +82,6 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
             UsuarioDTO usuarioDTO = new UsuarioDTO();
             CopyClassIface<UsuarioVO, UsuarioDTO> copy = new CopyClassImpl<>();
             usuarioDTO = copy.copyDataClassToClass(lisUsuarioVOs.get(0), usuarioDTO);
-            usuarioDTO.setContrasena("");
             list.add(usuarioDTO);
             return list;
         }
