@@ -49,9 +49,10 @@ public class IniciarSesionService {
                     ExceptionGenerics.setDescripcion(ReadProperties.getInstance().getMapMsgServices().get("error_validacion_usuario"));
                     throw new ExceptionGenerics();
                 }
+
             }
         }
         return usuarioDTO;
-    }
 
+    }
 }

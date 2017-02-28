@@ -8,6 +8,7 @@ package co.com.jj.appform.persistence.impl;
 import co.com.jj.appform.vo.CiudadVO;
 import co.com.jj.appform.persistence.iface.CiudadIfaceDAO;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *

@@ -13,7 +13,6 @@ import java.sql.Timestamp;
  */
 public class UsuarioVO {
 
-    
     private Integer idUsuario;
     private String codigoPerfil;
     private Integer codigoTipoDocumento;
@@ -95,8 +94,4 @@ public class UsuarioVO {
     public void setFechaModificacion(Timestamp fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    
-
-    
 }

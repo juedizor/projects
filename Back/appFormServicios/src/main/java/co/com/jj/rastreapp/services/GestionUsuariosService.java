@@ -36,9 +36,9 @@ public class GestionUsuariosService {
         int resultado;
         try {
             if(usuarioDTO.getIdUsuario() == null){
-                resultado = gestionUsuariosIface.registrarUsuario(usuarioDTO);
+                resultado = 0; //gestionUsuariosIface.registrar(usuarioDTO);
             }else{
-                resultado = gestionUsuariosIface.actualizarUsuario(usuarioDTO);
+                resultado = 0;// gestionUsuariosIface.actualizarUsuario(usuarioDTO);
             }
         } catch (Exception e) {
             ExceptionGenerics.setCodigo(Respuestas.ERROR);

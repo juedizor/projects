@@ -17,6 +17,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
+import co.com.jj.rastreapp.dto.factory.CreateDTO;
+import co.com.jj.rastreapp.dto.factory.createdto.CreateUsuarioDTO;
 import co.com.jj.rastreapp.util.DateUtils;
 import java.util.ArrayList;
 
@@ -47,30 +49,24 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
     private static final DateUtils DATE_UTILS = DateUtils.getInstance();
 
     @Override
+    public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception {
+        List<UsuarioVO> lisUsuarioVOs = usuarioIfaceDAO.findByNombreUsuarioContrasena(nombreUsuario, contrasena);
+        if (lisUsuarioVOs != null && !lisUsuarioVOs.isEmpty()) {
+            CreateDTO<UsuarioDTO> instance = new CreateDTO<>();
+            UsuarioDTO usuarioDTO = instance.createInstance(CreateUsuarioDTO.getInstance());
+            usuarioDTO.setNombreUsuario(lisUsuarioVOs.get(0).getNombreUsuario());
+            usuarioDTO.setActivo(lisUsuarioVOs.get(0).isActivo());
+            return usuarioDTO;
+        }
+        return null;
+    }
+        
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
         UsuarioVO usuarioVO = new UsuarioVO();
         CopyClassIface<UsuarioDTO, UsuarioVO> copy = new CopyClassImpl<>();
         usuarioVO = copy.copyDataClassToClass(usuarioDTO, usuarioVO);
         System.out.println("");
         return 0;
-    }
-
-    @Override
-    public int actualizarUsuario(UsuarioDTO usuarioDTO) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public UsuarioDTO getUserActivo(String nombreUsuario, String contrasena) throws Exception {
-        List<UsuarioVO> lisUsuarioVOs = usuarioIfaceDAO.findByNombreUsuarioContrasena(nombreUsuario, contrasena);
-        if (lisUsuarioVOs != null && !lisUsuarioVOs.isEmpty()) {
-            UsuarioDTO usuarioDTO = new UsuarioDTO();
-            CopyClassIface<UsuarioVO, UsuarioDTO> copy = new CopyClassImpl<>();
-            usuarioDTO = copy.copyDataClassToClass(lisUsuarioVOs.get(0), usuarioDTO);
-            usuarioDTO.setContrasena("");
-            return usuarioDTO;
-        }
-        return null;
     }
 
     @Override
@@ -91,6 +87,21 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
             return list;
         }
         return null;
+    }
+
+    @Override
+    public void actualizar(UsuarioDTO t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registrar(UsuarioDTO t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int actualizarUsuario(UsuarioDTO usuarioDTO) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

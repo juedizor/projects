@@ -138,11 +138,6 @@ ALTER TABLE telefono ADD CONSTRAINT FK_telefono_persona
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
 
-
-
-
-
-
 CREATE TABLE empresa
 (
 	codigo_tipo_documento INTEGER NOT NULL,
@@ -298,14 +293,3 @@ ALTER TABLE telefono_sede ADD CONSTRAINT FK_telefono_sede_sede_empresa
 	FOREIGN KEY (codigo_sede) REFERENCES sede_empresa (codigo_sede)
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
-
-
-
-
-
-
-
-
-
-
-
