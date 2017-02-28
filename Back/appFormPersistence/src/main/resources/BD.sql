@@ -138,37 +138,6 @@ ALTER TABLE telefono ADD CONSTRAINT FK_telefono_persona
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
 
-
-
-CREATE TABLE usuario
-(
-	id_usuario INTEGER NOT NULL AUTO_INCREMENT,
-	codigo_perfil VARCHAR(50) NOT NULL,
-	codigo_tipo_documento INTEGER NOT NULL,
-	numero_documento BIGINT NOT NULL,
-	nombre_usuario VARCHAR(50) NOT NULL,
-	contrasena VARCHAR(50) NOT NULL,
-	fecha_creacion TIMESTAMP NOT NULL,
-	activo BOOL NOT NULL,
-	fecha_modificacion TIMESTAMP NULL,
-	PRIMARY KEY (id_usuario),
-	KEY (codigo_perfil),
-	KEY (codigo_tipo_documento, numero_documento)
-) 
-;
-
-
-ALTER TABLE usuario ADD CONSTRAINT FK_usuario_perfil 
-	FOREIGN KEY (codigo_perfil) REFERENCES perfil (codigo_perfil)
-	ON DELETE CASCADE ON UPDATE CASCADE
-;
-
-ALTER TABLE usuario ADD CONSTRAINT FK_usuario_persona 
-	FOREIGN KEY (codigo_tipo_documento, numero_documento) REFERENCES persona (codigo_tipo_documento, numero_documento)
-	ON DELETE CASCADE ON UPDATE CASCADE
-;
-
-
 CREATE TABLE empresa
 (
 	codigo_tipo_documento INTEGER NOT NULL,
@@ -204,6 +173,37 @@ ALTER TABLE perfil ADD CONSTRAINT FK_perfil_empresa
 	FOREIGN KEY (codigo_tipo_documento, numero_documento) REFERENCES empresa (codigo_tipo_documento, numero_documento)
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
+
+CREATE TABLE usuario
+(
+	id_usuario INTEGER NOT NULL AUTO_INCREMENT,
+	codigo_perfil VARCHAR(50) NOT NULL,
+	codigo_tipo_documento INTEGER NOT NULL,
+	numero_documento BIGINT NOT NULL,
+	nombre_usuario VARCHAR(50) NOT NULL,
+	contrasena VARCHAR(50) NOT NULL,
+	fecha_creacion TIMESTAMP NOT NULL,
+	activo BOOL NOT NULL,
+	fecha_modificacion TIMESTAMP NULL,
+	PRIMARY KEY (id_usuario),
+	KEY (codigo_perfil),
+	KEY (codigo_tipo_documento, numero_documento)
+) 
+;
+
+
+ALTER TABLE usuario ADD CONSTRAINT FK_usuario_perfil 
+	FOREIGN KEY (codigo_perfil) REFERENCES perfil (codigo_perfil)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE usuario ADD CONSTRAINT FK_usuario_persona 
+	FOREIGN KEY (codigo_tipo_documento, numero_documento) REFERENCES persona (codigo_tipo_documento, numero_documento)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+
+
 
 CREATE TABLE cliente
 (

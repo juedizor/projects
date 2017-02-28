@@ -36,11 +36,17 @@ public class IniciarSesionService {
         if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena() != null) {
             if (!inicioSesionDTO.getUsuario().trim().isEmpty() && !inicioSesionDTO.getContrasena().trim().isEmpty()) {
                 try {
-                    aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
+                    usuarioDTO = aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
                             inicioSesionDTO.getContrasena().trim());
                 } catch (Exception e) {
                     ExceptionGenerics.setCodigo(Respuestas.ERROR);
                     ExceptionGenerics.setDescripcion(e.getMessage());
+                    throw new ExceptionGenerics();
+                }
+                
+                if(usuarioDTO == null){
+                    ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
+                    ExceptionGenerics.setDescripcion("Usuario/contrasña incorrecta");
                     throw new ExceptionGenerics();
                 }
             }

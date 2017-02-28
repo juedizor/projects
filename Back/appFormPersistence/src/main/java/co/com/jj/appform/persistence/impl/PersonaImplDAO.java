@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class PersonaImplDAO implements PersonaIfaceDAO {
 
+    
     private final DataAccessGenericIface DATA_ACCESS_GENERIC_IFACE;
     
     public PersonaImplDAO() throws Exception {
