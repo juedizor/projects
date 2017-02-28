@@ -7,58 +7,39 @@ package co.com.jj.rastreapp.dto;
 
 import java.sql.Timestamp;
 
-
 /**
  *
  * @author jeio
  */
 public class PersonaDTO {
-    
-    private Integer idPersona;
-    private long numeroDocumento;
+
+    private Integer codigoTipoDocumento;
+    private Long numeroDocumento;
     private String nombre1;
     private String nombre2;
     private String apellido1;
     private String apellido2;
-    private String email;
     private java.sql.Timestamp fechaRegistro;
-    private java.sql.Timestamp fechaModificacion;
+    private String email;
+    private String codigoCiudad;
     private UsuarioDTO usuario;
-    private TipoDocumentoDTO tipoDocumento;
-    private DireccionDTO direccion;
-    private EmpresaDTO empresa;
     private CiudadDTO ciudad;
+    private DireccionDTO direccion;
+    
 
-    public PersonaDTO() {
+    public Integer getCodigoTipoDocumento() {
+        return codigoTipoDocumento;
     }
 
-    public PersonaDTO(Integer idPersona, long numeroDocumento, String nombre1, String nombre2, String apellido1, String apellido2, String email, Timestamp fechaRegistro, Timestamp fechaModificacion, UsuarioDTO usuario, TipoDocumentoDTO tipoDocumento) {
-        this.idPersona = idPersona;
-        this.numeroDocumento = numeroDocumento;
-        this.nombre1 = nombre1;
-        this.nombre2 = nombre2;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.email = email;
-        this.fechaRegistro = fechaRegistro;
-        this.fechaModificacion = fechaModificacion;
-        this.usuario = usuario;
-        this.tipoDocumento = tipoDocumento;
+    public void setCodigoTipoDocumento(Integer codigoTipoDocumento) {
+        this.codigoTipoDocumento = codigoTipoDocumento;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
-    }
-
-    public long getNumeroDocumento() {
+    public Long getNumeroDocumento() {
         return numeroDocumento;
     }
 
-    public void setNumeroDocumento(long numeroDocumento) {
+    public void setNumeroDocumento(Long numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
 
@@ -94,6 +75,14 @@ public class PersonaDTO {
         this.apellido2 = apellido2;
     }
 
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -102,61 +91,12 @@ public class PersonaDTO {
         this.email = email;
     }
 
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
+    public String getCodigoCiudad() {
+        return codigoCiudad;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setCodigoCiudad(String codigoCiudad) {
+        this.codigoCiudad = codigoCiudad;
     }
 
-    public Timestamp getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Timestamp fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
-    }
-
-    public UsuarioDTO getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
-    }
-
-
-    public TipoDocumentoDTO getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(TipoDocumentoDTO tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
-    public DireccionDTO getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(DireccionDTO direccion) {
-        this.direccion = direccion;
-    }
-
-    public EmpresaDTO getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(EmpresaDTO empresa) {
-        this.empresa = empresa;
-    }
-
-    public CiudadDTO getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(CiudadDTO ciudad) {
-        this.ciudad = ciudad;
-    }
-    
 }

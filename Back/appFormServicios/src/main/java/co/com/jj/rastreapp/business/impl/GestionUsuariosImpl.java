@@ -6,9 +6,12 @@
 package co.com.jj.rastreapp.business.impl;
 
 import co.com.jj.appform.persistence.daofactory.CreateInstance;
+import co.com.jj.appform.appformtransaction.iface.TransactionIface;
+import co.com.jj.appform.cloneclasstoclass.CopyClassIface;
+import co.com.jj.appform.cloneclasstoclass.CopyClassImpl;
+import co.com.jj.appform.persistence.iface.PerfilIfaceDAO;
 import co.com.jj.appform.persistence.iface.PersonaIfaceDAO;
 import co.com.jj.appform.persistence.iface.UsuarioIfaceDAO;
-import co.com.jj.appform.persistence.iface.generics.TransactionIface;
 import co.com.jj.appform.vo.UsuarioVO;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import java.util.List;
@@ -36,8 +39,8 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 //    PersonaIfaceDAO personaIfaceDAO;
 //    @Autowired
 //    TipoDocumentoIfaceDAO tipoDocumentoIfaceDAO;
-//    @Autowired
-//    PerfilIfaceDAO perfilIfaceDAO;
+    @Autowired
+    PerfilIfaceDAO perfilIfaceDAO;
 //    @Autowired
 //    EmpresaIfaceDAO empresaIfaceDAO;
 //    @Autowired
@@ -57,6 +60,14 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
         }
         return null;
     }
+        
+    public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
+        UsuarioVO usuarioVO = new UsuarioVO();
+        CopyClassIface<UsuarioDTO, UsuarioVO> copy = new CopyClassImpl<>();
+        usuarioVO = copy.copyDataClassToClass(usuarioDTO, usuarioVO);
+        System.out.println("");
+        return 0;
+    }
 
     @Override
     public UsuarioDTO getUser(String nombreUsuario) throws Exception {
@@ -69,12 +80,17 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
     }
 
     @Override
-    public void registrar(UsuarioDTO t) {
+    public void actualizar(UsuarioDTO t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizar(UsuarioDTO t) {
+    public int actualizarUsuario(UsuarioDTO usuarioDTO) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registrar(UsuarioDTO t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

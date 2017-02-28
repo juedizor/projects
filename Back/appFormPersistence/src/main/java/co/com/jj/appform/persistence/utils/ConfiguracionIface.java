@@ -19,6 +19,7 @@ public interface ConfiguracionIface {
     static final String HOST = "host";
     static final String GESTOR = "gestor";
     static final String RESOURCE = "config/config";
+    
 
     public void readParamsConection() throws Exception;
 

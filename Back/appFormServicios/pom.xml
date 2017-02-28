@@ -62,7 +62,21 @@
             <artifactId>app-form</artifactId>
             <version>1.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>appFormTransaction</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>msgInternacionalizacion</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CloneClassToClass</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
         
     <build>

@@ -48,6 +48,13 @@ public class UsuarioImplDAO implements UsuarioIfaceDAO {
         return listUsuarioVOs;
     }
 
+    /**
+     * 
+     * @param idEmpresa
+     * @param nombreUsuario
+     * @return
+     * @throws Exception 
+     */
     @Override
     public List<UsuarioVO> findByEmpresaAndNotNombreUsuario(int idEmpresa, String nombreUsuario) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

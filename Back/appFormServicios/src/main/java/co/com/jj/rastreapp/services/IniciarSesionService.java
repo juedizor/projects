@@ -5,7 +5,6 @@
  */
 package co.com.jj.rastreapp.services;
 
-import co.com.jj.appform.vo.UsuarioVO;
 import co.com.jj.rastreapp.business.Respuestas;
 import co.com.jj.rastreapp.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.dto.InicioSesionDTO;
 import co.com.jj.rastreapp.excepcion.ExceptionGenerics;
+import co.com.jj.rastreapp.util.ReadProperties;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class IniciarSesionService {
 
     @Autowired
-    GestionUsuariosIface aeUsuarioIface;
+    GestionUsuariosIface gestionUsuariosIface;
 
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     public UsuarioDTO verificarUsuario(@RequestBody InicioSesionDTO inicioSesionDTO) throws ExceptionGenerics {
@@ -36,22 +36,23 @@ public class IniciarSesionService {
         if (inicioSesionDTO.getContrasena() != null && inicioSesionDTO.getContrasena() != null) {
             if (!inicioSesionDTO.getUsuario().trim().isEmpty() && !inicioSesionDTO.getContrasena().trim().isEmpty()) {
                 try {
-                    usuarioDTO = aeUsuarioIface.getUserActivo(inicioSesionDTO.getUsuario().trim(), 
+                    usuarioDTO = gestionUsuariosIface.getUserActivo(inicioSesionDTO.getUsuario().trim(),
                             inicioSesionDTO.getContrasena().trim());
                 } catch (Exception e) {
                     ExceptionGenerics.setCodigo(Respuestas.ERROR);
                     ExceptionGenerics.setDescripcion(e.getMessage());
                     throw new ExceptionGenerics();
                 }
-                
-                if(usuarioDTO == null){
+
+                if (usuarioDTO == null) {
                     ExceptionGenerics.setCodigo(Respuestas.SIN_DATOS);
-                    ExceptionGenerics.setDescripcion("Usuario/contrasña incorrecta");
+                    ExceptionGenerics.setDescripcion(ReadProperties.getInstance().getMapMsgServices().get("error_validacion_usuario"));
                     throw new ExceptionGenerics();
                 }
+
             }
         }
         return usuarioDTO;
-    }
 
+    }
 }

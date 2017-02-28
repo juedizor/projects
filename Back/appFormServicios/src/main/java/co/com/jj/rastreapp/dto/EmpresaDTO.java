@@ -5,23 +5,36 @@
  */
 package co.com.jj.rastreapp.dto;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author jeio
  */
 public class EmpresaDTO {
 
-    private Integer idEmpresa;
+    private Integer codigoTipoDocumento;
+    private Long numeroDocumento;
     private String nombreEmpresa;
     private String descripcionEmpresa;
+    private java.sql.Timestamp fechaRegistro;
+    private java.sql.Timestamp fechaModificacion;
     private PersonaDTO persona;
 
-    public Integer getIdEmpresa() {
-        return idEmpresa;
+    public Integer getCodigoTipoDocumento() {
+        return codigoTipoDocumento;
     }
 
-    public void setIdEmpresa(Integer idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setCodigoTipoDocumento(Integer codigoTipoDocumento) {
+        this.codigoTipoDocumento = codigoTipoDocumento;
+    }
+
+    public Long getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(Long numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
     public String getNombreEmpresa() {
@@ -40,13 +53,20 @@ public class EmpresaDTO {
         this.descripcionEmpresa = descripcionEmpresa;
     }
 
-    public PersonaDTO getPersona() {
-        return persona;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setPersona(PersonaDTO persona) {
-        this.persona = persona;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
-    
+
+    public Timestamp getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(Timestamp fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
 
 }

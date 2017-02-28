@@ -14,7 +14,8 @@ public class CreateInstance<T> {
 
     public CreateInstance() {
     }
-
+    
+    
     public T newInstance(FactoryIface<T> factoryIface) throws Exception {
         return factoryIface.newInstance();
     }

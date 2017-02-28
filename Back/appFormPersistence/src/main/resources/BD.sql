@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS direccion_sede;
 DROP TABLE IF EXISTS sede_empresa;
 DROP TABLE IF EXISTS cliente;
 DROP TABLE IF EXISTS perfil;
-DROP TABLE IF EXISTS empresa;
 DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS empresa;
 DROP TABLE IF EXISTS telefono;
 DROP TABLE IF EXISTS direccion;
 DROP TABLE IF EXISTS persona;
@@ -202,9 +202,6 @@ ALTER TABLE usuario ADD CONSTRAINT FK_usuario_persona
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
 
-
-
-
 CREATE TABLE cliente
 (
 	codigo_tipo_documento_cliente INTEGER NOT NULL,
@@ -296,14 +293,3 @@ ALTER TABLE telefono_sede ADD CONSTRAINT FK_telefono_sede_sede_empresa
 	FOREIGN KEY (codigo_sede) REFERENCES sede_empresa (codigo_sede)
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
-
-
-
-
-
-
-
-
-
-
-

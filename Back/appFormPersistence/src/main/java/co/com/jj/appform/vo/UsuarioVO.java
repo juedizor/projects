@@ -94,8 +94,4 @@ public class UsuarioVO {
     public void setFechaModificacion(Timestamp fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-    
-    
-
-    
 }

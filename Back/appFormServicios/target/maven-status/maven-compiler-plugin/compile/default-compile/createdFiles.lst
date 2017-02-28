@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 co/com/jj/rastreapp/business/iface/GestionEmpresasIface.class
 co/com/jj/rastreapp/dto/DireccionDTO.class
 co/com/jj/rastreapp/services/IniciarSesionService.class
@@ -25,3 +26,33 @@ co/com/jj/rastreapp/dto/TipoDocumentoDTO.class
 co/com/jj/rastreapp/excepcion/ExceptionGenerics.class
 co/com/jj/rastreapp/dto/FormulariosDTO.class
 co/com/jj/rastreapp/excepcion/ControllerExceptionHandler.class
+=======
+co\com\jj\rastreapp\dto\EmpresaDTO.class
+co\com\jj\rastreapp\util\ReadProperties.class
+co\com\jj\rastreapp\dto\UsuarioDTO.class
+co\com\jj\rastreapp\excepcion\ExceptionGenerics.class
+co\com\jj\rastreapp\MainApp.class
+co\com\jj\rastreapp\dto\CiudadDTO.class
+co\com\jj\rastreapp\dto\PaisDTO.class
+co\com\jj\rastreapp\business\iface\GestionClientesIface.class
+co\com\jj\rastreapp\dto\DireccionDTO.class
+co\com\jj\rastreapp\excepcion\ControllerExceptionHandler.class
+co\com\jj\rastreapp\dto\InicioSesionDTO.class
+co\com\jj\rastreapp\dto\ClienteDTO.class
+co\com\jj\rastreapp\excepcion\Message.class
+co\com\jj\rastreapp\dto\PerfilDTO.class
+co\com\jj\rastreapp\business\impl\GestionUsuariosImpl.class
+co\com\jj\rastreapp\dto\PersonaDTO.class
+co\com\jj\rastreapp\util\DateUtils.class
+co\com\jj\rastreapp\business\iface\GestionUsuariosIface.class
+co\com\jj\rastreapp\dto\DepartamentoDTO.class
+co\com\jj\rastreapp\business\iface\GestionParamsIface.class
+co\com\jj\rastreapp\business\Respuestas.class
+co\com\jj\rastreapp\services\IniciarSesionService.class
+co\com\jj\rastreapp\dto\FormulariosDTO.class
+co\com\jj\rastreapp\business\iface\GestionEmpresasIface.class
+co\com\jj\rastreapp\business\iface\GestionPersonalIface.class
+co\com\jj\rastreapp\business\impl\GestionEmpresasImpl.class
+co\com\jj\rastreapp\dto\TipoDocumentoDTO.class
+co\com\jj\rastreapp\business\iface\GestionFormulariosIface.class
+>>>>>>> 6e012da51232b1e7e14ef32357926356af5bffee
