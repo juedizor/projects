@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.com.jj.rastreapp.business.iface.GestionUsuariosIface;
 import co.com.jj.rastreapp.util.DateUtils;
+import java.util.ArrayList;
 
 /**
  *
@@ -79,7 +80,17 @@ public class GestionUsuariosImpl implements GestionUsuariosIface {
 
     @Override
     public List<UsuarioDTO> obtenerUsuarios(String nombreUsuario) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<UsuarioVO> lisUsuarioVOs = usuarioIfaceDAO.findByNombreUsuarioContrasena(nombreUsuario, "julio16");
+        List<UsuarioDTO> list = new ArrayList<>();
+        if (lisUsuarioVOs != null && !lisUsuarioVOs.isEmpty()) {
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            CopyClassIface<UsuarioVO, UsuarioDTO> copy = new CopyClassImpl<>();
+            usuarioDTO = copy.copyDataClassToClass(lisUsuarioVOs.get(0), usuarioDTO);
+            usuarioDTO.setContrasena("");
+            list.add(usuarioDTO);
+            return list;
+        }
+        return null;
     }
 
 }
